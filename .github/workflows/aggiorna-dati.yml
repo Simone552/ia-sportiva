@@ -24,6 +24,7 @@ jobs:
           import os
           import json
           import urllib.request
+          import urllib.error
           from datetime import datetime, timezone
           from pathlib import Path
 
@@ -32,21 +33,18 @@ jobs:
               raise SystemExit("Chiave PITCH_API_KEY non configurata")
 
           data = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-          url = f"https://api.pitchapi.dev/v1/date/{data}?status=all"
+          url = f"https://api.pitchapi.dev/v1/date/{data}"
           request = urllib.request.Request(
               url, headers={"X-API-KEY": key}
           )
 
           try:
-    with urllib.request.urlopen(request, timeout=30) as response:
-        risultato = json.load(response)
-except urllib.error.HTTPError as errore:
-    print("Errore HTTP:", errore.code)
-    print("Risposta PitchAPI:", errore.read().decode("utf-8", errors="replace"))
-    raise
-
-          if "data" not in risultato:
-              raise SystemExit("Risposta API non valida")
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  risultato = json.load(response)
+          except urllib.error.HTTPError as errore:
+              print("Errore HTTP:", errore.code)
+              print("Risposta PitchAPI:", errore.read().decode("utf-8", errors="replace"))
+              raise
 
           cartella = Path("data")
           cartella.mkdir(exist_ok=True)
@@ -54,8 +52,7 @@ except urllib.error.HTTPError as errore:
               json.dumps(risultato, ensure_ascii=False, indent=2),
               encoding="utf-8"
           )
-          print("Dati salvati correttamente.")
-          PY
+          print("Risposta API salvata.")
 
       - name: Salva aggiornamento nel repository
         run: |
