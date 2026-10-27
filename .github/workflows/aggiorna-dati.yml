@@ -37,8 +37,13 @@ jobs:
               url, headers={"X-API-KEY": key}
           )
 
-          with urllib.request.urlopen(request, timeout=30) as response:
-              risultato = json.load(response)
+          try:
+    with urllib.request.urlopen(request, timeout=30) as response:
+        risultato = json.load(response)
+except urllib.error.HTTPError as errore:
+    print("Errore HTTP:", errore.code)
+    print("Risposta PitchAPI:", errore.read().decode("utf-8", errors="replace"))
+    raise
 
           if "data" not in risultato:
               raise SystemExit("Risposta API non valida")
