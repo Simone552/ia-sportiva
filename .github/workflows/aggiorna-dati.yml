@@ -1,0 +1,61 @@
+
+name: Aggiorna dati IA Sportiva
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+
+      - name: Recupera dati da PitchAPI
+        env:
+          PITCH_KEY: ${{ secrets.PITCH_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          import json
+          import urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          key = os.environ.get("PITCH_KEY", "").strip()
+          if not key:
+              raise SystemExit("Chiave PITCH_API_KEY non configurata")
+
+          data = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          url = f"https://api.pitchapi.dev/v1/date/{data}?status=all"
+          request = urllib.request.Request(
+              url, headers={"X-API-KEY": key}
+          )
+
+          with urllib.request.urlopen(request, timeout=30) as response:
+              risultato = json.load(response)
+
+          if "data" not in risultato:
+              raise SystemExit("Risposta API non valida")
+
+          cartella = Path("data")
+          cartella.mkdir(exist_ok=True)
+          (cartella / "partite.json").write_text(
+              json.dumps(risultato, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
+          print("Dati salvati correttamente.")
+          PY
+
+      - name: Salva aggiornamento nel repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/partite.json
+          git diff --cached --quiet || git commit -m "Aggiorna dati partite"
+          git push
