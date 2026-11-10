@@ -62,6 +62,7 @@ jobs:
               encoding="utf-8"
           )
           print("Risposta API salvata.")
+          PY
 
       - name: Salva aggiornamento nel repository
         run: |
