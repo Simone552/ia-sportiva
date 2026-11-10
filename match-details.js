@@ -42,19 +42,35 @@
  function playerDataMap(players){const map={};(players||[]).forEach(e=>{if(e.player?.id)map[e.player.id]=e});return map;}
  function showPlayer(id){
   const entry=currentPlayers.find(e=>String(e.player?.id)===String(id));
-  const lineupPlayer=[...(currentLineups?.home?.starters||[]),...(currentLineups?.away?.starters||[]),...(currentLineups?.home?.subs||[]),...(currentLineups?.away?.subs||[])].find(p=>String(p.player_id)===String(id));
+  const lineupAll=[...(currentLineups?.home?.starters||[]),...(currentLineups?.away?.starters||[]),...(currentLineups?.home?.subs||[]),...(currentLineups?.away?.subs||[])];
+  const lineupPlayer=lineupAll.find(p=>String(p.player_id)===String(id));
   const p=entry?.player||{};
   const teamId=entry?.team_id;
-  const team=teamId===currentMatch?.home_team?.id?currentMatch.home_team.name:teamId===currentMatch?.away_team?.id?currentMatch.away_team.name:(lineupPlayer?"Formazione":"Squadra non indicata");
+  const team=teamId===currentMatch?.home_team?.id?currentMatch.home_team.name:teamId===currentMatch?.away_team?.id?currentMatch.away_team.name:(lineupPlayer?(currentLineups?.home?.starters||[]).some(x=>String(x.player_id)===String(id))?currentMatch?.home_team?.name:currentMatch?.away_team?.name:"Squadra non indicata");
   const stats=allPlayerStats(entry);
-  const main=["Minuti giocati","Gol","Assist","Tiri totali","Tiri in porta","Gol attesi (xG)","Passaggi riusciti","Occasioni create","Ammonizioni","Espulsioni"];
-  const sorted=stats.slice().sort((a,b)=>{let x=main.indexOf(a.name),y=main.indexOf(b.name);return (x<0?99:x)-(y<0?99:y)});
-  const groupsBy={};sorted.forEach(s=>(groupsBy[s.group]??=[]).push(s));
-  const photo=p.image_url?'<img class="player-photo" src="'+esc(p.image_url)+'" alt="">':'<div class="player-photo player-photo-empty">⚽</div>';
+  const findStat=(...names)=>stats.find(s=>names.includes(s.name))?.value??"—";
+  const main=[
+   ["Gol",findStat("Gol")],["Assist",findStat("Assist")],["Minuti",findStat("Minuti giocati")],["Tiri",findStat("Tiri totali","Total shots")]
+  ];
+  const groupsBy={};
+  stats.forEach(s=>(groupsBy[s.group]??=[]).push(s));
+  const photo=p.image_url?'<img class="player-photo" src="'+esc(p.image_url)+'" alt="Foto di '+esc(p.name||"giocatore")+'">':'<div class="player-photo player-photo-empty">⚽</div>';
+  const isStarter=(currentLineups?.home?.starters||[]).some(x=>String(x.player_id)===String(id))||(currentLineups?.away?.starters||[]).some(x=>String(x.player_id)===String(id));
+  const isSub=(currentLineups?.home?.subs||[]).some(x=>String(x.player_id)===String(id))||(currentLineups?.away?.subs||[]).some(x=>String(x.player_id)===String(id));
+  const status=isStarter?"Titolare":isSub?"In panchina":"Presenza non indicata";
+  const shirt=lineupPlayer?.shirt_number||"n.d.";
   const captain=lineupPlayer?.is_captain?" · Capitano":"";
-  const body='<div class="player-profile-head">'+photo+'<div><h4>'+esc(p.name||lineupPlayer?.name||"Giocatore")+'</h4><p>'+esc(team)+' · Maglia '+esc(lineupPlayer?.shirt_number||"n.d.")+esc(captain)+'</p><small>'+esc(entry?"Statistiche della partita": "Il giocatore è nella formazione, ma non sono disponibili statistiche individuali.")+'</small></div></div>'+
-   (sorted.length?Object.entries(groupsBy).map(([g,items])=>'<div class="player-stat-group"><h5>'+esc(g)+'</h5><div class="player-profile-stats">'+items.map(s=>'<div><span>'+esc(s.name)+'</span><strong>'+esc(s.value)+'</strong></div>').join("")+'</div></div>').join(""):empty("Nessuna statistica individuale pubblicata per questo giocatore."));
-  const box=document.querySelector(".match-section.active #playerProfile");if(box){box.innerHTML=body;box.classList.remove("hidden");box.scrollIntoView({behavior:"smooth",block:"nearest"});}else{window.showMatchSection("giocatori");const target=document.querySelector(".match-section.active #playerProfile");if(target){target.innerHTML=body;target.classList.remove("hidden");}}
+  const eventsRaw=getData(currentMatch?.details?.events);
+  const events=Array.isArray(eventsRaw)?eventsRaw:(eventsRaw?.events||[]);
+  const playerEvents=events.filter(e=>String(e.player?.id)===String(id)||String(e.sub_in_player?.id)===String(id));
+  const eventNames={goal:"⚽ Gol",yellowcard:"🟨 Ammonizione",redcard:"🟥 Espulsione",substitution:"🔄 Sostituzione",penalty:"⚽ Rigore"};
+  const eventHtml=playerEvents.length?'<div class="player-event-strip">'+playerEvents.map(e=>'<span class="player-event-chip">'+esc(eventNames[e.event_type]||"Evento")+' · '+esc(e.minute!=null?e.minute+"′":"minuto n.d.")+'</span>').join("")+'</div>':'';
+  const kpis='<div class="player-profile-kpis">'+main.map(x=>'<div class="player-kpi"><strong>'+esc(x[1])+'</strong><span>'+esc(x[0])+'</span></div>').join("")+'</div>';
+  const details=stats.length?Object.entries(groupsBy).map(([g,items])=>'<div class="player-stat-group"><h5>'+esc(g)+'</h5><div class="player-profile-stats">'+items.map(s=>'<div><span>'+esc(s.name)+'</span><strong>'+esc(s.value)+'</strong></div>').join("")+'</div></div>').join(""):empty("Nessuna statistica individuale pubblicata per questo giocatore.");
+  const body='<div class="player-profile-head">'+photo+'<div><h4>'+esc(p.name||lineupPlayer?.name||"Giocatore")+'</h4><p>'+esc(team)+' · Maglia '+esc(shirt)+esc(captain)+'</p><small>'+status+' · Ruolo: '+esc(lineupPlayer?.position_name||p.position_name||"non indicato dalla fonte")+'</small></div></div>'+kpis+eventHtml+'<div class="player-profile-body">'+(stats.length?'<p class="analysis-note">Statistiche registrate in questa partita, raggruppate per area. Il trattino indica un dato non pubblicato.</p>':"")+details+'</div><button class="player-profile-close" type="button" onclick="this.parentElement.classList.add(\'hidden\')">Chiudi scheda giocatore</button>';
+  let box=document.querySelector(".match-section.active #playerProfile");
+  if(!box){window.showMatchSection("giocatori");box=document.querySelector(".match-section.active #playerProfile");}
+  if(box){box.innerHTML=body;box.classList.remove("hidden");box.scrollIntoView({behavior:"smooth",block:"nearest"});}
  }
  window.openPlayerProfile=showPlayer;
  window.showMatchSection=function(id){
