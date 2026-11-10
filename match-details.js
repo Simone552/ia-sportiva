@@ -49,25 +49,27 @@
   const team=teamId===currentMatch?.home_team?.id?currentMatch.home_team.name:teamId===currentMatch?.away_team?.id?currentMatch.away_team.name:(lineupPlayer?(currentLineups?.home?.starters||[]).some(x=>String(x.player_id)===String(id))?currentMatch?.home_team?.name:currentMatch?.away_team?.name:"Squadra non indicata");
   const stats=allPlayerStats(entry);
   const findStat=(...names)=>stats.find(s=>names.includes(s.name))?.value??"—";
-  const main=[
-   ["Gol",findStat("Gol")],["Assist",findStat("Assist")],["Minuti",findStat("Minuti giocati")],["Tiri",findStat("Tiri totali","Total shots")]
-  ];
-  const groupsBy={};
-  stats.forEach(s=>(groupsBy[s.group]??=[]).push(s));
-  const photo=p.image_url?'<img class="player-photo" src="'+esc(p.image_url)+'" alt="Foto di '+esc(p.name||"giocatore")+'">':'<div class="player-photo player-photo-empty">⚽</div>';
+  const main=[["Gol",findStat("Gol")],["Assist",findStat("Assist")],["Minuti",findStat("Minuti giocati")],["Tiri",findStat("Tiri totali","Total shots")]];
+  const groupsBy={};stats.forEach(s=>(groupsBy[s.group]??=[]).push(s));
+  const image=p.image_url||"";
+  const photo=image?'<img class="player-photo" src="'+esc(image)+'" alt="Foto di '+esc(p.name||"giocatore")+'">':'<div class="player-photo player-photo-empty">⚽</div>';
   const isStarter=(currentLineups?.home?.starters||[]).some(x=>String(x.player_id)===String(id))||(currentLineups?.away?.starters||[]).some(x=>String(x.player_id)===String(id));
   const isSub=(currentLineups?.home?.subs||[]).some(x=>String(x.player_id)===String(id))||(currentLineups?.away?.subs||[]).some(x=>String(x.player_id)===String(id));
   const status=isStarter?"Titolare":isSub?"In panchina":"Presenza non indicata";
   const shirt=lineupPlayer?.shirt_number||"n.d.";
   const captain=lineupPlayer?.is_captain?" · Capitano":"";
+  const role=lineupPlayer?.position_name||p.position_name||"Ruolo non disponibile";
+  const league=String(currentMatch?.league?.name||currentMatch?.details?.summary?.data?.league?.name||"");
+  const isSerieA=/serie\s*a/i.test(league);
+  const sticker=isSerieA?'<div class="fantacalcio-sticker"><span class="sticker-title">FANTACALCIO</span>'+(image?'<img src="'+esc(image)+'" alt="">':'<div class="player-photo-empty">⚽</div>')+'<strong>'+esc(p.name||lineupPlayer?.name||"Giocatore")+'</strong><small>'+esc(team)+' · '+esc(role)+'</small><small>Maglia '+esc(shirt)+'</small><span class="sticker-band">SERIE A</span></div>':"";
   const eventsRaw=getData(currentMatch?.details?.events);
   const events=Array.isArray(eventsRaw)?eventsRaw:(eventsRaw?.events||[]);
   const playerEvents=events.filter(e=>String(e.player?.id)===String(id)||String(e.sub_in_player?.id)===String(id));
   const eventNames={goal:"⚽ Gol",yellowcard:"🟨 Ammonizione",redcard:"🟥 Espulsione",substitution:"🔄 Sostituzione",penalty:"⚽ Rigore"};
-  const eventHtml=playerEvents.length?'<div class="player-event-strip">'+playerEvents.map(e=>'<span class="player-event-chip">'+esc(eventNames[e.event_type]||"Evento")+' · '+esc(e.minute!=null?e.minute+"′":"minuto n.d.")+'</span>').join("")+'</div>':'';
+  const eventHtml=playerEvents.length?'<div class="player-event-strip">'+playerEvents.map(e=>'<span class="player-event-chip">'+esc(eventNames[e.event_type]||"Evento")+' · '+esc(e.minute!=null?e.minute+"′":"minuto n.d.")+'</span>').join("")+'</div>':"";
   const kpis='<div class="player-profile-kpis">'+main.map(x=>'<div class="player-kpi"><strong>'+esc(x[1])+'</strong><span>'+esc(x[0])+'</span></div>').join("")+'</div>';
   const details=stats.length?Object.entries(groupsBy).map(([g,items])=>'<div class="player-stat-group"><h5>'+esc(g)+'</h5><div class="player-profile-stats">'+items.map(s=>'<div><span>'+esc(s.name)+'</span><strong>'+esc(s.value)+'</strong></div>').join("")+'</div></div>').join(""):empty("Nessuna statistica individuale pubblicata per questo giocatore.");
-  const body='<div class="player-profile-head">'+photo+'<div><h4>'+esc(p.name||lineupPlayer?.name||"Giocatore")+'</h4><p>'+esc(team)+' · Maglia '+esc(shirt)+esc(captain)+'</p><small>'+status+' · Ruolo: '+esc(lineupPlayer?.position_name||p.position_name||"non indicato dalla fonte")+'</small></div></div>'+kpis+eventHtml+'<div class="player-profile-body">'+(stats.length?'<p class="analysis-note">Statistiche registrate in questa partita, raggruppate per area. Il trattino indica un dato non pubblicato.</p>':"")+details+'</div><button class="player-profile-close" type="button" onclick="this.parentElement.classList.add(\'hidden\')">Chiudi scheda giocatore</button>';
+  const body='<div class="player-profile-head">'+photo+sticker+'<div><h4>'+esc(p.name||lineupPlayer?.name||"Giocatore")+'</h4><p>'+esc(team)+' · Maglia '+esc(shirt)+esc(captain)+'</p><small>'+status+' · Ruolo: '+esc(role)+'</small></div></div>'+kpis+eventHtml+'<div class="player-profile-body">'+(stats.length?'<p class="analysis-note">Statistiche registrate in questa partita, raggruppate per area. Il trattino indica un dato non pubblicato.</p>':"")+details+'</div><button class="player-profile-close" type="button" onclick="this.parentElement.classList.add(\'hidden\')">Chiudi scheda giocatore</button>';
   let box=document.querySelector(".match-section.active #playerProfile");
   if(!box){window.showMatchSection("giocatori");box=document.querySelector(".match-section.active #playerProfile");}
   if(box){box.innerHTML=body;box.classList.remove("hidden");box.scrollIntoView({behavior:"smooth",block:"nearest"});}
@@ -93,15 +95,18 @@
   currentLineups=lineups;
   const h=lineups.home||{},a=lineups.away||{};
   if(!(h.starters||[]).length&&!(a.starters||[]).length)return empty("Non sono disponibili i titolari per disegnare le formazioni.");
+  const playerById=playerDataMap(currentPlayers);
   const markers=(arr,side)=>arr.map(p=>{
    const px=Number(p.pitch_x),py=Number(p.pitch_y);
-   if(!Number.isFinite(px)||!Number.isFinite(py)|| (px===0&&py===0))return "";
-   const x=Math.max(3,Math.min(97,(side==="away"?1-px:px)*100)),y=Math.max(5,Math.min(95,py*100));
-   return '<button class="pitch-player '+side+'" style="left:'+x+'%;top:'+y+'%" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')" title="'+esc(p.name)+'"><span>'+esc(p.shirt_number||"•")+'</span><small>'+esc(p.name)+'</small></button>';
+   if(!Number.isFinite(px)||!Number.isFinite(py)||(px===0&&py===0))return "";
+   const x=Math.max(5,Math.min(95,(side==="away"?1-px:px)*100)),y=Math.max(7,Math.min(93,py*100));
+   const player=playerById[p.player_id]?.player||{},face=player.image_url;
+   const avatar=face?'<img class="pitch-face" src="'+esc(face)+'" alt="">':'<span>'+esc(p.shirt_number||"•")+'</span>';
+   return '<button class="pitch-player '+side+'" style="left:'+x+'%;top:'+y+'%" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')" title="'+esc(p.name)+'" aria-label="Apri scheda '+esc(p.name)+'">'+avatar+'<b class="pitch-number">'+esc(p.shirt_number||"•")+'</b><small>'+esc(p.name)+'</small></button>';
   }).join("");
-  const pitch='<div class="pitch-wrap"><div class="pitch-labels"><b>'+esc(home)+'</b><span>Campo visto dall’alto</span><b>'+esc(away)+'</b></div><div class="football-pitch"><div class="pitch-halfway"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div><div class="pitch-box left"></div><div class="pitch-box right"></div><div class="pitch-six left"></div><div class="pitch-six right"></div><div class="pitch-goal left"></div><div class="pitch-goal right"></div>'+markers(h.starters||[],"home")+markers(a.starters||[],"away")+'</div><div class="pitch-hint">Seleziona un giocatore sul campo per aprire la sua scheda.</div></div>';
-  const teams=[["home",h,home],["away",a,away]].map(([side,t,name])=>{
-   const list=(arr)=>arr.length?'<div class="sub-list">'+arr.map(p=>'<button class="player-select" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')"><span class="shirt">'+esc(p.shirt_number||"•")+'</span><span>'+esc(p.name)+'</span>'+(p.is_captain?'<small>Capitano</small>':"")+'</button>').join("")+'</div>':empty("Elenco non fornito.");
+  const pitch='<div class="pitch-wrap"><div class="pitch-labels"><b>CASA · '+esc(home)+'</b><span>Campo visto dall’alto</span><b>OSPITE · '+esc(away)+'</b></div><div class="football-pitch"><div class="pitch-halfway"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div><div class="pitch-box left"></div><div class="pitch-box right"></div><div class="pitch-six left"></div><div class="pitch-six right"></div><div class="pitch-goal left"></div><div class="pitch-goal right"></div>'+markers(h.starters||[],"home")+markers(a.starters||[],"away")+'</div><div class="pitch-hint">Casa sempre a sinistra e ospite a destra. Le foto appaiono quando disponibili; seleziona un volto per aprire la scheda del giocatore.</div></div>';
+  const teams=[[h,home],[a,away]].map(([t,name])=>{
+   const list=arr=>arr.length?'<div class="sub-list">'+arr.map(p=>'<button class="player-select" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')"><span class="shirt">'+esc(p.shirt_number||"•")+'</span><span>'+esc(p.name)+'</span>'+(p.is_captain?'<small>Capitano</small>':"")+'</button>').join("")+'</div>':empty("Elenco non fornito.");
    return '<div class="lineup-team"><div class="lineup-team-head"><div><h4>'+esc(name)+'</h4><small>'+esc(t.formation?"Modulo "+t.formation:"Modulo non indicato")+' · '+(t.confirmed===true?"Formazione confermata":t.confirmed===false?"Probabile, non confermata":"Conferma non indicata")+'</small></div>'+(t.coach?.name?'<small>Allenatore: '+esc(t.coach.name)+'</small>':"")+'</div><h5>Titolari</h5>'+list(t.starters||[])+'<h5>Panchina</h5>'+list(t.subs||[])+'</div>';
   }).join("");
   return pitch+'<div class="lineup-grid">'+teams+'</div><div id="playerProfile" class="player-profile hidden"></div>';
