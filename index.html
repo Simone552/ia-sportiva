@@ -240,6 +240,105 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-ser
 .pitch-hint{padding:8px 10px;border-radius:9px;background:var(--panel2)}
 @media(hover:hover){.player-card-button:hover,.player-select:hover{border-color:var(--accent);transform:translateY(-1px);transition:transform .16s,border-color .16s}}
 
+
+/* IA SPORTIVA · RESTYLING STADIO NOTTURNO */
+:root{color-scheme:dark;--bg:#07120f;--panel:#101f1a;--panel2:#172b23;--text:#eff8ef;--muted:#9bb3a4;--line:#29483a;--accent:#b7f34a;--accent2:#12b981;--good:#72d99c;--warn:#f1bd58}
+html{background:#07120f;scroll-behavior:smooth}
+body{min-height:100vh;background:radial-gradient(ellipse at 50% -18%,#255b3c 0%,transparent 48%),linear-gradient(180deg,#07120f,#0a1814 55%,#07120f);color:var(--text);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-12%;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 12% 18%,#a5f34b16,transparent 23%),radial-gradient(ellipse at 88% 28%,#14c88b18,transparent 25%),radial-gradient(ellipse at 50% 100%,#276d4a25,transparent 35%);animation:stadiumGlow 18s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;background:repeating-linear-gradient(90deg,transparent 0 9.8%,#8ee7a30c 10% 10.15%),linear-gradient(180deg,transparent 68%,#b8ef4a0a 68.2%,transparent 68.5%);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 85%,transparent)}
+@keyframes stadiumGlow{0%{transform:translate3d(-1.5%,0,0) scale(1)}100%{transform:translate3d(1.5%,1%,0) scale(1.06)}}
+@keyframes pitchDrift{0%{background-position:0 0}100%{background-position:120px 0}}
+@keyframes pageIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.app{max-width:1320px;padding:24px 26px 50px;position:relative}
+.top{padding:9px 0 18px;border-bottom:1px solid #ffffff12}
+.logo{border-radius:15px;background:linear-gradient(145deg,#b7f34a,#13a875);color:#102117;box-shadow:0 0 28px #a8ef4933}
+.brand h1{font-size:25px;letter-spacing:-.05em}
+.eyebrow{color:#a6caad;letter-spacing:.17em;font-weight:800}
+.tag{border:1px solid #b7f34a44;background:#b7f34a0b;color:#c5e6b4}
+.hero{border:1px solid #a9ed4c55;border-radius:25px;padding:clamp(24px,4vw,42px);background:linear-gradient(105deg,#0c291df2,#103b2ce8 54%,#13271ff0);box-shadow:0 24px 70px #0005;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.24;background:repeating-linear-gradient(90deg,#c7f5b0 0 1px,transparent 1px 10%),linear-gradient(90deg,transparent 49.8%,#c7f5b055 50%,transparent 50.2%);mask-image:linear-gradient(90deg,transparent,#000)}
+.hero:after{content:"⚽";font-size:clamp(100px,18vw,230px);right:4%;top:2%;color:#d7ff9b12;animation:stadiumGlow 9s ease-in-out infinite alternate}
+.hero h2{font-size:clamp(27px,4.3vw,48px);letter-spacing:-.045em;max-width:740px}
+.hero p{color:#c1d8c8;max-width:700px}
+.btn{background:linear-gradient(120deg,#b7f34a,#75d846);color:#102016;border-radius:10px;box-shadow:0 6px 22px #a8ef4925;font-weight:850}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.secondary{background:#ffffff0c;border:1px solid #ffffff35;color:#eef8ef;box-shadow:none}
+.btn.ghost{background:#1b3328;border:1px solid #315440;color:#dcefe0;box-shadow:none}
+.tabs{position:sticky;top:0;z-index:20;padding:12px 10px;margin:18px -10px 8px;background:#07120fe8;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}
+.tab{background:#10221a;border:1px solid #294738;color:#a9c3b1;border-radius:10px;padding:10px 15px}
+.tab.active{background:linear-gradient(120deg,#b7f34a,#6bd94e);color:#112016;border-color:#b7f34a;font-weight:900}
+.panel{background:linear-gradient(145deg,#14271f,#0e1c17);border:1px solid #294638;border-radius:18px;box-shadow:0 14px 36px #0003}
+.panel h3{color:#e8f6e9;letter-spacing:-.02em}
+.panel-head{padding-bottom:10px;border-bottom:1px solid #ffffff10}
+.sport,.entry,.player-card,.lineup-team,.analysis-block{background:#14251d;border-color:#2a4938;color:var(--text)}
+.sport:hover,.sport.active{border-color:#b7f34a;background:#b7f34a12}
+.field{background:#0a1912;border-color:#315340;color:#f0f7ed}
+.field:focus{border-color:#b7f34a;box-shadow:0 0 0 3px #b7f34a18}
+label{color:#a9c4af}
+.pill{background:#1b3829;color:#c7e7ca;border:1px solid #31583e}
+.notice{background:#26351e;border:1px solid #687b32;color:#e7f2d4}
+.metric,.analysis-metrics>div,.player-kpi{background:#1a3025;border:1px solid #2d503b;color:#f0f7eb}
+.empty,.analysis-empty{background:#0d1b14;border-color:#345342;color:#a8c1ad}
+.source{border-color:#294638}
+.match-hero{border:1px solid #a8ee4b66;background:radial-gradient(circle at 50% 0%,#a8ef4933,transparent 42%),linear-gradient(120deg,#123b28,#0d2118);box-shadow:0 14px 35px #0004}
+.match-score strong{color:#c9ff78}
+.match-section-tab{background:#11241a;color:#a8c3af;border-color:#31503c}
+.match-section-tab.active{background:#b7f34a;color:#142014;border-color:#b7f34a}
+.analysis-block{background:linear-gradient(145deg,#13251c,#0d1a14);border-color:#294638}
+.stat-head{background:#20382a;color:#c8dfc8}
+.stat-row{border-color:#294638}
+.stat-table{border-color:#31503c}
+.lineup-team{background:linear-gradient(145deg,#14291e,#0c1b14);border:1px solid #2c503a}
+.player-profile{background:linear-gradient(145deg,#172d20,#0b1b14);border:1px solid #b7f34a66}
+.player-kpi{background:#1b3424}
+.analysis-details{border-color:#31503c}
+.result-list>div{background:#14251d;border-color:#294638}
+.event-row{border-color:#294638}
+.foot{color:#819d8a}
+.toast{background:#b7f34a;color:#102016}
+#pitchApiMatches .entry{align-items:center;padding:15px 16px;border-radius:14px;background:linear-gradient(100deg,#15291e,#102017)}
+#pitchApiMatches .entry strong{font-size:15px}
+#pitchApiMatches .entry .btn{font-size:12px}
+.page{animation:pageIn .32s ease both}
+.news-masthead{display:flex;align-items:end;justify-content:space-between;gap:18px;padding:28px;border:1px solid #a8ef4933;border-radius:20px;background:radial-gradient(ellipse at 90% 0%,#b7f34a22,transparent 34%),linear-gradient(120deg,#143b29,#102119);margin:12px 0}
+.news-masthead h2{font-size:clamp(28px,5vw,44px);margin:5px 0;letter-spacing:-.05em}
+.news-masthead p{color:#b9d1bd;margin:0;max-width:650px}
+.news-toolbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#9eb8a3;font-size:12px;margin:12px 2px 16px}
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.news-card{min-width:0;display:flex;flex-direction:column;padding:17px;border:1px solid #2d4c39;border-radius:16px;background:linear-gradient(150deg,#172d21,#0e1d15);box-shadow:0 12px 26px #0002;transition:transform .18s,border-color .18s}
+.news-card:hover{transform:translateY(-3px);border-color:#a8ef49}
+.news-source{font-size:10px;font-weight:900;letter-spacing:.13em;color:#b7f34a;text-transform:uppercase}
+.news-card h3{font-size:16px;line-height:1.35;margin:10px 0}
+.news-card p{font-size:13px;color:#a9c2af;line-height:1.5;margin:0 0 14px}
+.news-card time{font-size:11px;color:#809d89;margin-top:auto;padding-bottom:12px}
+.news-card a{font-size:12px;color:#d2ff8a;font-weight:800;text-decoration:none}
+.news-card a:hover{text-decoration:underline}
+.team-crest{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 3px 5px #0008)}
+.pitch-team-label{display:flex;align-items:center;justify-content:center;gap:9px;min-width:0}
+.pitch-team-label strong{font-size:12px;max-width:160px;overflow-wrap:anywhere}
+.pitch-team-label small{display:block;color:#a9c8ad;font-size:9px;letter-spacing:.1em}
+.football-pitch{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:1.8/1;min-height:380px;border:2px solid #b8e6a766;border-radius:15px;background:linear-gradient(90deg,#155b36 0 50%,#12492e 50% 100%);box-shadow:inset 0 0 35px #06140b88}
+.football-pitch:before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(90deg,#ffffff09 0 10%,transparent 10% 20%);animation:pitchDrift 22s linear infinite}
+.football-pitch:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#efffe7a8;z-index:0}
+.pitch-halfway,.pitch-center-circle,.pitch-center-spot,.pitch-box,.pitch-six,.pitch-goal{z-index:0;border-color:#e5f7e4aa}
+.pitch-player{z-index:2;width:64px;min-height:76px;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:2px;background:transparent!important;border:0!important;padding:0;transform:translate(-50%,-50%)}
+.pitch-player .pitch-face,.pitch-player .pitch-number{display:none!important}
+.pitch-player .pitch-kit{width:36px;height:40px;filter:drop-shadow(0 3px 4px #06160cbb);transition:transform .16s}
+.pitch-player:hover .pitch-kit{transform:scale(1.15)}
+.pitch-player small{max-width:76px;padding:3px 5px;background:#06170fdc;color:#fff;border:1px solid #ffffff35;border-radius:5px;font-size:9px;line-height:1.1;text-shadow:none;white-space:normal}
+.pitch-team-separator{position:absolute;z-index:1;left:50%;top:0;bottom:0;width:1px;background:#ffffff55}
+.pitch-hint{background:#10251a;border:1px solid #31533d;border-radius:10px;padding:10px;color:#b5d0b7}
+.pitch-legend{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:9px 0 3px}
+.pitch-legend span{display:flex;align-items:center;gap:7px;font-size:11px;color:#c4ddc6}
+.pitch-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.match-team-lockup{display:flex;flex-direction:column;align-items:center;gap:6px}
+.match-team-lockup .team-crest{width:52px;height:52px}
+.match-team-lockup b{font-size:clamp(12px,1.7vw,17px)}
+@media(max-width:760px){.app{padding:14px 12px 35px}.news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.news-masthead{align-items:flex-start;flex-direction:column}.football-pitch{min-height:340px;aspect-ratio:1.2/1}.pitch-player{width:50px;min-height:60px}.pitch-player .pitch-kit{width:29px;height:33px}.pitch-player small{font-size:7px;max-width:55px}.pitch-team-label strong{font-size:10px}}
+@media(max-width:500px){.news-grid{grid-template-columns:1fr}.pitch-team-label{gap:5px}.pitch-team-label .team-crest{width:28px;height:28px}.football-pitch{min-height:320px}.pitch-player small{max-width:48px;font-size:6.5px}.hero{padding:22px}.tabs{margin-left:-4px;margin-right:-4px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+
 </style>
 </head>
 <body><main class="app">
