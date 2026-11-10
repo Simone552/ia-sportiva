@@ -90,21 +90,37 @@
   const rows=shots.map(s=>'<div class="shot-row"><b>'+esc(s.minute!=null?s.minute+"'":"—")+'</b><div><strong>'+esc(s.player?.name||"Giocatore non indicato")+'</strong><small>'+esc(s.team_id===homeId?home:s.team_id===awayId?away:"Squadra non indicata")+' · '+esc(italian(s.period))+' · '+esc(italian(s.shot_type))+' · '+esc(italian(s.situation))+'</small></div><div class="shot-result"><strong>'+esc(italian(s.event_type))+'</strong><small>'+(s.expected_goals!=null?"xG "+Number(s.expected_goals).toFixed(2):"xG n.d.")+' · '+(s.is_on_target===true?"In porta":s.is_on_target===false?"Fuori porta":"Esito n.d.")+'</small></div></div>').join("");
   return overview+'<details class="analysis-details"><summary>Mostra tutti i '+shots.length+' tiri</summary><div class="shot-list">'+rows+'</div></details>';
  }
+
  function renderPitch(lineups,home,away){
   if(!lineups)return empty("Le formazioni non sono state pubblicate per questa partita.");
   currentLineups=lineups;
   const h=lineups.home||{},a=lineups.away||{};
   if(!(h.starters||[]).length&&!(a.starters||[]).length)return empty("Non sono disponibili i titolari per disegnare le formazioni.");
   const playerById=playerDataMap(currentPlayers);
+  const homeTeam=currentMatch?.home_team||{},awayTeam=currentMatch?.away_team||{};
+  const palettes={
+   "inter":["#0757a5","#101820"],"milan":["#c51f32","#171717"],"juventus":["#f4f4f0","#171717"],"napoli":["#58b9e9","#ffffff"],"roma":["#8c1837","#e7bd61"],"lazio":["#79c9ef","#ffffff"],"atalanta":["#1765ad","#171717"],"fiorentina":["#56328a","#ffffff"],"bologna":["#c62635","#183f7a"],"torino":["#7d1832","#ffffff"],"genoa":["#b92336","#173f77"],"cagliari":["#c42b43","#123d79"],"udinese":["#20242a","#f2f2ec"],"sassuolo":["#16784c","#111111"],"parma":["#e4c83c","#2252a0"],"lecce":["#e9c83d","#c62b36"],"como":["#65bce9","#ffffff"],"pisa":["#164d9a","#111111"],"cremonese":["#b92835","#f2f2f2"],"verona":["#f0c63c","#164b9c"],"junior":["#d52b3d","#ffffff"],"cucuta":["#d32932","#171717"]
+  };
+  const paletteFor=(name,side)=>{
+   const n=String(name||"").toLowerCase();
+   const key=Object.keys(palettes).find(k=>n.includes(k));
+   return key?palettes[key]:(side==="home"?["#b7f34a","#173b28"]:["#e4e9ee","#283a50"]);
+  };
+  const shirt=(p,side)=>{
+   const [c1,c2]=paletteFor(side==="home"?home:away,side);
+   const player=playerById[p.player_id]?.player||{},face=player.image_url;
+   const faceMarkup=face?'<image href="'+esc(face)+'" x="11" y="2" width="26" height="26" clip-path="url(#faceClip-'+side+'-'+esc(p.player_id)+')"/>':'';
+   return '<svg class="pitch-kit" viewBox="0 0 48 52" role="img" aria-label="Maglia numero '+esc(p.shirt_number||"n.d.")+'"><path d="M14 5 L7 9 L1 20 L9 25 L13 19 L13 48 Q24 52 35 48 L35 19 L39 25 L47 20 L41 9 L34 5 Q29 11 24 11 Q19 11 14 5Z" fill="'+c1+'" stroke="#f4ffe9" stroke-width="1.5"/><path d="M19 8 Q24 13 29 8 L35 6 L35 48 Q24 52 13 48 L13 6Z" fill="'+c2+'" opacity=".72"/><path d="M21 12 L27 12 L27 46 L21 46Z" fill="'+c1+'" opacity=".9"/><path d="M14 5 L7 9 L1 20 L9 25 L13 19 M34 5 L41 9 L47 20 L39 25 L35 19" fill="none" stroke="#f4ffe9" stroke-width="1.3"/><text x="24" y="34" fill="#fff" stroke="#102016" stroke-width=".5" paint-order="stroke" text-anchor="middle" font-size="11" font-weight="900">'+esc(p.shirt_number||"")+'</text></svg>'+(face?'<img class="pitch-face-small" src="'+esc(face)+'" alt="">':'');
+  };
   const markers=(arr,side)=>arr.map(p=>{
    const px=Number(p.pitch_x),py=Number(p.pitch_y);
    if(!Number.isFinite(px)||!Number.isFinite(py)||(px===0&&py===0))return "";
-   const x=Math.max(5,Math.min(95,(side==="away"?1-px:px)*100)),y=Math.max(7,Math.min(93,py*100));
-   const player=playerById[p.player_id]?.player||{},face=player.image_url;
-   const avatar=face?'<img class="pitch-face" src="'+esc(face)+'" alt="">':'<i class="pitch-face-fallback">⚽</i>';
-   return '<button class="pitch-player '+side+'" style="left:'+x+'%;top:'+y+'%" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')" title="'+esc(p.name)+'" aria-label="Apri scheda '+esc(p.name)+'">'+avatar+'<b class="pitch-number">'+esc(p.shirt_number||"•")+'</b><small>'+esc(p.name)+'</small></button>';
+   const x=side==="home"?Math.max(5,Math.min(45,5+px*40)):Math.max(55,Math.min(95,95-px*40));
+   const y=Math.max(7,Math.min(93,py*100));
+   return '<button class="pitch-player '+side+'" style="--x:'+x+'%;left:'+x+'%;top:'+y+'%" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')" title="'+esc(p.name)+'" aria-label="Apri scheda '+esc(p.name)+'">'+shirt(p,side)+'<small>'+esc(p.name)+'</small></button>';
   }).join("");
-  const pitch='<div class="pitch-wrap"><div class="pitch-labels"><b>CASA · '+esc(home)+'</b><span>Campo visto dall’alto</span><b>OSPITE · '+esc(away)+'</b></div><div class="football-pitch"><div class="pitch-halfway"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div><div class="pitch-box left"></div><div class="pitch-box right"></div><div class="pitch-six left"></div><div class="pitch-six right"></div><div class="pitch-goal left"></div><div class="pitch-goal right"></div>'+markers(h.starters||[],"home")+markers(a.starters||[],"away")+'</div><div class="pitch-hint">Casa sempre a sinistra e ospite a destra. Le foto appaiono quando disponibili; seleziona un volto per aprire la scheda del giocatore.</div></div>';
+  const crest=team=>team.image_url?'<img class="team-crest" src="'+esc(team.image_url)+'" alt="Stemma '+esc(team.name||"squadra")+'">':'<span class="team-crest">⚽</span>';
+  const pitch='<div class="pitch-wrap"><div class="pitch-labels"><div class="pitch-team-label">'+crest(homeTeam)+'<span><small>SQUADRA DI CASA</small><strong>'+esc(home)+'</strong></span></div><span class="muted">FORMAZIONI</span><div class="pitch-team-label"><span><small>SQUADRA OSPITE</small><strong>'+esc(away)+'</strong></span>'+crest(awayTeam)+'</div></div><div class="football-pitch"><div class="pitch-halfway"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div><div class="pitch-box left"></div><div class="pitch-box right"></div><div class="pitch-six left"></div><div class="pitch-six right"></div><div class="pitch-goal left"></div><div class="pitch-goal right"></div><div class="pitch-team-separator"></div>'+markers(h.starters||[],"home")+markers(a.starters||[],"away")+'</div><div class="pitch-legend"><span><i style="background:#b7f34a"></i> Casa · '+esc(home)+'</span><span><i style="background:#e4e9ee"></i> Ospite · '+esc(away)+'</span></div><div class="pitch-hint">Le squadre occupano due metà distinte: casa a sinistra, ospite a destra. Le maglie riprendono i colori sociali noti; se la divisa ufficiale della stagione non è fornita dalla fonte, la grafica è indicativa.</div></div>';
   const teams=[[h,home],[a,away]].map(([t,name])=>{
    const list=arr=>arr.length?'<div class="sub-list">'+arr.map(p=>'<button class="player-select" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')"><span class="shirt">'+esc(p.shirt_number||"•")+'</span><span>'+esc(p.name)+'</span>'+(p.is_captain?'<small>Capitano</small>':"")+'</button>').join("")+'</div>':empty("Elenco non fornito.");
    return '<div class="lineup-team"><div class="lineup-team-head"><div><h4>'+esc(name)+'</h4><small>'+esc(t.formation?"Modulo "+t.formation:"Modulo non indicato")+' · '+(t.confirmed===true?"Formazione confermata":t.confirmed===false?"Probabile, non confermata":"Conferma non indicata")+'</small></div>'+(t.coach?.name?'<small>Allenatore: '+esc(t.coach.name)+'</small>':"")+'</div><h5>Titolari</h5>'+list(t.starters||[])+'<h5>Panchina</h5>'+list(t.subs||[])+'</div>';
@@ -154,7 +170,7 @@
    const date=when?new Date(when).toLocaleString("it-IT",{dateStyle:"full",timeStyle:"short",timeZone:"Europe/Rome"}):"Data non indicata";
    $("matchDetailTitle").textContent=home+" – "+away;
    const state=status==="finished"?"Partita conclusa":status==="live"||status==="inprogress"?"Partita in corso":status==="scheduled"||status==="notstarted"?"In programma":status==="postponed"?"Rinviata":status==="cancelled"?"Annullata":"Stato non indicato";
-   const head='<div class="match-hero"><div class="match-league">'+esc(summary.league?.name||match.league?.name||"Competizione non indicata")+' · '+esc(date)+'</div><div class="match-score"><span>'+esc(home)+'</span><strong>'+esc(score)+'</strong><span>'+esc(away)+'</span></div><div class="match-state">'+state+'</div></div>';
+   const homeCrest=match.home_team?.image_url?'<img class="team-crest" src="'+esc(match.home_team.image_url)+'" alt="">':'⚽';const awayCrest=match.away_team?.image_url?'<img class="team-crest" src="'+esc(match.away_team.image_url)+'" alt="">':'⚽';const head='<div class="match-hero"><div class="match-league">'+esc(summary.league?.name||match.league?.name||"Competizione non indicata")+' · '+esc(date)+'</div><div class="match-score"><span class="match-team-lockup">'+homeCrest+'<b>'+esc(home)+'</b></span><strong>'+esc(score)+'</strong><span class="match-team-lockup">'+awayCrest+'<b>'+esc(away)+'</b></span></div><div class="match-state">'+state+'</div></div>';
    const summaryBody=metrics([["Giornata / turno",summary.round_name||"—"],["Arbitro",summary.referee||"—"],["Stadio",summary.stadium||"—"]]);
    const sections=sectionTabs()+
     section("riepilogo",block("Informazioni principali",summaryBody+metrics([["Competizione",summary.league?.name||match.league?.name||"—"],["Stagione",summary.season||"—"],["Stato",state]]),""),true)+
