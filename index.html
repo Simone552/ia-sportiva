@@ -14,6 +14,63 @@
 .page#panoramica,.page#freccette,.page#ttcup,.page#fonti{display:none!important}
 #calcio>.grid>.panel{margin-bottom:4px}
 @media(max-width:560px){.search-row{display:grid}.search-row .btn{width:100%}}
+
+#matchDetailPanel{padding:0;border:0;background:transparent}
+#matchDetailPanel>.panel-head{padding:4px 2px 12px}
+.analysis-block{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:17px;margin:13px 0}
+.analysis-block h3{font-size:17px;margin:0 0 12px}
+.analysis-note,.analysis-source{font-size:12px;color:var(--muted);line-height:1.5}
+.match-hero{background:linear-gradient(125deg,#202b52,#51428a);color:#fff;border-radius:18px;padding:20px;margin:8px 0 14px;text-align:center}
+.match-league{font-size:13px;color:#d9ddff}
+.match-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:15px;margin:18px 0}
+.match-score span{font-weight:700;font-size:clamp(14px,2vw,19px)}
+.match-score strong{font-size:clamp(28px,5vw,42px)}
+.match-state{font-size:12px;color:#d9ddff}
+.analysis-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.analysis-metrics>div{background:var(--panel2);border-radius:12px;padding:12px;text-align:center;min-width:0}
+.analysis-metrics strong{display:block;font-size:19px;overflow-wrap:anywhere}
+.analysis-metrics span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.stat-period>h4{font-size:15px;margin:15px 0 9px}
+.stat-group{margin:12px 0}
+.stat-group h5{font-size:13px;margin:0 0 6px;color:var(--muted)}
+.stat-table{border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.stat-head,.stat-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(55px,.35fr) minmax(55px,.35fr);gap:8px;padding:9px 11px;align-items:center}
+.stat-head{background:var(--panel2);font-size:11px;color:var(--muted);font-weight:700}
+.stat-head span:nth-child(n+2),.stat-row strong{text-align:center}
+.stat-row{border-top:1px solid var(--line);font-size:13px}
+.stat-row strong{font-variant-numeric:tabular-nums}
+.analysis-details{margin-top:13px;border:1px solid var(--line);border-radius:12px;padding:12px}
+.analysis-details summary{cursor:pointer;font-weight:700;font-size:13px}
+.shot-list{margin-top:10px}
+.shot-row{display:grid;grid-template-columns:42px minmax(0,1fr) minmax(105px,.55fr);gap:8px;padding:10px 0;border-top:1px solid var(--line);align-items:center}
+.shot-minute{font-weight:800;font-size:13px}
+.shot-main strong,.shot-result strong{display:block;font-size:12px}
+.shot-main small,.shot-result small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.shot-result{text-align:right}
+.player-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.player-card,.lineup-card{border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.player-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.player-top strong{font-size:13px}
+.player-top span{font-size:11px;color:var(--muted);text-align:right}
+.player-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:10px}
+.player-metrics>div{background:var(--panel2);border-radius:8px;padding:7px;display:flex;justify-content:space-between;gap:5px;font-size:11px}
+.player-metrics b{font-variant-numeric:tabular-nums}
+.lineup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lineup-card h4{margin:0 0 5px;font-size:15px}
+.lineup-card h5{margin:13px 0 5px;font-size:12px}
+.lineup-card p{font-size:11px;color:var(--muted);margin:4px 0}
+.lineup-card ol{padding-left:25px;margin:0}
+.lineup-card li{padding:4px 0;font-size:12px}
+.lineup-card li b{float:right;color:var(--muted)}
+.result-list,.event-list{display:grid;gap:7px}
+.result-list>div{padding:10px;border:1px solid var(--line);border-radius:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.result-list small{color:var(--muted);font-size:11px}
+.event-row{display:grid;grid-template-columns:42px 100px minmax(0,1fr);gap:9px;padding:9px;border-bottom:1px solid var(--line);align-items:start;font-size:12px}
+.event-row>span{font-weight:700}
+.event-row small{display:block;color:var(--muted);margin-top:3px}
+.analysis-empty{border:1px dashed var(--line);border-radius:10px;padding:13px;color:var(--muted);font-size:13px}
+.analysis-source{padding:10px 2px}
+@media(max-width:600px){.analysis-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.player-grid,.lineup-grid{grid-template-columns:1fr}.shot-row{grid-template-columns:35px minmax(0,1fr)}.shot-result{grid-column:2;text-align:left}.event-row{grid-template-columns:35px 78px minmax(0,1fr)}}
 </style>
 </head>
 <body><main class="app">
