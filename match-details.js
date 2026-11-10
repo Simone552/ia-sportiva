@@ -102,7 +102,7 @@
    "inter":["#0757a5","#101820"],"milan":["#c51f32","#171717"],"juventus":["#f4f4f0","#171717"],"napoli":["#58b9e9","#ffffff"],"roma":["#8c1837","#e7bd61"],"lazio":["#79c9ef","#ffffff"],"atalanta":["#1765ad","#171717"],"fiorentina":["#56328a","#ffffff"],"bologna":["#c62635","#183f7a"],"torino":["#7d1832","#ffffff"],"genoa":["#b92336","#173f77"],"cagliari":["#c42b43","#123d79"],"udinese":["#20242a","#f2f2ec"],"sassuolo":["#16784c","#111111"],"parma":["#e4c83c","#2252a0"],"lecce":["#e9c83d","#c62b36"],"como":["#65bce9","#ffffff"],"pisa":["#164d9a","#111111"],"cremonese":["#b92835","#f2f2f2"],"verona":["#f0c63c","#164b9c"],"junior":["#d52b3d","#ffffff"],"cucuta":["#d32932","#171717"]
   };
   const paletteFor=(name,side)=>{
-   const n=String(name||"").toLowerCase();
+   const n=String(name||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
    const key=Object.keys(palettes).find(k=>n.includes(k));
    return key?palettes[key]:(side==="home"?["#b7f34a","#173b28"]:["#e4e9ee","#283a50"]);
   };
