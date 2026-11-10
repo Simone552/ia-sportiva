@@ -101,7 +101,7 @@
    if(!Number.isFinite(px)||!Number.isFinite(py)||(px===0&&py===0))return "";
    const x=Math.max(5,Math.min(95,(side==="away"?1-px:px)*100)),y=Math.max(7,Math.min(93,py*100));
    const player=playerById[p.player_id]?.player||{},face=player.image_url;
-   const avatar=face?'<img class="pitch-face" src="'+esc(face)+'" alt="">':'<span>'+esc(p.shirt_number||"•")+'</span>';
+   const avatar=face?'<img class="pitch-face" src="'+esc(face)+'" alt="">':'<i class="pitch-face-fallback">⚽</i>';
    return '<button class="pitch-player '+side+'" style="left:'+x+'%;top:'+y+'%" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')" title="'+esc(p.name)+'" aria-label="Apri scheda '+esc(p.name)+'">'+avatar+'<b class="pitch-number">'+esc(p.shirt_number||"•")+'</b><small>'+esc(p.name)+'</small></button>';
   }).join("");
   const pitch='<div class="pitch-wrap"><div class="pitch-labels"><b>CASA · '+esc(home)+'</b><span>Campo visto dall’alto</span><b>OSPITE · '+esc(away)+'</b></div><div class="football-pitch"><div class="pitch-halfway"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div><div class="pitch-box left"></div><div class="pitch-box right"></div><div class="pitch-six left"></div><div class="pitch-six right"></div><div class="pitch-goal left"></div><div class="pitch-goal right"></div>'+markers(h.starters||[],"home")+markers(a.starters||[],"away")+'</div><div class="pitch-hint">Casa sempre a sinistra e ospite a destra. Le foto appaiono quando disponibili; seleziona un volto per aprire la scheda del giocatore.</div></div>';
