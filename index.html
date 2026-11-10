@@ -304,4 +304,5 @@ function render(){renderRecommendedSources();document.getElementById('slipCount'
 function removeSlip(id){data.slips=data.slips.filter(s=>s.id!==id);persist();toast('Selezione rimossa.')}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 render();
+loadPitchApiMatches();
 </script><script src="match-details.js"></script></body></html>
