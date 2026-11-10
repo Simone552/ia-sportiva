@@ -193,6 +193,36 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-ser
 .analysis-source{border-top:1px solid var(--line);margin-top:15px;line-height:1.6}
 @media(max-width:600px){.player-profile-kpis{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}.player-profile-head{padding:15px;gap:12px}.player-photo{width:70px;height:70px}.player-profile-body{padding:0 12px 14px}.player-profile-stats{grid-template-columns:1fr}.match-score{gap:8px}.match-score span{font-size:13px}.match-section-tabs{top:0}}
 
+
+/* Campo tattico con volti e mini-card Fantacalcio */
+.football-pitch{aspect-ratio:1.62/1;min-height:330px;background:repeating-linear-gradient(90deg,#176b43 0%,#176b43 12.5%,#1d784b 12.5%,#1d784b 25%);border:2px solid #d8f5df}
+.pitch-player{width:72px;min-height:58px;gap:3px;text-shadow:0 1px 4px #061b11}
+.pitch-player .pitch-face{width:35px;height:35px;object-fit:cover;border:2px solid #fff;border-radius:50%;background:#e7edf6;box-shadow:0 3px 9px #061b1188}
+.pitch-player .pitch-number{position:absolute;top:-2px;right:12px;width:17px;height:17px;border:1px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:900;color:#fff;box-shadow:0 1px 4px #061b1188}
+.pitch-player.home .pitch-number{background:#2457d6}
+.pitch-player.away .pitch-number{background:#c43c3c}
+.pitch-player small{max-width:72px;font-size:9px;line-height:1.1;background:#071b14a8;border-radius:5px;padding:2px 4px}
+.pitch-labels b:first-child{color:#4778f5}.pitch-labels b:last-child{color:#d34c55}
+.player-profile-head{display:grid;grid-template-columns:72px 92px minmax(0,1fr);align-items:center;gap:12px}
+.fantacalcio-sticker{width:92px;min-height:112px;overflow:hidden;position:relative;border:2px solid #e5bd57;border-radius:12px;background:linear-gradient(150deg,#243b70,#171f38 60%,#8a6730);color:#fff;box-shadow:0 5px 16px #101b3344;padding:5px;text-align:center}
+.fantacalcio-sticker img{width:48px;height:48px;object-fit:cover;border-radius:50%;border:2px solid #f2d47b;margin:2px auto 3px;display:block}
+.fantacalcio-sticker .sticker-title{font-size:8px;letter-spacing:.12em;font-weight:900;color:#f7d77e}
+.fantacalcio-sticker strong{display:block;font-size:10px;line-height:1.1;overflow-wrap:anywhere}
+.fantacalcio-sticker small{display:block;font-size:8px;color:#e8e4d7;margin-top:3px}
+.fantacalcio-sticker .sticker-band{position:absolute;top:8px;right:-17px;transform:rotate(35deg);background:#e8c76d;color:#25304a;font-size:7px;font-weight:900;padding:2px 18px}
+@media(max-width:600px){
+ .football-pitch{min-height:300px;aspect-ratio:1.2/1}
+ .pitch-player{width:53px}
+ .pitch-player .pitch-face{width:29px;height:29px}
+ .pitch-player .pitch-number{right:4px;width:15px;height:15px;font-size:8px}
+ .pitch-player small{max-width:54px;font-size:7px}
+ .player-profile-head{grid-template-columns:58px 78px minmax(0,1fr);gap:8px}
+ .player-photo{width:58px;height:58px}
+ .fantacalcio-sticker{width:78px;min-height:102px}
+ .fantacalcio-sticker img{width:40px;height:40px}
+ .player-profile-head h4{font-size:14px}
+}
+
 </style>
 </head>
 <body><main class="app">
