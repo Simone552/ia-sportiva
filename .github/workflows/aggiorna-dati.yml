@@ -18,7 +18,7 @@ jobs:
 
       - name: Recupera dati da PitchAPI
         env:
-          PITCH_KEY: ${{ secrets.PITCH_API_KEY }}
+          PITCH_KEY: ${{ secrets.PITCH_KEY || secrets.PITCH_API_KEY }}
         run: |
           python - <<'PY'
           import os
@@ -41,9 +41,18 @@ jobs:
           try:
               with urllib.request.urlopen(request, timeout=30) as response:
                   risultato = json.load(response)
+                  print("Connessione PitchAPI riuscita. HTTP:", response.status)
           except urllib.error.HTTPError as errore:
+              corpo = errore.read().decode("utf-8", errors="replace")
               print("Errore HTTP:", errore.code)
-              print("Risposta PitchAPI:", errore.read().decode("utf-8", errors="replace"))
+              print("Risposta del provider:", corpo[:4000])
+              if errore.code == 401:
+                  print("Controlla il nome e il valore del secret PITCH_KEY o PITCH_API_KEY.")
+              elif errore.code == 403:
+                  print("Possibile blocco del provider o limite di copertura del piano gratuito. Leggi il codice errore nella risposta.")
+              raise
+          except Exception as errore:
+              print("Errore di rete o risposta non valida:", repr(errore))
               raise
 
           cartella = Path("data")
