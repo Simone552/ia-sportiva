@@ -11,7 +11,12 @@ if not key:
 
 data = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 url = f"https://api.pitchapi.dev/v1/date/{data}"
-request = urllib.request.Request(url, headers={"X-API-KEY": key})
+headers = {
+    "X-API-KEY": key,
+    "User-Agent": "IA-Sportiva/0.6 (https://github.com/Simone552/ia-sportiva)",
+    "Accept": "application/json",
+}
+request = urllib.request.Request(url, headers=headers)
 
 try:
     with urllib.request.urlopen(request, timeout=30) as response:
