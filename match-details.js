@@ -2,7 +2,7 @@
   const $ = id => document.getElementById(id);
   const esc = value => String(value ?? "Dato non disponibile").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const getData = item => item && item.available ? item.data : null;
-  const missing = item => !item ? "Dato non presente nell'archivio." : (item.reason || "La fonte non ha fornito questo dato per la partita.");
+  const missing = item => !item ? "Dato non presente nell’archivio." : "La fonte non ha pubblicato questo dato per la partita.";
   const statNames = {
     "Total shots":"Tiri totali","Shots on target":"Tiri in porta","Shots off target":"Tiri fuori","Blocked shots":"Tiri bloccati","Shots inside box":"Tiri in area","Shots outside box":"Tiri fuori area",
     "Corners":"Calci d'angolo","Fouls committed":"Falli commessi","Yellow cards":"Ammonizioni","Red cards":"Espulsioni","Ball possession":"Possesso palla",
@@ -118,7 +118,7 @@
       const when=summary.time_utc||match.time_utc;
       const date=when?new Date(when).toLocaleString("it-IT",{dateStyle:"full",timeStyle:"short",timeZone:"Europe/Rome"}):"Data non indicata";
       $("matchDetailTitle").textContent=home+" – "+away;
-      let html='<div class="match-hero"><div class="match-league">'+esc(summary.league?.name||match.league?.name||"Competizione non indicata")+' · '+esc(date)+'</div><div class="match-score"><span>'+esc(home)+'</span><strong>'+esc(score)+'</strong><span>'+esc(away)+'</span></div><div class="match-state">'+(finished?"Partita conclusa":esc(match.status||"Stato non indicato"))+'</div></div>';
+      let html='<div class="match-hero"><div class="match-league">'+esc(summary.league?.name||match.league?.name||"Competizione non indicata")+' · '+esc(date)+'</div><div class="match-score"><span>'+esc(home)+'</span><strong>'+esc(score)+'</strong><span>'+esc(away)+'</span></div><div class="match-state">'+(finished?"Partita conclusa":status==="live"||status==="inprogress"?"Partita in corso":status==="scheduled"||status==="notstarted"?"In programma":status==="postponed"?"Rinviata":status==="cancelled"?"Annullata":"Stato non indicato")+'</div></div>';
       html+=panel("Riepilogo della partita",'<div class="analysis-metrics"><div><strong>'+esc(summary.round_name||"—")+'</strong><span>Giornata / turno</span></div><div><strong>'+esc(summary.referee||"—")+'</strong><span>Arbitro</span></div><div><strong>'+esc(summary.stadium||"—")+'</strong><span>Stadio</span></div></div>');
       html+=panel("Statistiche delle due squadre",statCards(getData(d.stats)));
       html+=panel("Tiri e occasioni",renderShots(d.shots,homeId,awayId,home,away),"Riepilogo dei tiri e dettaglio completo, quando fornito dalla fonte.");
