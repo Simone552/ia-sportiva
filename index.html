@@ -340,6 +340,7 @@ label{color:#a9c4af}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
 
 .pitch-player{position:absolute;cursor:pointer}.pitch-face-small{position:absolute;top:-5px;right:3px;width:19px;height:19px;border:1.5px solid #f5ffe8;border-radius:50%;object-fit:cover;box-shadow:0 2px 5px #000b;background:#243a2c}.match-team-lockup{min-width:0}.match-score{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.match-team-lockup b{max-width:190px;overflow-wrap:anywhere;text-align:center}@media(max-width:520px){.pitch-face-small{width:15px;height:15px;top:-3px;right:0}.match-team-lockup .team-crest{width:38px;height:38px}.match-team-lockup b{font-size:11px}}
+.fixture-entry{align-items:center;gap:14px}.fixture-main{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0;flex:1}.fixture-team{display:flex;align-items:center;gap:8px;min-width:0}.fixture-team strong{font-size:14px}.fixture-crest{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 2px 4px #0008)}.fixture-crest-fallback{width:30px;height:30px;display:grid;place-items:center;background:#203c2b;border-radius:50%}.fixture-vs{font-size:10px;color:#91ad9a;font-weight:800}.fixture-meta{width:100%;font-size:11px}.fixture-action{text-align:right;white-space:nowrap;display:grid;justify-items:end}@media(max-width:600px){.fixture-entry{align-items:flex-start}.fixture-main{gap:8px}.fixture-team{width:100%}.fixture-vs{display:none}.fixture-action .btn{font-size:10px;padding:7px}}
 </style>
 </head>
 <body><main class="app">
@@ -437,7 +438,9 @@ async function loadPitchApiMatches(){
    const time=match.time_utc?new Date(match.time_utc).toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'}):'Orario n.d.';
    const finished=String(match.status||'').toLowerCase()==='finished';
    const score=finished&&match.score_home!=null&&match.score_away!=null?String(match.score_home)+' – '+String(match.score_away):'—';
-   return '<div class="entry"><div style="min-width:0"><strong>'+esc(home)+' <span class="muted">vs</span> '+esc(away)+'</strong><div class="muted" style="font-size:12px">'+esc(league)+' · '+esc(time)+'</div><div class="muted" style="font-size:12px">'+esc(pitchStatusLabel(match.status))+'</div></div><div style="text-align:right;white-space:nowrap"><strong>'+esc(score)+'</strong><br><button class="btn ghost" style="margin-top:7px" onclick="openMatchDetails(\''+esc(match.id)+'\')">Apri analisi completa</button></div></div>';
+   const homeBadge=match.home_team?.image_url?'<img class="fixture-crest" src="'+esc(match.home_team.image_url)+'" alt="">':'<span class="fixture-crest-fallback">⚽</span>';
+   const awayBadge=match.away_team?.image_url?'<img class="fixture-crest" src="'+esc(match.away_team.image_url)+'" alt="">':'<span class="fixture-crest-fallback">⚽</span>';
+   return '<div class="entry fixture-entry"><div class="fixture-main"><div class="fixture-team">'+homeBadge+'<strong>'+esc(home)+'</strong></div><span class="fixture-vs">vs</span><div class="fixture-team">'+awayBadge+'<strong>'+esc(away)+'</strong></div><div class="muted fixture-meta">'+esc(league)+' · '+esc(time)+' · '+esc(pitchStatusLabel(match.status))+'</div></div><div class="fixture-action"><strong>'+esc(score)+'</strong><button class="btn ghost" style="margin-top:7px" onclick="openMatchDetails(\''+esc(match.id)+'\')">Apri analisi completa</button></div></div>';
   }).join('');
   status.textContent='Archivio PitchAPI caricato · '+matches.length+' partite · data '+dataDate+'.';
   pitchApiLoaded=true;
