@@ -1,0 +1,51 @@
+{
+  "data": {
+    "date": "2026-11-10",
+    "matches": [
+      {
+        "id": "m_0NldjE",
+        "league": {
+          "id": "l_1xXulJ",
+          "name": "Primera A",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/430320a87b60e9c44aff35055c5680e5d85a3c5c89dd4ed04abc0016356b58d1.webp"
+        },
+        "home_team": {
+          "id": "t_2e5O8D",
+          "name": "Junior",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/4022a0adef9fca8377bbc9d91ffc90666c26cb9569531c7200c94b89f2c741e9.webp"
+        },
+        "away_team": {
+          "id": "t_11ggED",
+          "name": "Cúcuta Deportivo",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/b17e79b00fd1f0983893b8b5378c6143c7b4660a936602812b2ae98b829aae0d.webp"
+        },
+        "time_utc": "2026-11-10T00:00:00Z",
+        "status": "finished",
+        "score_home": 2,
+        "score_away": 0
+      },
+      {
+        "id": "m_1EmehY",
+        "league": {
+          "id": "l_4dzm4e",
+          "name": "Primera Division",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/2ce3f4ff7905e71fee55f8f620489282e1aa76f5a5c2a854afea74a6153363a1.webp"
+        },
+        "home_team": {
+          "id": "t_3KpT7r",
+          "name": "Aurora",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/6f7b01a35736c211ee28118a31a2341d28ae469f47fe80c22151fae53024a108.webp"
+        },
+        "away_team": {
+          "id": "t_2txXQc",
+          "name": "Universitario de Vinto",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/0c1a714d822f9f9209845fedbd308f17b51b986949a6a3cddf242d5e24d5c351.webp"
+        },
+        "time_utc": "2026-11-10T00:30:00Z",
+        "status": "finished",
+        "score_home": 1,
+        "score_away": 1
+      }
+    ]
+  }
+}
