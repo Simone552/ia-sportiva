@@ -73,6 +73,16 @@ for source, url in FEEDS:
     except Exception as exc:
         print(f"Feed non disponibile {source}: {exc}")
 
+if not items:
+    previous = Path("data/notizie.json")
+    if previous.exists():
+        try:
+            old_payload = json.loads(previous.read_text(encoding="utf-8"))
+            items = old_payload.get("items", [])
+            print(f"Nessun feed raggiungibile: mantengo {len(items)} notizie precedenti")
+        except Exception:
+            pass
+
 items.sort(key=lambda item: item.get("published") or "", reverse=True)
 unique, seen = [], set()
 for item in items:
