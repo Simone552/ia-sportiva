@@ -15,7 +15,7 @@ FEEDS = [
 
 def clean(value):
     value = re.sub(r"<[^>]+>", " ", value or "")
-    return re.sub(r"\\s+", " ", value).strip()
+    return re.sub(r"\s+", " ", value).strip()
 
 def child_text(node, names):
     for child in list(node):
