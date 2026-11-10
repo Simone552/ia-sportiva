@@ -33,10 +33,20 @@
     return out;
   }
   function renderPairs(data){
+    const periods=data?.periods||[];
+    if(periods.length){
+      return periods.map(period=>{
+        const groups=period.groups||[];
+        return '<div style="margin:12px 0"><h4>'+esc(period.period||"Periodo")+'</h4>'+groups.map(group=>{
+          const items=group.items||[];
+          if(!items.length)return "";
+          return '<h4 style="margin:10px 0 6px">'+esc(group.group_name||"Statistiche")+'</h4><div class="list">'+items.map(item=>'<div class="entry"><strong>'+esc(item.title||item.key)+'</strong><span>'+esc(item.home??"n.d.")+' – '+esc(item.away??"n.d.")+'</span></div>').join("")+'</div>';
+        }).join("")+'</div>';
+      }).join("");
+    }
     const pairs=flatten(data).filter(x=>x.value!=="" && x.value!==null && x.value!==undefined);
     if(!pairs.length) return empty("Nessuna statistica strutturata disponibile.");
-    const unique=pairs.slice(0,100);
-    return '<div class="stats-grid">'+unique.map(x=>'<div><strong>'+esc(x.label)+'</strong><p>'+esc(x.value)+'</p></div>').join("")+'</div>';
+    return '<div class="stats-grid">'+pairs.slice(0,100).map(x=>'<div><strong>'+esc(x.label)+'</strong><p>'+esc(x.value)+'</p></div>').join("")+'</div>';
   }
   function renderPlayers(item){
     const data=unwrap(item);
@@ -57,7 +67,10 @@
     const periods=data.periods||[];
     const shots=periods.flatMap(period=>(period.shots||[]).map(s=>({...s,period:period.period})));
     if(!shots.length) return empty("Nessun dettaglio tiro disponibile.");
-    return '<div class="list">'+shots.map(s=>'<div class="entry"><div><strong>'+esc(s.minute!=null?s.minute+"'":"Minuto n.d.")+' · '+esc(s.player?.name||"Giocatore n.d.")+'</strong><div class="muted" style="font-size:12px">'+esc(s.period||"Tempo n.d.")+' · '+esc(s.shot_type||"Tipo n.d.")+' · '+esc(s.situation||"Situazione n.d.")+'</div></div><div style="text-align:right"><strong>'+((s.expected_goals!=null)?'xG '+Number(s.expected_goals).toFixed(2):'xG n.d.')+'</strong><div class="muted" style="font-size:12px">'+(s.is_on_target===true?"In porta":s.is_on_target===false?"Fuori / bloccato":"Esito n.d.")+'</div></div></div>').join("")+'</div>';
+    const onTarget=shots.filter(s=>s.is_on_target===true).length;
+    const totalXg=shots.reduce((sum,s)=>sum+(Number(s.expected_goals)||0),0);
+    const overview='<div class="stats-grid"><div><strong>'+shots.length+'</strong><p>Tiri registrati</p></div><div><strong>'+onTarget+'</strong><p>Tiri in porta / diretti in porta</p></div><div><strong>'+totalXg.toFixed(2)+'</strong><p>xG complessivo dei tiri elencati</p></div></div>';
+    return overview+'<div class="list">'+shots.map(s=>'<div class="entry"><div><strong>'+esc(s.minute!=null?s.minute+"'":"Minuto n.d.")+' · '+esc(s.player?.name||"Giocatore n.d.")+'</strong><div class="muted" style="font-size:12px">'+esc(s.period||"Tempo n.d.")+' · '+esc(s.shot_type||"Tipo n.d.")+' · '+esc(s.situation||"Situazione n.d.")+' · '+esc(s.event_type||"Esito n.d.")+'</div></div><div style="text-align:right"><strong>'+((s.expected_goals!=null)?'xG '+Number(s.expected_goals).toFixed(2):'xG n.d.')+'</strong><div class="muted" style="font-size:12px">'+(s.is_on_target===true?"In porta":s.is_on_target===false?"Fuori porta":"Esito n.d.")+'</div></div></div>').join("")+'</div>';
   }
   function renderLineups(item){
     const data=unwrap(item);
@@ -70,13 +83,14 @@
   function renderH2H(item){
     const data=unwrap(item);
     if(!data) return empty(unavailable(item));
-    const games=Array.isArray(data)?data:(data.matches||data.meetings||data.h2h||[]);
-    if(!games.length) return renderPairs(data);
-    return '<div class="list">'+games.slice(0,15).map(g=>{
+    const games=data.recent_matches||data.matches||data.meetings||data.h2h||[];
+    const summary='<div class="stats-grid"><div><strong>'+esc(data.home_wins??"n.d.")+'</strong><p>Vittorie squadra casa</p></div><div><strong>'+esc(data.draws??"n.d.")+'</strong><p>Pareggi</p></div><div><strong>'+esc(data.away_wins??"n.d.")+'</strong><p>Vittorie squadra ospite</p></div><div><strong>'+esc(data.total_matches??games.length)+'</strong><p>Scontri totali riportati</p></div></div>';
+    if(!games.length) return summary+empty("Nessun singolo precedente restituito dalla fonte.");
+    return summary+'<div class="list">'+games.slice(0,20).map(g=>{
       const home=g.home?.name||g.home_team?.name||g.home||"Casa";
       const away=g.away?.name||g.away_team?.name||g.away||"Ospite";
-      const score=(g.score_home!=null&&g.score_away!=null)?g.score_home+"–"+g.score_away:(g.score||"Risultato n.d.");
-      return '<div class="entry"><div><strong>'+esc(home)+' '+esc(score)+' '+esc(away)+'</strong><div class="muted" style="font-size:12px">'+esc(g.date||g.time_utc||"Data n.d.")+'</div></div><span class="pill">H2H</span></div>';
+      const score=(g.score_home!=null&&g.score_away!=null)?g.score_home+"–"+g.score_away:(g.finished===false?"Da disputare":"Risultato n.d.");
+      return '<div class="entry"><div><strong>'+esc(home)+' '+esc(score)+' '+esc(away)+'</strong><div class="muted" style="font-size:12px">'+esc(g.time_utc||g.date||"Data n.d.")+'</div></div><span class="pill">H2H</span></div>';
     }).join("")+'</div>';
   }
   function renderEvents(item){
