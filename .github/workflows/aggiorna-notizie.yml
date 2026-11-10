@@ -1,0 +1,22 @@
+name: Aggiorna notizie calcio
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "13 */3 * * *"
+permissions:
+  contents: write
+jobs:
+  notizie:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+      - name: Raccogli notizie dai feed sportivi
+        run: python scripts/fetch_news.py
+      - name: Salva archivio notizie
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/notizie.json
+          git diff --cached --quiet || git commit -m "Aggiorna notizie calcio"
+          git push
