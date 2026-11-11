@@ -174,7 +174,7 @@
   const d=getData(item);if(!d)return empty(unavailable(item));
   const points=d.points||[];if(!points.length)return empty(waitingMessage("L’indicatore di pressione"));
   const peakHome=Math.max(...points.map(p=>Number(p.value)||0)),peakAway=Math.min(...points.map(p=>Number(p.value)||0));
-  const bars=points.map(p=>{const v=Number(p.value)||0,h=Math.max(3,Math.min(48,Math.abs(v)*.48));return '<span class="momentum-bar '+(v>=0?"home":"away")+'" style="height:'+h+'%;'+(v>=0?"bottom:50%;":"top:50%;")+'" title="'+esc(p.minute)+"′ · "+esc(v.toFixed(2))+'"></span>';}).join("");
+  const bars=points.map((p,i)=>{const v=Number(p.value)||0,h=Math.max(3,Math.min(48,Math.abs(v)*.48)),left=points.length>1?i/(points.length-1)*100:50,width=Math.max(.5,Math.min(3,70/points.length));return '<span class="momentum-bar '+(v>=0?"home":"away")+'" style="left:'+left+'%;width:'+width+'%;height:'+h+'%;'+(v>=0?"bottom:50%;":"top:50%;")+'" title="'+esc(p.minute)+"′ · "+esc(v.toFixed(2))+'"></span>';}).join("");
   return metrics([["Picco pressione casa",peakHome.toFixed(2)],["Picco pressione ospite",peakAway.toFixed(2)]])+'<div class="momentum-chart"><div class="momentum-zero"></div>'+bars+'</div><div class="momentum-legend"><span>Casa: pressione positiva</span><span>Ospite: pressione negativa</span></div>';
  }
  function renderEvents(item,homeId,home,away){
