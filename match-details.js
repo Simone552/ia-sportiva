@@ -188,8 +188,8 @@
   }).join("")+'</div>';
  }
  function renderHeatmaps(item){
-  const d=getData(item);if(!d)return "";
-  const teams=d.teams||[];if(!teams.length)return "";
+  const d=getData(item);if(!d)return empty(unavailable(item));
+  const teams=d.teams||[];if(!teams.length)return empty(waitingMessage("Le mappe delle azioni"));
   const length=d.grid?.length||16,width=d.grid?.width||12;
   return '<div class="heatmap-team-grid">'+teams.map(t=>{
    const counts={};let max=1;(t.cells||[]).forEach(c=>{counts[c[1]*length+c[0]]=c[2];max=Math.max(max,c[2]);});
@@ -198,8 +198,8 @@
   }).join("")+'</div>';
  }
  function renderAdvancedNetwork(item){
-  const d=getData(item);if(!d)return "";
-  const networks=d.networks||[];if(!networks.length)return "";
+  const d=getData(item);if(!d)return empty(unavailable(item));
+  const networks=d.networks||[];if(!networks.length)return empty(waitingMessage("La rete dei passaggi"));
   return '<div class="network-grid">'+networks.map(n=>'<div class="network-team"><strong>'+esc(n.team?.name||"Squadra")+'</strong><small>Rete passaggi · primi undici</small><div class="result-list">'+(n.nodes||[]).slice().sort((a,b)=>(b.passes||0)-(a.passes||0)).slice(0,6).map(p=>'<div><strong>'+esc(p.player?.name||"Giocatore")+'</strong><small>'+esc(p.passes??0)+' passaggi · '+esc(p.passes_received??0)+' ricevuti</small></div>').join("")+'</div></div>').join("")+'</div>';
  }
  function renderEvents(item,homeId,home,away){
