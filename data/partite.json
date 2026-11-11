@@ -1008,35 +1008,145 @@
         "country_code": "INT-2",
         "season": "2026/2027",
         "matches_in_season": 144,
-        "played_results": 72
+        "played_results": 72,
+        "sample_played": [
+          {
+            "date": "2026-09-08",
+            "time_utc": "2026-09-08T16:45:00Z",
+            "home_id": "t_2jeqmO",
+            "home_name": "AEK Athens",
+            "away_id": "t_1ta56l",
+            "away_name": "LASK",
+            "score_home": 1,
+            "score_away": 0
+          },
+          {
+            "date": "2026-09-08",
+            "time_utc": "2026-09-08T16:45:00Z",
+            "home_id": "t_1mTmMO",
+            "home_name": "Club Brugge",
+            "away_id": "t_4RqKpo",
+            "away_name": "Aston Villa",
+            "score_home": 2,
+            "score_away": 3
+          }
+        ]
       },
       {
         "league": "Conference League",
         "country_code": "INT-2",
         "season": "2026/2027",
         "matches_in_season": 108,
-        "played_results": 54
+        "played_results": 54,
+        "sample_played": [
+          {
+            "date": "2026-10-15",
+            "time_utc": "2026-10-15T16:45:00Z",
+            "home_id": "t_3CeUfH",
+            "home_name": "Gent",
+            "away_id": "t_0rrO78",
+            "away_name": "AGF",
+            "score_home": 1,
+            "score_away": 0
+          },
+          {
+            "date": "2026-10-15",
+            "time_utc": "2026-10-15T16:45:00Z",
+            "home_id": "t_2SZyGH",
+            "home_name": "Universitatea Craiova",
+            "away_id": "t_3i7zAH",
+            "away_name": "Getafe",
+            "score_home": 1,
+            "score_away": 1
+          }
+        ]
       },
       {
         "league": "Europa League",
         "country_code": "INT-2",
         "season": "2026/2027",
         "matches_in_season": 144,
-        "played_results": 72
+        "played_results": 72,
+        "sample_played": [
+          {
+            "date": "2026-09-16",
+            "time_utc": "2026-09-16T16:45:00Z",
+            "home_id": "t_2cGY1H",
+            "home_name": "Ararat Armenia",
+            "away_id": "t_19pSyq",
+            "away_name": "Sparta Prague",
+            "score_home": 1,
+            "score_away": 4
+          },
+          {
+            "date": "2026-09-16",
+            "time_utc": "2026-09-16T16:45:00Z",
+            "home_id": "t_0YNrpr",
+            "home_name": "Omonia Nicosia",
+            "away_id": "t_4aQcO7",
+            "away_name": "Celta Vigo",
+            "score_home": 1,
+            "score_away": 0
+          }
+        ]
       },
       {
         "league": "Serie A",
         "country_code": "ITA",
         "season": "2026/2027",
         "matches_in_season": 380,
-        "played_results": 110
+        "played_results": 110,
+        "sample_played": [
+          {
+            "date": "2026-08-22",
+            "time_utc": "2026-08-22T16:30:00Z",
+            "home_id": "t_3CPHHF",
+            "home_name": "Inter",
+            "away_id": "t_1pp2Qa",
+            "away_name": "Monza",
+            "score_home": 4,
+            "score_away": 1
+          },
+          {
+            "date": "2026-08-22",
+            "time_utc": "2026-08-22T16:30:00Z",
+            "home_id": "t_2ur07g",
+            "home_name": "Udinese",
+            "away_id": "t_0oXTvZ",
+            "away_name": "Como",
+            "score_home": 1,
+            "score_away": 1
+          }
+        ]
       },
       {
         "league": "Serie B",
         "country_code": "ITA",
         "season": "2026/2027",
         "matches_in_season": 380,
-        "played_results": 110
+        "played_results": 110,
+        "sample_played": [
+          {
+            "date": "2026-08-21",
+            "time_utc": "2026-08-21T18:30:00Z",
+            "home_id": "t_3ve04n",
+            "home_name": "LR Vicenza",
+            "away_id": "t_2GekAE",
+            "away_name": "Catanzaro",
+            "score_home": 3,
+            "score_away": 2
+          },
+          {
+            "date": "2026-08-22",
+            "time_utc": "2026-08-22T17:00:00Z",
+            "home_id": "t_40hOWg",
+            "home_name": "Südtirol",
+            "away_id": "t_35OKws",
+            "away_name": "Virtus Entella",
+            "score_home": 1,
+            "score_away": 0
+          }
+        ]
       }
     ],
     "priority_league_schedule_errors": [],
@@ -1059,7 +1169,7 @@
       "USL League One": 1,
       "Liga 1": 5
     },
-    "fetched_at": "2026-11-11T18:45:05.145165+00:00",
+    "fetched_at": "2026-11-11T18:47:16.081855+00:00",
     "matches": [
       {
         "id": "m_4XjY7T",
