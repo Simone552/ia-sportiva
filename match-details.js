@@ -152,13 +152,25 @@
  }
  function renderRecentForm(form){
   if(!form)return empty("La forma recente non è presente nell’archivio per questa competizione.");
-  const side=(items,name)=>'<div class="form-team"><h4>'+esc(name)+'</h4>'+((items||[]).length?'<div class="result-list">'+items.map(g=>{
-   const date=g.date?new Date(g.date+"T12:00:00").toLocaleDateString("it-IT",{day:"2-digit",month:"short"}):"Data n.d.";
-   const venue=g.home?"Casa":"Trasferta";
-   const resultLabel=g.result==="W"?"Vittoria":g.result==="D"?"Pareggio":"Sconfitta";
-   return '<div><span><strong>'+esc(g.opponent||"Avversaria")+'</strong><small>'+esc(date)+' · '+venue+'</small></span><span><strong>'+esc(g.score_for)+' – '+esc(g.score_against)+'</strong><small>'+resultLabel+'</small></span></div>';
-  }).join("")+'</div>':empty("Nessuna gara precedente trovata nella stagione di questa competizione."))+'</div>';
-  return '<p class="analysis-note">Ultime cinque partite di campionato precedenti a questa gara. I risultati sono mostrati dal punto di vista della rispettiva squadra; non includono amichevoli o coppe.</p><div class="form-grid">'+side(form.home,currentMatch?.home_team?.name||"Casa")+side(form.away,currentMatch?.away_team?.name||"Ospite")+'</div>';
+  const summarize=items=>{
+   const games=items||[],wins=games.filter(g=>g.result==="W").length,draws=games.filter(g=>g.result==="D").length,losses=games.filter(g=>g.result==="L").length;
+   const scored=games.reduce((sum,g)=>sum+(Number(g.score_for)||0),0),conceded=games.reduce((sum,g)=>sum+(Number(g.score_against)||0),0);
+   const points=wins*3+draws;
+   return {games:games.length,wins,draws,losses,scored,conceded,points};
+  };
+  const side=(items,name)=>{
+   const s=summarize(items);
+   const overview=metrics([["Gare",s.games],["V-P-S",s.wins+"-"+s.draws+"-"+s.losses],["Gol fatti/subiti",s.scored+" / "+s.conceded],["Punti",s.points]]);
+   const rows=(items||[]).slice().reverse();
+   const list=rows.length?'<div class="result-list">'+rows.map(g=>{
+    const date=g.date?new Date(g.date+"T12:00:00").toLocaleDateString("it-IT",{day:"2-digit",month:"short"}):"Data n.d.";
+    const venue=g.home?"Casa":"Trasferta";
+    const resultLabel=g.result==="W"?"Vittoria":g.result==="D"?"Pareggio":"Sconfitta";
+    return '<div><span><strong>'+esc(g.opponent||"Avversaria")+'</strong><small>'+esc(date)+' · '+venue+'</small></span><span><strong>'+esc(g.score_for)+' – '+esc(g.score_against)+'</strong><small>'+resultLabel+'</small></span></div>';
+   }).join("")+'</div>':empty("Nessuna gara precedente trovata nella stagione di questa competizione.");
+   return '<div class="form-team"><h4>'+esc(name)+'</h4>'+overview+list+'</div>';
+  };
+  return '<p class="analysis-note">Ultime cinque partite di campionato precedenti a questa gara, dalla più recente. Risultati e riepiloghi sono calcolati dai punteggi registrati dalla fonte; non includono amichevoli o coppe.</p><div class="form-grid">'+side(form.home,currentMatch?.home_team?.name||"Casa")+side(form.away,currentMatch?.away_team?.name||"Ospite")+'</div>';
  }
  function renderAdvanced(item){
   const d=getData(item);if(!d)return empty(unavailable(item));
