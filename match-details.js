@@ -177,6 +177,30 @@
   const bars=points.map((p,i)=>{const v=Number(p.value)||0,h=Math.max(3,Math.min(48,Math.abs(v)*.48)),left=points.length>1?i/(points.length-1)*100:50,width=Math.max(.5,Math.min(3,70/points.length));return '<span class="momentum-bar '+(v>=0?"home":"away")+'" style="left:'+left+'%;width:'+width+'%;height:'+h+'%;'+(v>=0?"bottom:50%;":"top:50%;")+'" title="'+esc(p.minute)+"′ · "+esc(v.toFixed(2))+'"></span>';}).join("");
   return metrics([["Picco pressione casa",peakHome.toFixed(2)],["Picco pressione ospite",peakAway.toFixed(2)]])+'<div class="momentum-chart"><div class="momentum-zero"></div>'+bars+'</div><div class="momentum-legend"><span>Casa: pressione positiva</span><span>Ospite: pressione negativa</span></div>';
  }
+ function renderAdvancedPlayers(item,homeId,awayId){
+  const d=getData(item);if(!d)return empty("Le metriche avanzate individuali non sono disponibili per questa partita.");
+  const players=d.players||[];if(!players.length)return empty("Nessun dato avanzato individuale pubblicato.");
+  return '<p class="analysis-note">Giocatori ordinati dalla fonte per valore delle azioni. Il VAEP misura il contributo delle azioni alla probabilità di segnare o subire gol.</p><div class="advanced-player-list">'+players.slice(0,10).map(p=>{
+   const team=p.team_id===homeId?currentMatch?.home_team?.name:p.team_id===awayId?currentMatch?.away_team?.name:"Squadra";
+   const vaep=p.possession_value?.vaep_total,xt=p.possession_value?.xt_total;
+   return '<div class="advanced-player-row"><strong>'+esc(p.player?.name||"Giocatore")+'</strong><small>'+esc(team)+' · '+esc(p.minutes_played??"—")+' min · '+esc(p.actions??"—")+' azioni</small><span>VAEP '+esc(vaep==null?"n.d.":Number(vaep).toFixed(3))+' · xT '+esc(xt==null?"n.d.":Number(xt).toFixed(3))+'</span></div>';
+  }).join("")+'</div>';
+ }
+ function renderHeatmaps(item){
+  const d=getData(item);if(!d)return "";
+  const teams=d.teams||[];if(!teams.length)return "";
+  const length=d.grid?.length||16,width=d.grid?.width||12;
+  return '<div class="heatmap-team-grid">'+teams.map(t=>{
+   const counts={};let max=1;(t.cells||[]).forEach(c=>{counts[c[1]*length+c[0]]=c[2];max=Math.max(max,c[2]);});
+   const cells=Array.from({length:length*width},(_,i)=>{const n=counts[i]||0,opacity=n?(.12+.88*n/max):.035;return '<span title="'+n+' azioni" style="background:rgba(46,174,120,'+opacity.toFixed(2)+')"></span>';}).join("");
+   return '<div class="heatmap-team"><strong>'+esc(t.team?.name||"Squadra")+'</strong><small>'+esc(t.actions??"—")+' azioni · mappa orientata verso la porta avversaria</small><div class="heatmap-grid" style="grid-template-columns:repeat('+length+',minmax(0,1fr))">'+cells+'</div></div>';
+  }).join("")+'</div>';
+ }
+ function renderAdvancedNetwork(item){
+  const d=getData(item);if(!d)return "";
+  const networks=d.networks||[];if(!networks.length)return "";
+  return '<div class="network-grid">'+networks.map(n=>'<div class="network-team"><strong>'+esc(n.team?.name||"Squadra")+'</strong><small>Rete passaggi · primi undici</small><div class="result-list">'+(n.nodes||[]).slice().sort((a,b)=>(b.passes||0)-(a.passes||0)).slice(0,6).map(p=>'<div><strong>'+esc(p.player?.name||"Giocatore")+'</strong><small>'+esc(p.passes??0)+' passaggi · '+esc(p.passes_received??0)+' ricevuti</small></div>').join("")+'</div></div>').join("")+'</div>';
+ }
  function renderEvents(item,homeId,home,away){
   const d=getData(item);if(!d)return empty(unavailable(item));
   const events=Array.isArray(d)?d:(d.events||[]);if(!events.length)return empty(waitingMessage("La cronologia degli eventi"));
@@ -213,9 +237,9 @@
     section("statistiche",block("Confronto statistico",renderStats(getData(d.stats)),"Valori della squadra di casa e della squadra ospite, suddivisi per categoria."),false)+
     section("tiri",block("Tiri e occasioni",renderShots(d.shots,homeId,awayId,home,away),"Conteggio e dettaglio dei tiri registrati dalla fonte."),false)+
     section("formazioni",block("Formazioni sul campo",renderPitch(getData(d.lineups),home,away),"I moduli e le posizioni sono quelli restituiti dalla fonte; clicca sui calciatori per vedere i dati individuali."),false)+
-    section("giocatori",block("Tutti i giocatori",renderPlayerDirectory(currentPlayers,homeId,awayId,home,away),"Statistiche individuali della partita. Apri un calciatore per vedere tutti i valori disponibili."),false)+
+    section("giocatori",block("Tutti i giocatori",renderPlayerDirectory(currentPlayers,homeId,awayId,home,away),"Statistiche individuali della partita. Apri un calciatore per vedere tutti i valori disponibili.")+block("Impatto avanzato dei giocatori",renderAdvancedPlayers(d.advanced_players,homeId,awayId)),false)+
     section("precedenti",block("Scontri diretti",renderH2H(d.h2h)),false)+
-    section("avanzate",block("Metriche avanzate",renderAdvanced(d.advanced),"Passaggi progressivi, conduzioni, creazione, difesa, territorio e ritmo."),false)+
+    section("avanzate",block("Metriche avanzate",renderAdvanced(d.advanced),"Passaggi progressivi, conduzioni, creazione, difesa, territorio e ritmo.")+block("Rete dei passaggi",renderAdvancedNetwork(d.advanced_network))+block("Mappe delle azioni",renderHeatmaps(d.heatmaps),"Le zone più intense indicano dove sono state registrate più azioni."),false)+
     section("pressione",block("Andamento della pressione",renderMomentum(d.momentum),"La linea positiva favorisce la squadra di casa, quella negativa la squadra ospite."),false)+
     section("eventi",block("Cronologia della partita",renderEvents(d.events,homeId,home,away)),false);
    const note='<div class="analysis-source">Fonte: PitchAPI · ultimo aggiornamento archivio: '+esc(root.fetched_at||"non indicato")+'. I dati non pubblicati dalla fonte vengono indicati come non disponibili e non sono sostituiti da valori inventati. Le formazioni sono probabili o confermate secondo lo stato indicato dal provider.</div>';
