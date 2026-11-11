@@ -133,13 +133,26 @@ for league in leagues:
         })
         print(f"Calendario lega {league.get('name')}: non disponibile · {league_error}")
         continue
+    all_league_matches = league_data.get("matches", [])
+    played_data, played_error = api_get(
+        f"/leagues/{league_id}/matches?season={season_param}&status=played"
+    )
+    played_matches = played_data.get("matches", []) if isinstance(played_data, dict) else []
+    if played_error:
+        print(f"Risultati giocati {league.get('name')}: uso i risultati presenti nel calendario completo · {played_error}")
+        played_matches = [
+            item for item in all_league_matches
+            if item.get("score_home") is not None and item.get("score_away") is not None
+        ]
     league_schedules_checked.append({
         "league": league.get("name"),
         "country_code": league.get("country_code"),
         "season": season,
+        "matches_in_season": len(all_league_matches),
+        "played_results": len(played_matches),
     })
-    league_matches_by_id[league_id] = league_data.get("matches", [])
-    for match in league_data.get("matches", []):
+    league_matches_by_id[league_id] = played_matches
+    for match in all_league_matches:
         match_date = match.get("date")
         if not match_date:
             continue
@@ -163,7 +176,8 @@ def recent_team_form(team_id, before_date, league_id):
     """Ultime cinque gare di campionato precedenti alla partita, senza includere il match da analizzare."""
     played = []
     for previous in league_matches_by_id.get(league_id, []):
-        if previous.get("date", "9999-99-99") >= before_date:
+        previous_date = previous.get("date") or str(previous.get("time_utc") or "")[:10]
+        if not previous_date or previous_date >= before_date:
             continue
         if previous.get("score_home") is None or previous.get("score_away") is None:
             continue
@@ -195,6 +209,11 @@ for match in matches:
         "home": recent_team_form((match.get("home_team") or {}).get("id"), match.get("date", today), league_id),
         "away": recent_team_form((match.get("away_team") or {}).get("id"), match.get("date", today), league_id),
     }
+
+recent_form_coverage = {
+    "matches_with_home_results": sum(bool(m.get("recent_form", {}).get("home")) for m in matches),
+    "matches_with_away_results": sum(bool(m.get("recent_form", {}).get("away")) for m in matches),
+}
 
 league_counts = {}
 for match in matches:
@@ -269,6 +288,7 @@ result = {
         "leagues_catalogue_error": leagues_error,
         "priority_league_schedules_checked": league_schedules_checked,
         "priority_league_schedule_errors": league_schedule_errors,
+        "recent_form_coverage": recent_form_coverage,
         "league_counts_in_calendar": league_counts,
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "matches": matches,
