@@ -144,7 +144,8 @@
  }
  function renderH2H(item){
   const d=getData(item);if(!d)return empty(unavailable(item));
-  const games=d.recent_matches||d.matches||[];
+  const allGames=d.recent_matches||d.matches||[];
+  const games=allGames.filter(g=>g.finished===true||(g.finished===undefined&&g.score_home!=null&&g.score_away!=null));
   const overview=metrics([["Vittorie casa",d.home_wins??"n.d."],["Pareggi",d.draws??"n.d."],["Vittorie ospite",d.away_wins??"n.d."]]);
   if(!games.length){if(Number(d.total_matches||0)===0)return empty("Nessun precedente restituito dalla fonte. Questo non dimostra che le squadre non si siano mai affrontate: significa soltanto che l’archivio non fornisce incontri H2H per questa partita.");return overview+empty("La fonte non ha restituito l’elenco dei precedenti.");}
   return overview+'<div class="result-list">'+games.map(g=>'<div><strong>'+esc(g.home?.name||"Casa")+' '+esc(g.score_home??"—")+' – '+esc(g.score_away??"—")+' '+esc(g.away?.name||"Ospite")+'</strong><small>'+esc(g.time_utc?new Date(g.time_utc).toLocaleDateString("it-IT",{timeZone:"Europe/Rome"}):"Data non indicata")+'</small></div>').join("")+'</div>';
