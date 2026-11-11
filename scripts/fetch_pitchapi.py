@@ -190,6 +190,8 @@ endpoints = {
     "h2h": "/h2h",
     "events": "/events",
     "advanced": "/advanced",
+    "advanced_players": "/advanced/players",
+    "advanced_network": "/advanced/network",
     "momentum": "/momentum",
     "players_halves": "/players/halves",
     "heatmaps": "/heatmaps",
