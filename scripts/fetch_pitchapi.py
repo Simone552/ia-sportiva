@@ -3,7 +3,7 @@ import json
 import time
 import urllib.request
 import urllib.error
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 key = os.environ.get("PITCH_KEY", "").strip()
@@ -33,13 +33,32 @@ def api_get(path):
         print(f"Endpoint {path}: {error!r}")
         return None, {"available": False, "reason": str(error)}
 
-today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-matches_data, error = api_get(f"/date/{today}?status=all")
-if error or not isinstance(matches_data, dict):
-    raise SystemExit(f"Impossibile recuperare il calendario: {error}")
+today_dt = datetime.now(timezone.utc).date()
+today = today_dt.strftime("%Y-%m-%d")
+matches_by_id = {}
+calendar_errors = []
 
-matches = matches_data.get("matches", [])
-print(f"Calendario {today} (giocate + in programma): {len(matches)} partite")
+# Calendario completo di oggi e dei prossimi 6 giorni, per tutte
+# le competizioni coperte da PitchAPI.
+for offset in range(7):
+    day = (today_dt + timedelta(days=offset)).strftime("%Y-%m-%d")
+    day_data, day_error = api_get(f"/date/{day}?status=all")
+    if day_error or not isinstance(day_data, dict):
+        calendar_errors.append({"date": day, "error": day_error or "Risposta non valida"})
+        print(f"Calendario {day}: non disponibile · {day_error}")
+        continue
+    day_matches = day_data.get("matches", [])
+    print(f"Calendario {day}: {len(day_matches)} partite")
+    for match in day_matches:
+        match_id = match.get("id")
+        if match_id:
+            match.setdefault("date", day)
+            matches_by_id[match_id] = match
+
+matches = list(matches_by_id.values())
+if not matches and calendar_errors:
+    raise SystemExit(f"Nessun calendario recuperato. Errori: {calendar_errors}")
+print(f"Totale calendario 7 giorni: {len(matches)} partite uniche")
 
 # Un solo archivio per partita: calendario, statistiche, tiri, giocatori,
 # formazioni, precedenti e timeline vengono raccolti insieme lato server.
@@ -74,6 +93,8 @@ for index, match in enumerate(matches, start=1):
 result = {
     "data": {
         "date": today,
+        "period_days": 7,
+        "calendar_errors": calendar_errors,
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "matches": matches,
     }
@@ -84,4 +105,4 @@ folder.mkdir(exist_ok=True)
     json.dumps(result, ensure_ascii=False, indent=2),
     encoding="utf-8",
 )
-print(f"Archivio salvato: {len(matches)} partite con dettagli aggregati.")
+print(f"Archivio salvato: {len(matches)} partite con dettagli aggregati su 7 giorni.")
