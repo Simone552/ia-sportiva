@@ -1,7 +1,546 @@
 {
   "data": {
     "date": "2026-11-11",
-    "fetched_at": "2026-11-11T13:20:39.907438+00:00",
-    "matches": []
+    "fetched_at": "2026-11-11T17:52:48.367474+00:00",
+    "matches": [
+      {
+        "id": "m_4XjY7T",
+        "league": {
+          "id": "l_3qUkB8",
+          "name": "Serie B",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/2283252267859e291fd350c135171e0a836ff7f944c839dae7dcfdc5c458068c.webp"
+        },
+        "home_team": {
+          "id": "t_2RhN0s",
+          "name": "Londrina",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
+        },
+        "away_team": {
+          "id": "t_1cAOm2",
+          "name": "Náutico",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
+        },
+        "time_utc": "2026-11-11T22:00:00Z",
+        "status": "not_started",
+        "score_home": null,
+        "score_away": null,
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_4XjY7T",
+              "league": {
+                "id": "l_3qUkB8",
+                "name": "Serie B",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/2283252267859e291fd350c135171e0a836ff7f944c839dae7dcfdc5c458068c.webp"
+              },
+              "season": "2026",
+              "home_team": {
+                "id": "t_2RhN0s",
+                "name": "Londrina",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
+              },
+              "away_team": {
+                "id": "t_1cAOm2",
+                "name": "Náutico",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
+              },
+              "date": "2026-11-11",
+              "time_utc": "2026-11-11T22:00:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": null,
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": true,
+            "data": {
+              "match_id": "m_4XjY7T",
+              "home_team": {
+                "id": "t_2RhN0s",
+                "name": "Londrina",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
+              },
+              "away_team": {
+                "id": "t_1cAOm2",
+                "name": "Náutico",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
+              },
+              "periods": []
+            }
+          },
+          "shots": {
+            "available": true,
+            "data": {
+              "match_id": "m_4XjY7T",
+              "periods": null
+            }
+          },
+          "players": {
+            "available": true,
+            "data": []
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_4XjY7T",
+              "home_team": {
+                "id": "t_2RhN0s",
+                "name": "Londrina",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
+              },
+              "away_team": {
+                "id": "t_1cAOm2",
+                "name": "Náutico",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
+              },
+              "home": {
+                "formation": "3-4-3",
+                "confirmed": false,
+                "lineup_type": "lastStarting11",
+                "coach": {
+                  "name": "Hugo Emanuel Barros Chacon"
+                },
+                "starters": [
+                  {
+                    "player_id": "p_4KZUym",
+                    "name": "Maurício Kozlinski",
+                    "shirt_number": "30",
+                    "position_id": 11,
+                    "is_captain": false,
+                    "pitch_x": 0.1,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_06hGqz",
+                    "name": "André Dhominique Queiroz Santiago da Silva",
+                    "shirt_number": "13",
+                    "position_id": 72,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_2qMr2C",
+                    "name": "Artur Sérgio Batista de Souza",
+                    "shirt_number": "22",
+                    "position_id": 78,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_0GLytd",
+                    "name": "Matheus Henrique dos Santos",
+                    "shirt_number": "3",
+                    "position_id": 37,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.21
+                  },
+                  {
+                    "player_id": "p_3O1TGw",
+                    "name": "Wallace Reis da Silva",
+                    "shirt_number": "4",
+                    "position_id": 35,
+                    "is_captain": true,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_4MmAdc",
+                    "name": "Caio César Rodrigues Souza",
+                    "shirt_number": "44",
+                    "position_id": 33,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.79
+                  },
+                  {
+                    "player_id": "p_2AQTPd",
+                    "name": "Geovane Santana Meurer",
+                    "shirt_number": "38",
+                    "position_id": 74,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_0sVC8i",
+                    "name": "Lucas Marques de Oliveira",
+                    "shirt_number": "8",
+                    "position_id": 76,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_4TKDxc",
+                    "name": "Igor Ruan Sousa dos Santos",
+                    "shirt_number": "99",
+                    "position_id": 105,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_0d1NL5",
+                    "name": "João Vitor Coni de Andrade",
+                    "shirt_number": "17",
+                    "position_id": 103,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.79
+                  },
+                  {
+                    "player_id": "p_0oe7Qe",
+                    "name": "Herbert Mateus Almeida de Oliveira",
+                    "shirt_number": "28",
+                    "position_id": 107,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.21
+                  }
+                ],
+                "subs": [
+                  {
+                    "player_id": "p_0wUiNo",
+                    "name": "Eduardo Alves Zanella",
+                    "shirt_number": "12",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0njYCp",
+                    "name": "Severino do Ramo Clementino da Silva",
+                    "shirt_number": "2",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_05W9DT",
+                    "name": "Richarlyson Covre de Mello",
+                    "shirt_number": "75",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0VbGcE",
+                    "name": "Tárik Michel Kedes Boschetti",
+                    "shirt_number": "32",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1NmdDc",
+                    "name": "Rafael Monteiro Reis",
+                    "shirt_number": "77",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_12KuNC",
+                    "name": "Cainã Santos da Silva",
+                    "shirt_number": "15",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1l07gD",
+                    "name": "Pablo Dyego da Silva Rosa",
+                    "shirt_number": "11",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2plgMX",
+                    "name": "Willian da Silva Santos",
+                    "shirt_number": "53",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_4VgYQF",
+                    "name": "Kauã Jonathan dos Santos Ferreira",
+                    "shirt_number": "27",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  }
+                ]
+              },
+              "away": {
+                "formation": "4-2-3-1",
+                "confirmed": false,
+                "lineup_type": "lastStarting11",
+                "coach": {
+                  "name": "Bruno Marques Fernandes Pivetti"
+                },
+                "starters": [
+                  {
+                    "player_id": "p_07fqVp",
+                    "name": "Gastón Guruceaga Fagúndez",
+                    "shirt_number": "55",
+                    "position_id": 11,
+                    "is_captain": false,
+                    "pitch_x": 0.1,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_0Ca9tY",
+                    "name": "Reginaldo Lopes de Jesus",
+                    "shirt_number": "93",
+                    "position_id": 32,
+                    "is_captain": false,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_3Uto5K",
+                    "name": "Luiz Paulo França do Nascimento",
+                    "shirt_number": "60",
+                    "position_id": 38,
+                    "is_captain": false,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_2Ip0XW",
+                    "name": "Samuel Felix Rodrigues",
+                    "shirt_number": "41",
+                    "position_id": 66,
+                    "is_captain": false,
+                    "pitch_x": 0.49,
+                    "pitch_y": 0.3
+                  },
+                  {
+                    "player_id": "p_4NrEMp",
+                    "name": "Wanderson Camelo Viana",
+                    "shirt_number": "34",
+                    "position_id": 34,
+                    "is_captain": false,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_0L2CJm",
+                    "name": "Alberto Magno Santos de Melo Filho",
+                    "shirt_number": "3",
+                    "position_id": 36,
+                    "is_captain": true,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_1AOBTR",
+                    "name": "Derek Freitas Ribeiro",
+                    "shirt_number": "72",
+                    "position_id": 83,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.84
+                  },
+                  {
+                    "player_id": "p_4BiL7G",
+                    "name": "Luiz Felipe Oliveira de Paula",
+                    "shirt_number": "27",
+                    "position_id": 64,
+                    "is_captain": false,
+                    "pitch_x": 0.49,
+                    "pitch_y": 0.7
+                  },
+                  {
+                    "player_id": "p_0vT9jo",
+                    "name": "Kauã Almeida da Costa",
+                    "shirt_number": "19",
+                    "position_id": 115,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_0NZW0D",
+                    "name": "Luiz Cláudio Bezerra Alves",
+                    "shirt_number": "16",
+                    "position_id": 85,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_2sILsg",
+                    "name": "Victor Andrade Santos",
+                    "shirt_number": "11",
+                    "position_id": 87,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.16
+                  }
+                ],
+                "subs": [
+                  {
+                    "player_id": "p_0G8ptX",
+                    "name": "Nikollas Alves Portella",
+                    "shirt_number": "33",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1U8og2",
+                    "name": "Hector Fernandes de Andrade Silva",
+                    "shirt_number": "75",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1J8c37",
+                    "name": "Halan Gomes da Silva Tenório",
+                    "shirt_number": "18",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3STpr1",
+                    "name": "Leonardo Joventino Honório",
+                    "shirt_number": "32",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0Y0M0M",
+                    "name": "Isaque Vitor Kaminski Borba Ferreira",
+                    "shirt_number": "99",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_22iNwM",
+                    "name": "Wendell Miranda Azevedo",
+                    "shirt_number": "17",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_002tnp",
+                    "name": "Everson Luis Santana dos Santos",
+                    "shirt_number": "28",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1EBbT8",
+                    "name": "Ryan Carlos Santos de Sousa",
+                    "shirt_number": "6",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2RQc7V",
+                    "name": "Gabriel Severino de Sousa",
+                    "shirt_number": "13",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0yNh7c",
+                    "name": "Matheus Antonio Uchôa da Silva",
+                    "shirt_number": "37",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2hLved",
+                    "name": "Guilherme da Silva Ramos",
+                    "shirt_number": "48",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1EjGlG",
+                    "name": "Caio de Oliveira Mendonça Soares",
+                    "shirt_number": "88",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  }
+                ]
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_4XjY7T",
+              "home_team": {
+                "id": "t_2RhN0s",
+                "name": "Londrina",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
+              },
+              "away_team": {
+                "id": "t_1cAOm2",
+                "name": "Náutico",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": true,
+            "data": {
+              "match_id": "m_4XjY7T",
+              "events": []
+            }
+          }
+        }
+      }
+    ]
   }
 }
