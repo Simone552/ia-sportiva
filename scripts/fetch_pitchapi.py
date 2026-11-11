@@ -79,6 +79,9 @@ window_start = today_dt
 window_end = today_dt + timedelta(days=6)
 league_schedule_errors = []
 league_schedules_checked = []
+# Conserva i risultati già giocati della stagione per calcolare la forma recente
+# delle squadre prima di ogni partita in programma.
+league_matches_by_id = {}
 
 for league in leagues:
     if (league.get("name"), league.get("country_code")) not in priority_competitions:
@@ -108,6 +111,7 @@ for league in leagues:
         "country_code": league.get("country_code"),
         "season": season,
     })
+    league_matches_by_id[league_id] = league_data.get("matches", [])
     for match in league_data.get("matches", []):
         match_date = match.get("date")
         if not match_date:
@@ -127,6 +131,44 @@ for league in leagues:
                 matches_by_id[match_id] = match
 
 matches = list(matches_by_id.values())
+
+def recent_team_form(team_id, before_date, league_id):
+    """Ultime cinque gare di campionato precedenti alla partita, senza includere il match da analizzare."""
+    played = []
+    for previous in league_matches_by_id.get(league_id, []):
+        if previous.get("date", "9999-99-99") >= before_date:
+            continue
+        if previous.get("score_home") is None or previous.get("score_away") is None:
+            continue
+        home = previous.get("home_team") or {}
+        away = previous.get("away_team") or {}
+        if team_id not in (home.get("id"), away.get("id")):
+            continue
+        is_home = home.get("id") == team_id
+        scored = previous.get("score_home") if is_home else previous.get("score_away")
+        conceded = previous.get("score_away") if is_home else previous.get("score_home")
+        result = "W" if scored > conceded else "D" if scored == conceded else "L"
+        played.append({
+            "date": previous.get("date"),
+            "opponent": (away if is_home else home).get("name", "Avversaria"),
+            "home": is_home,
+            "score_for": scored,
+            "score_against": conceded,
+            "result": result,
+        })
+    played.sort(key=lambda item: item.get("date") or "")
+    return played[-5:]
+
+for match in matches:
+    league_id = (match.get("league") or {}).get("id")
+    if not league_id:
+        continue
+    match["recent_form"] = {
+        "scope": "Ultime 5 in campionato",
+        "home": recent_team_form((match.get("home_team") or {}).get("id"), match.get("date", today), league_id),
+        "away": recent_team_form((match.get("away_team") or {}).get("id"), match.get("date", today), league_id),
+    }
+
 league_counts = {}
 for match in matches:
     league = match.get("league") or {}
@@ -147,6 +189,10 @@ endpoints = {
     "lineups": "/lineups",
     "h2h": "/h2h",
     "events": "/events",
+    "advanced": "/advanced",
+    "momentum": "/momentum",
+    "players_halves": "/players/halves",
+    "heatmaps": "/heatmaps",
 }
 
 for index, match in enumerate(matches, start=1):
