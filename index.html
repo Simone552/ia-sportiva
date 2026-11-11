@@ -72,6 +72,18 @@
 .analysis-source{padding:10px 2px}
 @media(max-width:600px){.analysis-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.player-grid,.lineup-grid{grid-template-columns:1fr}.shot-row{grid-template-columns:35px minmax(0,1fr)}.shot-result{grid-column:2;text-align:left}.event-row{grid-template-columns:35px 78px minmax(0,1fr)}}
 
+/* Riepilogo copertura dati e calendari */
+.coverage-panel{display:grid;gap:12px;margin:13px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}
+.coverage-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.coverage-top strong{font-size:13px}
+.coverage-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.coverage-kpi{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.coverage-kpi strong{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.coverage-kpi span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.coverage-leagues{display:flex;flex-wrap:wrap;gap:7px}
+.coverage-league{font-size:11px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--panel)}
+.coverage-warning{font-size:12px;color:var(--warn)}
+@media(max-width:520px){.coverage-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.coverage-kpi{padding:8px}.coverage-kpi strong{font-size:17px}.coverage-kpi span{font-size:10px}}
 /* Navigazione a finestre della scheda partita */
 .match-section-tabs{display:flex;gap:7px;overflow-x:auto;padding:4px 1px 12px;margin:12px 0 5px;scrollbar-width:thin}
 .match-section-tab{white-space:nowrap;border:1px solid var(--line);border-radius:10px;padding:9px 13px;background:var(--panel);color:var(--muted);font-size:13px;font-weight:700}
@@ -353,9 +365,10 @@ label{color:#a9c4af}
 <div class="panel span12"><div class="panel-head"><h3>Partite PitchAPI · archivio automatico</h3><span class="pill">Aggiornamento ogni 6 ore</span></div>
 <p class="muted">I dati vengono raccolti automaticamente. Apri una partita per vedere in un’unica scheda risultato, statistiche, tiri, giocatori, formazioni, precedenti ed eventi disponibili.</p>
 <div class="search-row"><div style="flex:1;min-width:220px"><label for="footballEvent">Cerca una partita, una squadra o una competizione</label><input id="footballEvent" class="field" placeholder="Es. Inter - Napoli, Inter, Champions League"></div><div style="display:flex;align-items:end"><button class="btn" onclick="prepareFootballAnalysis()">Cerca</button></div></div><div class="row"><div><div id="pitchApiStatus" class="notice">Lettura dell'archivio PitchAPI…</div></div><div style="display:flex;align-items:end;justify-content:flex-end"><button class="btn" id="loadPitchApiBtn" onclick="loadPitchApiMatches()">Aggiorna elenco</button></div></div>
+<div id="pitchApiCoverage" class="coverage-panel" aria-live="polite"></div>
 <div id="pitchApiMatches" class="list" style="margin-top:12px"><div class="empty">Caricamento partite…</div></div>
 <div id="matchDetailPanel" class="panel span12 hidden" style="margin-top:16px"><div class="panel-head"><h3 id="matchDetailTitle">Scheda completa partita</h3><button class="btn ghost" onclick="closeMatchDetails()">Chiudi scheda</button></div><div id="matchDetailContent"><div class="empty">Seleziona una partita per caricare tutti i dati disponibili.</div></div></div>
-<p class="muted" style="font-size:12px;margin-top:10px">Fonte: PitchAPI. La ricerca restituisce tutte le partite corrispondenti presenti nell’archivio scaricato. In questa fase l’archivio contiene ancora una sola data: l’estensione a più giornate e all’intero calendario delle competizioni è il prossimo passaggio.</p></div>
+<p class="muted" style="font-size:12px;margin-top:10px">Fonte: PitchAPI. Archivio aggiornato automaticamente ogni 6 ore, con una finestra di 7 giorni e integrazione dei calendari stagionali delle principali competizioni. La disponibilità delle singole statistiche dipende dalla partita e dalla copertura della fonte.</p></div>
 </section>
 <section id="notizie" class="page hidden"><div class="news-masthead"><div><span class="eyebrow">CENTRO INFORMAZIONI · CALCIO</span><h2>Il calcio, oggi.</h2><p>Le notizie più recenti dai principali feed sportivi. Apri sempre l’articolo originale per leggere il contenuto completo. Aggiornamento automatico ogni 3 ore circa.</p></div><button class="btn" onclick="loadFootballNews(true)">Ricarica elenco</button></div><div class="news-toolbar"><span id="newsUpdated">Aggiornamento in corso…</span><span>Fonti: Sky Sport · Gazzetta dello Sport</span></div><div id="footballNewsGrid" class="news-grid"><div class="empty">Caricamento notizie…</div></div></section>
 <section id="freccette" class="page hidden"><div class="grid"><div class="panel span8"><div class="panel-head"><h3>Analisi freccette MODUS</h3><span class="pill">Modulo iniziale</span></div><p class="muted">Per ogni incontro confronteremo risultati recenti, medie e leg vinti/persi quando disponibili. Non useremo il solo valore della quota per scegliere.</p><label>Giocatore A vs Giocatore B</label><input id="dartsEvent" class="field" placeholder="Es. Giocatore A - Giocatore B"><label>Dati recenti / quote / fonte</label><textarea id="dartsNotes" class="field" rows="4" placeholder="Inserisci risultati, medie, leg e quote disponibili…"></textarea><button class="btn" style="margin-top:12px" onclick="prepareAnalysis('Freccette MODUS')">Salva richiesta</button></div><div class="panel span4"><h3>Indicatori prioritari</h3><div class="list" style="margin-top:12px"><div class="entry"><strong>Forma recente</strong><span class="pill">Priorità alta</span></div><div class="entry"><strong>Media e checkout</strong><span class="pill">Se disponibili</span></div><div class="entry"><strong>Leg e precedenti</strong><span class="pill">Da verificare</span></div></div></div></div></section>
@@ -410,6 +423,22 @@ function pitchStatusLabel(status){
  const labels={finished:'Conclusa',live:'In corso',inprogress:'In corso',scheduled:'In programma',notstarted:'In programma',postponed:'Rinviata',cancelled:'Annullata'};
  return labels[String(status||'').toLowerCase()]||String(status||'Stato n.d.');
 }
+function renderPitchApiCoverage(root,matches){
+ const box=document.getElementById('pitchApiCoverage');
+ if(!box)return;
+ const checked=Array.isArray(root.priority_league_schedules_checked)?root.priority_league_schedules_checked:[];
+ const errors=Array.isArray(root.priority_league_schedule_errors)?root.priority_league_schedule_errors:[];
+ const catalogue=Array.isArray(root.leagues_catalogue)?root.leagues_catalogue:[];
+ const counts=root.league_counts_in_calendar&&typeof root.league_counts_in_calendar==='object'?root.league_counts_in_calendar:{};
+ const leagueNames=Object.keys(counts).sort((a,b)=>a.localeCompare(b,'it'));
+ const leagueTags=leagueNames.map(name=>'<span class="coverage-league">'+esc(name)+' · '+Number(counts[name]||0)+'</span>').join('');
+ const updated=root.fetched_at?new Date(root.fetched_at).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'}):'Orario non disponibile';
+ const errorText=errors.length?'<div class="coverage-warning">Attenzione: '+errors.length+' calendari prioritari non sono stati letti correttamente. '+errors.map(e=>esc(typeof e==='string'?e:(e.league||e.error||JSON.stringify(e)))).join(' · ')+'</div>':'<span class="status">✓ Nessun errore nei calendari prioritari</span>';
+ box.innerHTML='<div class="coverage-top"><strong>Copertura archivio e competizioni</strong><span class="pill">Aggiornato: '+esc(updated)+'</span></div>'+
+ '<div class="coverage-kpis"><div class="coverage-kpi"><strong>'+matches.length+'</strong><span>Partite archiviate</span></div><div class="coverage-kpi"><strong>'+checked.length+'/5</strong><span>Calendari prioritari letti</span></div><div class="coverage-kpi"><strong>'+catalogue.length+'</strong><span>Competizioni nel catalogo</span></div></div>'+
+ '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Calendari stagionali integrati</div><div class="coverage-leagues">'+(checked.length?checked.map(x=>'<span class="coverage-league">✓ '+esc(x.league)+' · '+esc(x.season)+'</span>').join(''):'<span class="muted">Nessun calendario stagionale confermato.</span>')+'</div></div>'+
+ '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Competizioni presenti nelle partite archiviate</div><div class="coverage-leagues">'+(leagueTags||'<span class="muted">Nessun conteggio disponibile.</span>')+'</div></div>'+errorText;
+}
 async function loadPitchApiMatches(){
  const status=document.getElementById('pitchApiStatus');
  const output=document.getElementById('pitchApiMatches');
@@ -425,6 +454,8 @@ async function loadPitchApiMatches(){
   const matches=Array.isArray(root.matches)?root.matches:[];
   window.iaPitchMatches=matches;
   const dataDate=root.date||payload.date||'Data n.d.';
+  renderPitchApiCoverage(root,matches);
+
   if(!matches.length){
    output.innerHTML='<div class="empty">Il file è stato letto, ma non contiene partite per la data indicata.</div>';
    status.textContent='Archivio PitchAPI letto · '+dataDate+' · nessuna partita restituita.';
