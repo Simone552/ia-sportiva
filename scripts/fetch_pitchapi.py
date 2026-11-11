@@ -34,12 +34,12 @@ def api_get(path):
         return None, {"available": False, "reason": str(error)}
 
 today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-matches_data, error = api_get(f"/date/{today}")
+matches_data, error = api_get(f"/date/{today}?status=all")
 if error or not isinstance(matches_data, dict):
     raise SystemExit(f"Impossibile recuperare il calendario: {error}")
 
 matches = matches_data.get("matches", [])
-print(f"Calendario {today}: {len(matches)} partite")
+print(f"Calendario {today} (giocate + in programma): {len(matches)} partite")
 
 # Un solo archivio per partita: calendario, statistiche, tiri, giocatori,
 # formazioni, precedenti e timeline vengono raccolti insieme lato server.
