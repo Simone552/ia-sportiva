@@ -17,21 +17,48 @@ HEADERS = {
     "Accept": "application/json",
 }
 
+last_request_at = 0.0
+
 def api_get(path):
+    global last_request_at
     request = urllib.request.Request(BASE + path, headers=HEADERS)
-    try:
-        with urllib.request.urlopen(request, timeout=35) as response:
-            payload = json.load(response)
-            return payload.get("data", payload), None
-    except urllib.error.HTTPError as error:
-        body = error.read().decode("utf-8", errors="replace")
-        if error.code == 404:
-            return None, {"available": False, "http_status": 404, "reason": "Dato non pubblicato o non disponibile per questa partita."}
-        print(f"Endpoint {path}: HTTP {error.code} · {body[:500]}")
-        return None, {"available": False, "http_status": error.code, "reason": body[:500]}
-    except Exception as error:
-        print(f"Endpoint {path}: {error!r}")
-        return None, {"available": False, "reason": str(error)}
+    for attempt in range(5):
+        # Mantiene una distanza minima tra le richieste per evitare il burst guard.
+        wait = 0.25 - (time.monotonic() - last_request_at)
+        if wait > 0:
+            time.sleep(wait)
+        last_request_at = time.monotonic()
+        try:
+            with urllib.request.urlopen(request, timeout=35) as response:
+                payload = json.load(response)
+                return payload.get("data", payload), None
+        except urllib.error.HTTPError as error:
+            body = error.read().decode("utf-8", errors="replace")
+            if error.code == 404:
+                return None, {"available": False, "http_status": 404, "reason": "Dato non pubblicato o non disponibile per questa partita."}
+            if error.code == 429 and attempt < 4:
+                retry_after = error.headers.get("Retry-After", "")
+                try:
+                    delay = max(1.0, float(retry_after))
+                except (TypeError, ValueError):
+                    delay = min(2 ** (attempt + 1), 16)
+                print(f"Limite richieste PitchAPI su {path}: nuovo tentativo tra {delay:.1f}s")
+                time.sleep(delay)
+                continue
+            if error.code in {500, 502, 503, 504} and attempt < 3:
+                delay = min(2 ** (attempt + 1), 12)
+                print(f"Errore temporaneo PitchAPI HTTP {error.code} su {path}: riprovo tra {delay}s")
+                time.sleep(delay)
+                continue
+            print(f"Endpoint {path}: HTTP {error.code} · {body[:500]}")
+            return None, {"available": False, "http_status": error.code, "reason": body[:500]}
+        except Exception as error:
+            if attempt < 2:
+                time.sleep(2 ** attempt)
+                continue
+            print(f"Endpoint {path}: {error!r}")
+            return None, {"available": False, "reason": str(error)}
+    return None, {"available": False, "reason": "Tentativi di recupero esauriti."}
 
 # Catalogo completo delle competizioni e delle stagioni disponibili.
 # Questo endpoint serve a verificare la copertura, senza sostituire il calendario.
@@ -230,7 +257,7 @@ for index, match in enumerate(matches, start=1):
             details[name] = endpoint_error
         else:
             details[name] = {"available": True, "data": value}
-        time.sleep(0.12)
+        time.sleep(0.05)
     match["details"] = details
 
 result = {
