@@ -150,6 +150,19 @@ for league in leagues:
         "season": season,
         "matches_in_season": len(all_league_matches),
         "played_results": len(played_matches),
+        "sample_played": [
+            {
+                "date": item.get("date"),
+                "time_utc": item.get("time_utc"),
+                "home_id": (item.get("home_team") or {}).get("id"),
+                "home_name": (item.get("home_team") or {}).get("name"),
+                "away_id": (item.get("away_team") or {}).get("id"),
+                "away_name": (item.get("away_team") or {}).get("name"),
+                "score_home": item.get("score_home"),
+                "score_away": item.get("score_away"),
+            }
+            for item in played_matches[:2]
+        ],
     })
     league_matches_by_id[league_id] = played_matches
     for match in all_league_matches:
@@ -172,9 +185,10 @@ for league in leagues:
 
 matches = list(matches_by_id.values())
 
-def recent_team_form(team_id, before_date, league_id):
+def recent_team_form(team_id, team_name, before_date, league_id):
     """Ultime cinque gare di campionato precedenti alla partita, senza includere il match da analizzare."""
     played = []
+    team_key = str(team_name or "").strip().casefold()
     for previous in league_matches_by_id.get(league_id, []):
         previous_date = previous.get("date") or str(previous.get("time_utc") or "")[:10]
         if not previous_date or previous_date >= before_date:
@@ -183,9 +197,11 @@ def recent_team_form(team_id, before_date, league_id):
             continue
         home = previous.get("home_team") or {}
         away = previous.get("away_team") or {}
-        if team_id not in (home.get("id"), away.get("id")):
+        home_match = home.get("id") == team_id or (team_key and str(home.get("name") or "").strip().casefold() == team_key)
+        away_match = away.get("id") == team_id or (team_key and str(away.get("name") or "").strip().casefold() == team_key)
+        if not home_match and not away_match:
             continue
-        is_home = home.get("id") == team_id
+        is_home = bool(home_match)
         scored = previous.get("score_home") if is_home else previous.get("score_away")
         conceded = previous.get("score_away") if is_home else previous.get("score_home")
         result = "W" if scored > conceded else "D" if scored == conceded else "L"
@@ -206,8 +222,8 @@ for match in matches:
         continue
     match["recent_form"] = {
         "scope": "Ultime 5 in campionato",
-        "home": recent_team_form((match.get("home_team") or {}).get("id"), match.get("date", today), league_id),
-        "away": recent_team_form((match.get("away_team") or {}).get("id"), match.get("date", today), league_id),
+        "home": recent_team_form((match.get("home_team") or {}).get("id"), (match.get("home_team") or {}).get("name"), match.get("date", today), league_id),
+        "away": recent_team_form((match.get("away_team") or {}).get("id"), (match.get("away_team") or {}).get("name"), match.get("date", today), league_id),
     }
 
 recent_form_coverage = {
