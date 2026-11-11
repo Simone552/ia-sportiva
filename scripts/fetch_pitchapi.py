@@ -33,6 +33,17 @@ def api_get(path):
         print(f"Endpoint {path}: {error!r}")
         return None, {"available": False, "reason": str(error)}
 
+# Catalogo completo delle competizioni e delle stagioni disponibili.
+# Questo endpoint serve a verificare la copertura, senza sostituire il calendario.
+leagues_data, leagues_error = api_get("/leagues")
+leagues = []
+if isinstance(leagues_data, dict):
+    leagues = leagues_data.get("leagues", [])
+if leagues_error:
+    print(f"Catalogo leghe non disponibile: {leagues_error}")
+else:
+    print(f"Catalogo PitchAPI: {len(leagues)} leghe/competizioni")
+
 today_dt = datetime.now(timezone.utc).date()
 today = today_dt.strftime("%Y-%m-%d")
 matches_by_id = {}
@@ -56,6 +67,12 @@ for offset in range(7):
             matches_by_id[match_id] = match
 
 matches = list(matches_by_id.values())
+league_counts = {}
+for match in matches:
+    league = match.get("league") or {}
+    league_name = league.get("name", "Competizione non indicata")
+    league_counts[league_name] = league_counts.get(league_name, 0) + 1
+
 if not matches and calendar_errors:
     raise SystemExit(f"Nessun calendario recuperato. Errori: {calendar_errors}")
 print(f"Totale calendario 7 giorni: {len(matches)} partite uniche")
@@ -95,6 +112,9 @@ result = {
         "date": today,
         "period_days": 7,
         "calendar_errors": calendar_errors,
+        "leagues_catalogue": leagues,
+        "leagues_catalogue_error": leagues_error,
+        "league_counts_in_calendar": league_counts,
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "matches": matches,
     }
