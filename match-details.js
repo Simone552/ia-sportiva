@@ -11,6 +11,8 @@
  const label=x=>names[x]||String(x||"Dato non indicato").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase());
  const italian=x=>vals[x]||x||"Dato non indicato";
  const empty=x=>'<div class="analysis-empty">'+esc(x)+'</div>';
+ const matchNotStarted=()=>["not_started","notstarted","scheduled"].includes(String(currentMatch?.status||currentMatch?.details?.summary?.data?.status||"").toLowerCase().replace(/_/g,""));
+ const waitingMessage=area=>matchNotStarted()?area+" non ancora disponibili: la partita deve ancora iniziare.":area+" non disponibili o non pubblicati dalla fonte per questa partita.";
  const block=(title,body,note="")=>'<section class="analysis-block"><h3>'+esc(title)+'</h3>'+(note?'<p class="analysis-note">'+esc(note)+'</p>':"")+body+'</section>';
  let currentMatch=null,currentPlayers=[],currentLineups=null;
  function sectionTabs(){
@@ -20,7 +22,7 @@
  function section(id,html,active){return '<section class="match-section '+(active?"active":"")+'" id="match-section-'+id+'">'+html+'</section>';}
  function metrics(items){return '<div class="analysis-metrics">'+items.map(x=>'<div><strong>'+esc(x[1])+'</strong><span>'+esc(x[0])+'</span></div>').join("")+'</div>';}
  function renderStats(data){
-  const periods=data?.periods||[];if(!periods.length)return empty("Le statistiche di squadra non sono disponibili per questa partita.");
+  const periods=data?.periods||[];if(!periods.length)return empty(waitingMessage("Le statistiche di squadra"));
   return periods.map(p=>'<div class="stat-period"><h4>'+esc(italian(p.period))+'</h4>'+(p.groups||[]).map(g=>{
    const items=g.items||[];if(!items.length)return "";
    return '<div class="stat-group"><h5>'+esc(groups[g.group_name]||g.group_name||"Altri dati")+'</h5><div class="stat-table"><div class="stat-head"><span>Statistica</span><span>Casa</span><span>Ospite</span></div>'+items.map(it=>'<div class="stat-row"><span>'+esc(label(it.title||it.key))+'</span><strong>'+esc(it.home??"n.d.")+'</strong><strong>'+esc(it.away??"n.d.")+'</strong></div>').join("")+'</div></div>';
@@ -83,7 +85,7 @@
  function renderShots(item,homeId,awayId,home,away){
   const d=getData(item);if(!d)return empty(unavailable(item));
   const shots=(d.periods||[]).flatMap(p=>(p.shots||[]).map(s=>({...s,period:p.period})));
-  if(!shots.length)return empty("Il dettaglio dei singoli tiri non è stato pubblicato.");
+  if(!shots.length)return empty(waitingMessage("Il dettaglio dei singoli tiri"));
   const h=shots.filter(s=>s.team_id===homeId),a=shots.filter(s=>s.team_id===awayId),on=x=>x.filter(s=>s.is_on_target===true).length;
   const xg=x=>x.reduce((n,s)=>n+(Number(s.expected_goals)||0),0);
   const overview=metrics([["Tiri totali",shots.length],["Tiri in porta",on(h)+" – "+on(a)],["xG dei tiri elencati",xg(h).toFixed(2)+" – "+xg(a).toFixed(2)]]);
@@ -123,12 +125,12 @@
   const pitch='<div class="pitch-wrap"><div class="pitch-labels"><div class="pitch-team-label">'+crest(homeTeam)+'<span><small>SQUADRA DI CASA</small><strong>'+esc(home)+'</strong></span></div><span class="muted">FORMAZIONI</span><div class="pitch-team-label"><span><small>SQUADRA OSPITE</small><strong>'+esc(away)+'</strong></span>'+crest(awayTeam)+'</div></div><div class="football-pitch"><div class="pitch-halfway"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div><div class="pitch-box left"></div><div class="pitch-box right"></div><div class="pitch-six left"></div><div class="pitch-six right"></div><div class="pitch-goal left"></div><div class="pitch-goal right"></div><div class="pitch-team-separator"></div>'+markers(h.starters||[],"home")+markers(a.starters||[],"away")+'</div><div class="pitch-legend"><span><i style="background:#b7f34a"></i> Casa · '+esc(home)+'</span><span><i style="background:#e4e9ee"></i> Ospite · '+esc(away)+'</span></div><div class="pitch-hint">Le squadre occupano due metà distinte: casa a sinistra, ospite a destra. Le maglie riprendono i colori sociali noti; se la divisa ufficiale della stagione non è fornita dalla fonte, la grafica è indicativa.</div></div>';
   const teams=[[h,home],[a,away]].map(([t,name])=>{
    const list=arr=>arr.length?'<div class="sub-list">'+arr.map(p=>'<button class="player-select" onclick="openPlayerProfile(\''+esc(p.player_id)+'\')"><span class="shirt">'+esc(p.shirt_number||"•")+'</span><span>'+esc(p.name)+'</span>'+(p.is_captain?'<small>Capitano</small>':"")+'</button>').join("")+'</div>':empty("Elenco non fornito.");
-   return '<div class="lineup-team"><div class="lineup-team-head"><div><h4>'+esc(name)+'</h4><small>'+esc(t.formation?"Modulo "+t.formation:"Modulo non indicato")+' · '+(t.confirmed===true?"Formazione confermata":t.confirmed===false?"Probabile, non confermata":"Conferma non indicata")+'</small></div>'+(t.coach?.name?'<small>Allenatore: '+esc(t.coach.name)+'</small>':"")+'</div><h5>Titolari</h5>'+list(t.starters||[])+'<h5>Panchina</h5>'+list(t.subs||[])+'</div>';
+   return '<div class="lineup-team"><div class="lineup-team-head"><div><h4>'+esc(name)+'</h4><small>'+esc(t.formation?"Modulo "+t.formation:"Modulo non indicato")+' · '+(t.confirmed===true?"Formazione ufficiale confermata":t.lineup_type==="lastStarting11"?"Ultima formazione nota · non è una probabile":t.confirmed===false?"Formazione non confermata":"Conferma non indicata")+'</small></div>'+(t.coach?.name?'<small>Allenatore: '+esc(t.coach.name)+'</small>':"")+'</div><h5>Titolari</h5>'+list(t.starters||[])+'<h5>Panchina</h5>'+list(t.subs||[])+'</div>';
   }).join("");
   return pitch+'<div class="lineup-grid">'+teams+'</div><div id="playerProfile" class="player-profile hidden"></div>';
  }
  function renderPlayerDirectory(players,homeId,awayId,home,away){
-  if(!players?.length)return empty("Le statistiche individuali non sono disponibili.");
+  if(!players?.length)return empty(waitingMessage("Le statistiche individuali"));
   return '<p class="analysis-note">Seleziona un giocatore per aprire la scheda completa con tutti i dati individuali pubblicati.</p><div class="player-grid">'+players.map(e=>{
    const p=e.player||{},stats=allPlayerStats(e),team=e.team_id===homeId?home:e.team_id===awayId?away:"Squadra non indicata";
    const goals=stats.find(x=>x.name==="Gol")?.value??"—",assists=stats.find(x=>x.name==="Assist")?.value??"—",minutes=stats.find(x=>x.name==="Minuti giocati")?.value??"—";
@@ -139,12 +141,12 @@
   const d=getData(item);if(!d)return empty(unavailable(item));
   const games=d.recent_matches||d.matches||[];
   const overview=metrics([["Vittorie casa",d.home_wins??"n.d."],["Pareggi",d.draws??"n.d."],["Vittorie ospite",d.away_wins??"n.d."]]);
-  if(!games.length)return overview+empty("La fonte non ha restituito l’elenco dei precedenti.");
+  if(!games.length){if(Number(d.total_matches||0)===0)return empty("Nessun precedente restituito dalla fonte. Questo non dimostra che le squadre non si siano mai affrontate: significa soltanto che l’archivio non fornisce incontri H2H per questa partita.");return overview+empty("La fonte non ha restituito l’elenco dei precedenti.");}
   return overview+'<div class="result-list">'+games.map(g=>'<div><strong>'+esc(g.home?.name||"Casa")+' '+esc(g.score_home??"—")+' – '+esc(g.score_away??"—")+' '+esc(g.away?.name||"Ospite")+'</strong><small>'+esc(g.time_utc?new Date(g.time_utc).toLocaleDateString("it-IT",{timeZone:"Europe/Rome"}):"Data non indicata")+'</small></div>').join("")+'</div>';
  }
  function renderEvents(item,homeId,home,away){
   const d=getData(item);if(!d)return empty(unavailable(item));
-  const events=Array.isArray(d)?d:(d.events||[]);if(!events.length)return empty("La cronologia degli eventi non è disponibile.");
+  const events=Array.isArray(d)?d:(d.events||[]);if(!events.length)return empty(waitingMessage("La cronologia degli eventi"));
   return '<div class="event-list">'+events.map(e=>{
    const type=italian(e.event_type||"Evento"),minute=e.minute!=null?e.minute+"'":"—";
    const team=e.team_id===homeId?home:(e.team?.name||away);
@@ -169,7 +171,7 @@
    const score=summary.score_home!=null&&summary.score_away!=null?summary.score_home+" – "+summary.score_away:"—",when=summary.time_utc||match.time_utc;
    const date=when?new Date(when).toLocaleString("it-IT",{dateStyle:"full",timeStyle:"short",timeZone:"Europe/Rome"}):"Data non indicata";
    $("matchDetailTitle").textContent=home+" – "+away;
-   const state=status==="finished"?"Partita conclusa":status==="live"||status==="inprogress"?"Partita in corso":status==="scheduled"||status==="notstarted"?"In programma":status==="postponed"?"Rinviata":status==="cancelled"?"Annullata":"Stato non indicato";
+   const normalizedStatus=status.replace(/_/g,"");const state=normalizedStatus==="finished"?"Partita conclusa":normalizedStatus==="live"||normalizedStatus==="inprogress"?"Partita in corso":normalizedStatus==="scheduled"||normalizedStatus==="notstarted"?"In programma":normalizedStatus==="postponed"?"Rinviata":normalizedStatus==="cancelled"?"Annullata":"Stato non indicato";
    const homeCrest=match.home_team?.image_url?'<img class="team-crest" src="'+esc(match.home_team.image_url)+'" alt="">':'⚽';const awayCrest=match.away_team?.image_url?'<img class="team-crest" src="'+esc(match.away_team.image_url)+'" alt="">':'⚽';const stadium=summary.stadium||"Stadio non indicato";const head='<div class="match-hero"><div class="match-league">'+esc(summary.league?.name||match.league?.name||"Competizione non indicata")+' · '+esc(date)+'</div><div class="match-score"><span class="match-team-lockup">'+homeCrest+'<b>'+esc(home)+'</b></span><strong>'+esc(score)+'</strong><span class="match-team-lockup">'+awayCrest+'<b>'+esc(away)+'</b></span></div><div class="match-state">'+state+'</div><div class="match-stadium">🏟️ '+esc(stadium)+'</div></div>';
    const summaryBody=metrics([["Giornata / turno",summary.round_name||"—"],["Arbitro",summary.referee||"—"],["Stadio",summary.stadium||"—"]]);
    const sections=sectionTabs()+
