@@ -21,7 +21,7 @@
  const block=(title,body,note="")=>'<section class="analysis-block"><h3>'+esc(title)+'</h3>'+(note?'<p class="analysis-note">'+esc(note)+'</p>':"")+body+'</section>';
  let currentMatch=null,currentPlayers=[],currentLineups=null;
  function sectionTabs(){
-  const items=[["riepilogo","Riepilogo"],["forma","Forma recente"],["statistiche","Statistiche"],["tiri","Tiri e occasioni"],["formazioni","Formazioni"],["giocatori","Giocatori"],["precedenti","Precedenti"],["eventi","Cronologia"]];
+  const items=[["riepilogo","Riepilogo"],["forma","Forma recente"],["statistiche","Statistiche"],["tiri","Tiri e occasioni"],["formazioni","Formazioni"],["giocatori","Giocatori"],["precedenti","Precedenti"],["avanzate","Analisi avanzata"],["pressione","Pressione"],["eventi","Cronologia"]];
   return '<nav class="match-section-tabs" aria-label="Sezioni analisi">'+items.map((x,i)=>'<button class="match-section-tab '+(i===0?"active":"")+'" data-section="'+x[0]+'" onclick="showMatchSection(\''+x[0]+'\')">'+x[1]+'</button>').join("")+'</nav>';
  }
  function section(id,html,active){return '<section class="match-section '+(active?"active":"")+'" id="match-section-'+id+'">'+html+'</section>';}
@@ -159,6 +159,24 @@
   }).join("")+'</div>':empty("Nessuna gara precedente trovata nella stagione di questa competizione."))+'</div>';
   return '<p class="analysis-note">Ultime cinque partite di campionato precedenti a questa gara. I risultati sono mostrati dal punto di vista della rispettiva squadra; non includono amichevoli o coppe.</p><div class="form-grid">'+side(form.home,currentMatch?.home_team?.name||"Casa")+side(form.away,currentMatch?.away_team?.name||"Ospite")+'</div>';
  }
+ function renderAdvanced(item){
+  const d=getData(item);if(!d)return empty(unavailable(item));
+  const teams=d.teams||[];if(!teams.length)return empty(waitingMessage("Le statistiche avanzate"));
+  const labels={possession_value:"Valore del possesso",passing:"Passaggi",carrying:"Conduzione palla",creation:"Creazione occasioni",defending:"Fase difensiva",territory:"Territorio",tempo:"Ritmo"};
+  const metricLabels={xt_total:"xT totale",vaep_total:"VAEP totale",vaep_offensive:"VAEP offensivo",vaep_defensive:"VAEP difensivo",pv_total:"Valore possesso",passes:"Passaggi",pass_accuracy:"Precisione passaggi %",progressive_passes:"Passaggi progressivi",progressive_pass_distance:"Metri passaggi progressivi",passes_into_box:"Passaggi in area",key_passes:"Passaggi chiave",assists:"Assist",through_balls:"Filtranti",crosses:"Cross",switches:"Cambi gioco",carries:"Conduzioni",carry_distance:"Metri in conduzione",progressive_carries:"Conduzioni progressive",carries_into_final_third:"Conduzioni ultimo terzo",carries_into_box:"Conduzioni in area",take_ons:"Dribbling tentati",take_ons_won:"Dribbling riusciti",miscontrols:"Controlli sbagliati",dispossessed:"Palloni persi",sca:"Azioni da tiro create",gca:"Azioni da gol create",chances_created:"Occasioni create",second_assists:"Pre-assist",xag:"xA da assist",tackles:"Contrasti",interceptions:"Intercetti",blocks:"Blocchi",clearances:"Respinte",duels_won:"Duelli vinti",aerials:"Duelli aerei",aerials_won:"Duelli aerei vinti",ppda:"PPDA",opponent_passes:"Passaggi avversari",defensive_actions:"Azioni difensive",high_turnovers:"Recuperi alti",counterpress_regains_5s:"Riconquiste entro 5s",ball_recovery_time:"Tempo recupero palla",possession_pct:"Possesso %",field_tilt:"Field tilt %",final_third_entries:"Ingressi ultimo terzo",box_entries:"Ingressi in area",avg_action_x:"Posizione media azioni",passes_per_sequence:"Passaggi per azione",sequence_time:"Durata sequenza",direct_speed:"Velocità attacco diretto",buildup_attacks:"Attacchi manovrati",direct_attacks:"Attacchi diretti"};
+  const fmt=v=>typeof v==="number"?Number(v.toFixed(2)):v;
+  return '<p class="analysis-note">Metriche avanzate elaborate dal feed eventi della partita. Non sono previsioni: descrivono ciò che è successo in campo.</p><div class="advanced-team-grid">'+teams.map(t=>{
+   const groups=Object.entries(t).filter(([k,v])=>k!=="team"&&k!=="actions"&&v&&typeof v==="object"&&!Array.isArray(v));
+   return '<article class="advanced-team"><h4>'+esc(t.team?.name||"Squadra")+'</h4>'+metrics([["Azioni registrate",t.actions??"—"]])+groups.map(([key,values])=>'<div class="advanced-group"><h5>'+esc(labels[key]||key)+'</h5><div class="advanced-values">'+Object.entries(values).filter(([,v])=>v!==null&&typeof v!=="object").map(([k,v])=>'<div><span>'+esc(metricLabels[k]||label(k))+'</span><strong>'+esc(fmt(v))+'</strong></div>').join("")+'</div></div>').join("")+'</article>';
+  }).join("")+'</div>';
+ }
+ function renderMomentum(item){
+  const d=getData(item);if(!d)return empty(unavailable(item));
+  const points=d.points||[];if(!points.length)return empty(waitingMessage("L’indicatore di pressione"));
+  const peakHome=Math.max(...points.map(p=>Number(p.value)||0)),peakAway=Math.min(...points.map(p=>Number(p.value)||0));
+  const bars=points.map(p=>{const v=Number(p.value)||0,h=Math.max(3,Math.min(48,Math.abs(v)*.48));return '<span class="momentum-bar '+(v>=0?"home":"away")+'" style="height:'+h+'%;'+(v>=0?"bottom:50%;":"top:50%;")+'" title="'+esc(p.minute)+"′ · "+esc(v.toFixed(2))+'"></span>';}).join("");
+  return metrics([["Picco pressione casa",peakHome.toFixed(2)],["Picco pressione ospite",peakAway.toFixed(2)]])+'<div class="momentum-chart"><div class="momentum-zero"></div>'+bars+'</div><div class="momentum-legend"><span>Casa: pressione positiva</span><span>Ospite: pressione negativa</span></div>';
+ }
  function renderEvents(item,homeId,home,away){
   const d=getData(item);if(!d)return empty(unavailable(item));
   const events=Array.isArray(d)?d:(d.events||[]);if(!events.length)return empty(waitingMessage("La cronologia degli eventi"));
@@ -197,6 +215,8 @@
     section("formazioni",block("Formazioni sul campo",renderPitch(getData(d.lineups),home,away),"I moduli e le posizioni sono quelli restituiti dalla fonte; clicca sui calciatori per vedere i dati individuali."),false)+
     section("giocatori",block("Tutti i giocatori",renderPlayerDirectory(currentPlayers,homeId,awayId,home,away),"Statistiche individuali della partita. Apri un calciatore per vedere tutti i valori disponibili."),false)+
     section("precedenti",block("Scontri diretti",renderH2H(d.h2h)),false)+
+    section("avanzate",block("Metriche avanzate",renderAdvanced(d.advanced),"Passaggi progressivi, conduzioni, creazione, difesa, territorio e ritmo."),false)+
+    section("pressione",block("Andamento della pressione",renderMomentum(d.momentum),"La linea positiva favorisce la squadra di casa, quella negativa la squadra ospite."),false)+
     section("eventi",block("Cronologia della partita",renderEvents(d.events,homeId,home,away)),false);
    const note='<div class="analysis-source">Fonte: PitchAPI · ultimo aggiornamento archivio: '+esc(root.fetched_at||"non indicato")+'. I dati non pubblicati dalla fonte vengono indicati come non disponibili e non sono sostituiti da valori inventati. Le formazioni sono probabili o confermate secondo lo stato indicato dal provider.</div>';
    content.innerHTML=head+sections+note;
