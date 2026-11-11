@@ -2,6 +2,10 @@ name: Aggiorna dati IA Sportiva
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "scripts/fetch_pitchapi.py"
+      - ".github/workflows/aggiorna-dati.yml"
   schedule:
     - cron: "17 */6 * * *"
 
