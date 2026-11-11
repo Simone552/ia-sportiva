@@ -106,34 +106,47 @@ window_start = today_dt
 window_end = today_dt + timedelta(days=6)
 league_schedule_errors = []
 league_schedules_checked = []
-# Conserva i risultati già giocati della stagione per calcolare la forma recente
-# delle squadre prima di ogni partita in programma.
+# Recupera lo storico di ogni competizione presente nelle partite in calendario,
+# oltre ai calendari stagionali delle cinque competizioni prioritarie.
 league_matches_by_id = {}
+calendar_league_ids = {
+    (match.get("league") or {}).get("id")
+    for match in matches_by_id.values()
+    if (match.get("league") or {}).get("id")
+}
+priority_league_ids = {
+    league.get("id")
+    for league in leagues
+    if (league.get("name"), league.get("country_code")) in priority_competitions
+    and league.get("id")
+}
+league_ids_needed = calendar_league_ids | priority_league_ids
 
 for league in leagues:
-    if (league.get("name"), league.get("country_code")) not in priority_competitions:
+    league_id = league.get("id")
+    if not league_id or league_id not in league_ids_needed:
         continue
+    is_priority = (league.get("name"), league.get("country_code")) in priority_competitions
     seasons = league.get("seasons") or []
     if not seasons:
         continue
-    season = max(seasons, key=lambda value: int(str(value).split("/")[-1]))  # Gestisce sia stagioni 2026 sia 2026/2027
-    league_id = league.get("id")
-    if not league_id:
-        continue
+    season = max(seasons, key=lambda value: int(str(value).split("/")[-1]))
     season_param = season.replace("/", "%2F")
-    league_data, league_error = api_get(
-        f"/leagues/{league_id}/matches?season={season_param}&status=all"
-    )
-    if league_error or not isinstance(league_data, dict):
-        league_schedule_errors.append({
-            "league": league.get("name"),
-            "country_code": league.get("country_code"),
-            "season": season,
-            "error": league_error or "Risposta non valida",
-        })
-        print(f"Calendario lega {league.get('name')}: non disponibile · {league_error}")
-        continue
-    all_league_matches = league_data.get("matches", [])
+    all_league_matches = []
+    if is_priority:
+        league_data, league_error = api_get(
+            f"/leagues/{league_id}/matches?season={season_param}&status=all"
+        )
+        if league_error or not isinstance(league_data, dict):
+            league_schedule_errors.append({
+                "league": league.get("name"),
+                "country_code": league.get("country_code"),
+                "season": season,
+                "error": league_error or "Risposta non valida",
+            })
+            print(f"Calendario lega {league.get('name')}: non disponibile · {league_error}")
+        else:
+            all_league_matches = league_data.get("matches", [])
     played_data, played_error = api_get(
         f"/leagues/{league_id}/matches?season={season_param}&status=played"
     )
@@ -148,7 +161,7 @@ for league in leagues:
         "league": league.get("name"),
         "country_code": league.get("country_code"),
         "season": season,
-        "matches_in_season": len(all_league_matches),
+        "matches_in_season": len(all_league_matches) if is_priority else None,
         "played_results": len(played_matches),
         "sample_played": [
             {
