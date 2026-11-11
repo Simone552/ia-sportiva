@@ -197,13 +197,31 @@ endpoints = {
     "heatmaps": "/heatmaps",
 }
 
+deferred_until_kickoff = {
+    "stats", "shots", "players", "events", "advanced",
+    "advanced_players", "advanced_network", "momentum",
+    "players_halves", "heatmaps",
+}
+
 for index, match in enumerate(matches, start=1):
     match_id = match.get("id")
     if not match_id:
         continue
     print(f"[{index}/{len(matches)}] Raccolta dettagli partita {match_id}")
     details = {}
+    status = str(match.get("status") or "").lower().replace("_", "")
+    has_started = (
+        match.get("score_home") is not None
+        or match.get("score_away") is not None
+        or status in {"live", "inprogress", "finished", "afterextratime", "afterpenalties", "halftime"}
+    )
     for name, suffix in endpoints.items():
+        if name in deferred_until_kickoff and not has_started:
+            details[name] = {
+                "available": False,
+                "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita.",
+            }
+            continue
         if name == "summary":
             value, endpoint_error = api_get(f"/matches/{match_id}")
         else:
