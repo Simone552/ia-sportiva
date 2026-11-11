@@ -1002,6 +1002,34 @@
       }
     ],
     "leagues_catalogue_error": null,
+    "priority_league_schedules_checked": [
+      {
+        "league": "Champions League",
+        "country_code": "INT-2",
+        "season": "2026/2027"
+      },
+      {
+        "league": "Conference League",
+        "country_code": "INT-2",
+        "season": "2026/2027"
+      },
+      {
+        "league": "Europa League",
+        "country_code": "INT-2",
+        "season": "2026/2027"
+      },
+      {
+        "league": "Serie A",
+        "country_code": "ITA",
+        "season": "2026/2027"
+      },
+      {
+        "league": "Serie B",
+        "country_code": "ITA",
+        "season": "2026/2027"
+      }
+    ],
+    "priority_league_schedule_errors": [],
     "league_counts_in_calendar": {
       "Serie B": 10,
       "Primera Division": 1,
@@ -1017,7 +1045,7 @@
       "USL League One": 1,
       "Liga 1": 5
     },
-    "fetched_at": "2026-11-11T18:13:15.452129+00:00",
+    "fetched_at": "2026-11-11T18:21:32.109725+00:00",
     "matches": [
       {
         "id": "m_4XjY7T",
