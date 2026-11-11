@@ -21,7 +21,7 @@
  const block=(title,body,note="")=>'<section class="analysis-block"><h3>'+esc(title)+'</h3>'+(note?'<p class="analysis-note">'+esc(note)+'</p>':"")+body+'</section>';
  let currentMatch=null,currentPlayers=[],currentLineups=null;
  function sectionTabs(){
-  const items=[["riepilogo","Riepilogo"],["statistiche","Statistiche"],["tiri","Tiri e occasioni"],["formazioni","Formazioni"],["giocatori","Giocatori"],["precedenti","Precedenti"],["eventi","Cronologia"]];
+  const items=[["riepilogo","Riepilogo"],["forma","Forma recente"],["statistiche","Statistiche"],["tiri","Tiri e occasioni"],["formazioni","Formazioni"],["giocatori","Giocatori"],["precedenti","Precedenti"],["eventi","Cronologia"]];
   return '<nav class="match-section-tabs" aria-label="Sezioni analisi">'+items.map((x,i)=>'<button class="match-section-tab '+(i===0?"active":"")+'" data-section="'+x[0]+'" onclick="showMatchSection(\''+x[0]+'\')">'+x[1]+'</button>').join("")+'</nav>';
  }
  function section(id,html,active){return '<section class="match-section '+(active?"active":"")+'" id="match-section-'+id+'">'+html+'</section>';}
@@ -149,6 +149,16 @@
   if(!games.length){if(Number(d.total_matches||0)===0)return empty("Nessun precedente restituito dalla fonte. Questo non dimostra che le squadre non si siano mai affrontate: significa soltanto che l’archivio non fornisce incontri H2H per questa partita.");return overview+empty("La fonte non ha restituito l’elenco dei precedenti.");}
   return overview+'<div class="result-list">'+games.map(g=>'<div><strong>'+esc(g.home?.name||"Casa")+' '+esc(g.score_home??"—")+' – '+esc(g.score_away??"—")+' '+esc(g.away?.name||"Ospite")+'</strong><small>'+esc(g.time_utc?new Date(g.time_utc).toLocaleDateString("it-IT",{timeZone:"Europe/Rome"}):"Data non indicata")+'</small></div>').join("")+'</div>';
  }
+ function renderRecentForm(form){
+  if(!form)return empty("La forma recente non è presente nell’archivio per questa competizione.");
+  const side=(items,name)=>'<div class="form-team"><h4>'+esc(name)+'</h4>'+((items||[]).length?'<div class="result-list">'+items.map(g=>{
+   const date=g.date?new Date(g.date+"T12:00:00").toLocaleDateString("it-IT",{day:"2-digit",month:"short"}):"Data n.d.";
+   const venue=g.home?"Casa":"Trasferta";
+   const resultLabel=g.result==="W"?"Vittoria":g.result==="D"?"Pareggio":"Sconfitta";
+   return '<div><span><strong>'+esc(g.opponent||"Avversaria")+'</strong><small>'+esc(date)+' · '+venue+'</small></span><span><strong>'+esc(g.score_for)+' – '+esc(g.score_against)+'</strong><small>'+resultLabel+'</small></span></div>';
+  }).join("")+'</div>':empty("Nessuna gara precedente trovata nella stagione di questa competizione."))+'</div>';
+  return '<p class="analysis-note">Ultime cinque partite di campionato precedenti a questa gara. I risultati sono mostrati dal punto di vista della rispettiva squadra; non includono amichevoli o coppe.</p><div class="form-grid">'+side(form.home,currentMatch?.home_team?.name||"Casa")+side(form.away,currentMatch?.away_team?.name||"Ospite")+'</div>';
+ }
  function renderEvents(item,homeId,home,away){
   const d=getData(item);if(!d)return empty(unavailable(item));
   const events=Array.isArray(d)?d:(d.events||[]);if(!events.length)return empty(waitingMessage("La cronologia degli eventi"));
@@ -181,6 +191,7 @@
    const summaryBody=metrics([["Giornata / turno",summary.round_name||"—"],["Arbitro",summary.referee||"—"],["Stadio",summary.stadium||"—"]]);
    const sections=sectionTabs()+
     section("riepilogo",block("Informazioni principali",summaryBody+metrics([["Competizione",summary.league?.name||match.league?.name||"—"],["Stagione",summary.season||"—"],["Stato",state]]),""),true)+
+    section("forma",block("Forma recente delle squadre",renderRecentForm(match.recent_form),"Risultati storici recuperati dal calendario stagionale della stessa competizione."),false)+
     section("statistiche",block("Confronto statistico",renderStats(getData(d.stats)),"Valori della squadra di casa e della squadra ospite, suddivisi per categoria."),false)+
     section("tiri",block("Tiri e occasioni",renderShots(d.shots,homeId,awayId,home,away),"Conteggio e dettaglio dei tiri registrati dalla fonte."),false)+
     section("formazioni",block("Formazioni sul campo",renderPitch(getData(d.lineups),home,away),"I moduli e le posizioni sono quelli restituiti dalla fonte; clicca sui calciatori per vedere i dati individuali."),false)+
