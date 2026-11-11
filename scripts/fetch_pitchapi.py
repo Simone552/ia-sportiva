@@ -89,7 +89,7 @@ for league in leagues:
     seasons = league.get("seasons") or []
     if not seasons:
         continue
-    season = seasons[-1]
+    season = seasons[0]  # PitchAPI ordina le stagioni dalla più recente alla più vecchia
     league_id = league.get("id")
     if not league_id:
         continue
