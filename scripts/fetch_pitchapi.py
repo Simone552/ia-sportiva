@@ -6,6 +6,8 @@ import urllib.error
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+from match_status import match_has_started
+
 key = os.environ.get("PITCH_KEY", "").strip()
 if not key:
     raise SystemExit("Chiave PITCH_KEY/PITCH_API_KEY non configurata")
@@ -284,12 +286,14 @@ for index, match in enumerate(matches, start=1):
         continue
     print(f"[{index}/{len(matches)}] Raccolta dettagli partita {match_id}")
     details = {}
-    status = str(match.get("status") or "").lower().replace("_", "")
-    has_started = (
-        match.get("score_home") is not None
-        or match.get("score_away") is not None
-        or status in {"live", "inprogress", "finished", "afterextratime", "afterpenalties", "halftime"}
-    )
+    # Alcuni provider valorizzano 0-0 anche prima del calcio d'inizio:
+    # lo stato della partita e l'orario sono più affidabili dei soli punteggi.
+    has_started = match_has_started(match)
+    if not has_started:
+        print(
+            f"Partita {match_id}: pre-match ({match.get('status') or 'stato non indicato'}); "
+            "statistiche, tiri, giocatori ed eventi saranno richiesti dopo l'inizio."
+        )
     for name, suffix in endpoints.items():
         if name in deferred_until_kickoff and not has_started:
             details[name] = {

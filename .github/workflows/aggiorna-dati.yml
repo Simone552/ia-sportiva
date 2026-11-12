@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - "scripts/fetch_pitchapi.py"
+      - "scripts/match_status.py"
+      - "tests/**"
       - ".github/workflows/aggiorna-dati.yml"
   schedule:
     - cron: "17 */6 * * *"
@@ -22,6 +24,9 @@ jobs:
     steps:
       - name: Scarica repository
         uses: actions/checkout@v4
+
+      - name: Verifica classificazione stato partita
+        run: python -m unittest discover -s tests -v
 
       - name: Recupera dati da PitchAPI
         env:
