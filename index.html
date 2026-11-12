@@ -656,7 +656,7 @@ function competitionMatchesQuery(league,query){
 }
 function isCompetitionSearch(query){
  if(resolveCompetitionQuery(query))return true;
- return /\\b(serie|league|liga|bundesliga|ligue|championship|division|cup|coppa|champions|europa|conference|eredivisie)\\b/i.test(query);
+ return /\b(serie|league|liga|bundesliga|ligue|championship|division|cup|coppa|champions|europa|conference|eredivisie)\b/i.test(query);
 }
 function renderCompetitionEmptyState(query){
  const selected=resolveCompetitionQuery(query);
