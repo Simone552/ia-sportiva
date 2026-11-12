@@ -720,17 +720,32 @@ function prepareFootballAnalysis(){
  const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
  const matches=window.iaPitchMatches||[];
  const q=norm(query);
- const exact=matches.find(m=>{
-  const h=norm(m.home_team?.name),a=norm(m.away_team?.name);
-  return q && ((q.includes(h)&&q.includes(a)) || (h+' '+a).includes(q));
- });
- if(exact){window.openMatchDetails(String(exact.id));return}
- const found=matches.filter(m=>norm(m.league?.name).includes(q)||norm(m.home_team?.name).includes(q)||norm(m.away_team?.name).includes(q));
  const output=document.getElementById('pitchApiMatches');
  const status=document.getElementById('pitchApiStatus');
+ const leagueExact=matches.filter(m=>norm(m.league?.name)===q);
+ if(leagueExact.length){
+  const ranks=leagueExact.map(m=>leaguePriority(m.league));
+  const bestRank=Math.min(...ranks);
+  const preferred=bestRank<99?leagueExact.filter(m=>leaguePriority(m.league)===bestRank):leagueExact;
+  const uniqueLeagues=new Map(preferred.map(m=>[m.league?.id||norm(m.league?.name),m.league]));
+  const found=preferred;
+  output.innerHTML=renderPitchApiFixtures(found);
+  const selectedName=[...uniqueLeagues.values()][0]?.name||query;
+  const selectedCountry=uniqueLeagues.size===1?leagueCountryCode([...uniqueLeagues.values()][0]):'';
+  status.textContent='Filtro campionato: '+selectedName+(selectedCountry?' · '+selectedCountry:'')+' — '+found.length+' partite. Sono esclusi gli altri campionati.';
+  output.scrollIntoView({behavior:'smooth',block:'start'});
+  return;
+ }
+ const exact=matches.find(m=>{
+  const h=norm(m.home_team?.name),a=norm(m.away_team?.name);
+  return q && ((q.includes(h)&&q.includes(a)) || (h+' '+a)===q);
+ });
+ if(exact){window.openMatchDetails(String(exact.id));return}
+ const leagueFound=matches.filter(m=>norm(m.league?.name).includes(q));
+ const found=leagueFound.length?leagueFound:matches.filter(m=>norm(m.home_team?.name).includes(q)||norm(m.away_team?.name).includes(q));
  if(found.length){
   output.innerHTML=renderPitchApiFixtures(found);
-  status.textContent='Trovate '+found.length+' partite nell’archivio caricato per “'+query+'”. Se hai cercato una competizione, sono mostrati tutti gli incontri presenti in questo archivio.';
+  status.textContent=leagueFound.length?'Filtro competizione: '+found.length+' partite corrispondenti a “'+query+'”.':'Trovate '+found.length+' partite con una squadra corrispondente a “'+query+'”.';
   output.scrollIntoView({behavior:'smooth',block:'start'});
   return;
  }
