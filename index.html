@@ -637,8 +637,8 @@ function competitionMatchesQuery(league,query){
  const expected=expectedCountryForCompetition(query);
  const country=leagueCountryCode(league);
  if(expected){
-  if(country)return country===expected;
-  return leaguePriority(league)<99;
+  const recognizedName=leaguePriority(league)<99;
+  return recognizedName&&(!country||country===expected);
  }
  return name===q||name.startsWith(q+' ')||(' '+name+' ').includes(' '+q+' ');
 }
