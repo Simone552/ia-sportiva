@@ -618,7 +618,29 @@ function renderPitchApiCoverage(root,matches){
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Competizioni presenti nelle partite archiviate</div><div class="coverage-leagues">'+(leagueTags||'<span class="muted">Nessun conteggio disponibile.</span>')+'</div></div>'+errorText;
 }
 function leagueCountryCode(league){
- return league?.country_code||window.iaLeagueCountryById?.[league?.id]||'';
+ return league?.country_code||league?.country?.code||window.iaLeagueCountryById?.[league?.id]||'';
+}
+function expectedCountryForCompetition(query){
+ const q=teamKey(query);
+ const aliases=[
+  {country:'ITA',names:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a']},
+  {country:'ENG',names:['premier league','english premier league','england premier league']},
+  {country:'ESP',names:['la liga','laliga','laliga ea sports','spanish la liga']},
+  {country:'GER',names:['bundesliga','german bundesliga','germany bundesliga']},
+  {country:'FRA',names:['ligue 1','french ligue 1','france ligue 1']}
+ ];
+ return aliases.find(item=>item.names.some(name=>teamKey(name)===q))?.country||'';
+}
+function competitionMatchesQuery(league,query){
+ const name=teamKey(league?.name),q=teamKey(query);
+ if(!name||!q)return false;
+ const expected=expectedCountryForCompetition(query);
+ const country=leagueCountryCode(league);
+ if(expected){
+  if(country)return country===expected;
+  return leaguePriority(league)<99;
+ }
+ return name===q||name.startsWith(q+' ')||(' '+name+' ').includes(' '+q+' ');
 }
 function leaguePriority(league){
  const name=teamKey(typeof league==='string'?league:league?.name);
@@ -722,17 +744,14 @@ function prepareFootballAnalysis(){
  const q=norm(query);
  const output=document.getElementById('pitchApiMatches');
  const status=document.getElementById('pitchApiStatus');
- const leagueExact=matches.filter(m=>norm(m.league?.name)===q);
+ const leagueExact=matches.filter(m=>competitionMatchesQuery(m.league,query));
  if(leagueExact.length){
-  const ranks=leagueExact.map(m=>leaguePriority(m.league));
-  const bestRank=Math.min(...ranks);
-  const preferred=bestRank<99?leagueExact.filter(m=>leaguePriority(m.league)===bestRank):leagueExact;
-  const uniqueLeagues=new Map(preferred.map(m=>[m.league?.id||norm(m.league?.name),m.league]));
-  const found=preferred;
+  const uniqueLeagues=new Map(leagueExact.map(m=>[m.league?.id||norm(m.league?.name),m.league]));
+  const found=leagueExact;
   output.innerHTML=renderPitchApiFixtures(found);
   const selectedName=[...uniqueLeagues.values()][0]?.name||query;
   const selectedCountry=uniqueLeagues.size===1?leagueCountryCode([...uniqueLeagues.values()][0]):'';
-  status.textContent='Filtro campionato: '+selectedName+(selectedCountry?' · '+selectedCountry:'')+' — '+found.length+' partite. Sono esclusi gli altri campionati.';
+  status.textContent='Filtro campionato rigoroso: '+selectedName+(selectedCountry?' · '+selectedCountry:'')+' — '+found.length+' partite. Nessun altro campionato è incluso.';
   output.scrollIntoView({behavior:'smooth',block:'start'});
   return;
  }
@@ -741,8 +760,9 @@ function prepareFootballAnalysis(){
   return q && ((q.includes(h)&&q.includes(a)) || (h+' '+a)===q);
  });
  if(exact){window.openMatchDetails(String(exact.id));return}
- const leagueFound=matches.filter(m=>norm(m.league?.name).includes(q));
- const found=leagueFound.length?leagueFound:matches.filter(m=>norm(m.home_team?.name).includes(q)||norm(m.away_team?.name).includes(q));
+ const leagueFound=matches.filter(m=>competitionMatchesQuery(m.league,query));
+ const looksLikeCompetition=/\b(serie|league|liga|bundesliga|ligue|championship|division|cup|coppa)\b/i.test(query);
+ const found=leagueFound.length?leagueFound:(looksLikeCompetition?[]:matches.filter(m=>norm(m.home_team?.name).includes(q)||norm(m.away_team?.name).includes(q)));
  if(found.length){
   output.innerHTML=renderPitchApiFixtures(found);
   status.textContent=leagueFound.length?'Filtro competizione: '+found.length+' partite corrispondenti a “'+query+'”.':'Trovate '+found.length+' partite con una squadra corrispondente a “'+query+'”.';
