@@ -620,27 +620,54 @@ function renderPitchApiCoverage(root,matches){
 function leagueCountryCode(league){
  return league?.country_code||league?.country?.code||window.iaLeagueCountryById?.[league?.id]||'';
 }
-function expectedCountryForCompetition(query){
+const IA_COMPETITIONS=[
+ {key:'serie-a',label:'Serie A',country:'ITA',aliases:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a']},
+ {key:'serie-b',label:'Serie B',country:'ITA',aliases:['serie b','serie bkt','italian serie b']},
+ {key:'serie-c',label:'Serie C',country:'ITA',aliases:['serie c','serie c now','serie c girone a','serie c girone b','serie c girone c']},
+ {key:'premier-league',label:'Premier League',country:'ENG',aliases:['premier league','english premier league','england premier league']},
+ {key:'la-liga',label:'La Liga',country:'ESP',aliases:['la liga','laliga','laliga ea sports','spanish la liga']},
+ {key:'bundesliga',label:'Bundesliga',country:'GER',aliases:['bundesliga','german bundesliga','germany bundesliga']},
+ {key:'ligue-1',label:'Ligue 1',country:'FRA',aliases:['ligue 1','french ligue 1','france ligue 1']},
+ {key:'champions-league',label:'Champions League',country:'',aliases:['champions league','uefa champions league','ucl']},
+ {key:'europa-league',label:'Europa League',country:'',aliases:['europa league','uefa europa league','uel']},
+ {key:'conference-league',label:'Conference League',country:'',aliases:['conference league','uefa conference league','uecl']},
+ {key:'eredivisie',label:'Eredivisie',country:'NED',aliases:['eredivisie','dutch eredivisie']},
+ {key:'primeira-liga',label:'Primeira Liga',country:'POR',aliases:['primeira liga','liga portugal','portuguese primeira liga']},
+ {key:'championship',label:'Championship',country:'ENG',aliases:['championship','english championship','efl championship']},
+ {key:'scottish-premiership',label:'Scottish Premiership',country:'SCO',aliases:['scottish premiership','scottish premier league']}
+];
+function resolveCompetitionQuery(query){
  const q=teamKey(query);
- const aliases=[
-  {country:'ITA',names:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a']},
-  {country:'ENG',names:['premier league','english premier league','england premier league']},
-  {country:'ESP',names:['la liga','laliga','laliga ea sports','spanish la liga']},
-  {country:'GER',names:['bundesliga','german bundesliga','germany bundesliga']},
-  {country:'FRA',names:['ligue 1','french ligue 1','france ligue 1']}
- ];
- return aliases.find(item=>item.names.some(name=>teamKey(name)===q))?.country||'';
+ if(!q)return null;
+ return IA_COMPETITIONS.find(item=>item.aliases.some(alias=>teamKey(alias)===q))||null;
 }
 function competitionMatchesQuery(league,query){
- const name=teamKey(league?.name),q=teamKey(query);
- if(!name||!q)return false;
- const expected=expectedCountryForCompetition(query);
- const country=leagueCountryCode(league);
- if(expected){
-  const recognizedName=leaguePriority(league)<99;
-  return recognizedName&&(!country||country===expected);
+ const name=teamKey(league?.name);
+ if(!name)return false;
+ const selected=resolveCompetitionQuery(query);
+ const country=String(leagueCountryCode(league)||'').toUpperCase();
+ if(selected){
+  const nameMatches=selected.aliases.some(alias=>teamKey(alias)===name);
+  if(!nameMatches)return false;
+  return !selected.country||!country||country===selected.country;
  }
+ const q=teamKey(query);
  return name===q||name.startsWith(q+' ')||(' '+name+' ').includes(' '+q+' ');
+}
+function isCompetitionSearch(query){
+ if(resolveCompetitionQuery(query))return true;
+ return /\\b(serie|league|liga|bundesliga|ligue|championship|division|cup|coppa|champions|europa|conference|eredivisie)\\b/i.test(query);
+}
+function renderCompetitionEmptyState(query){
+ const selected=resolveCompetitionQuery(query);
+ const label=selected?.label||query;
+ const meta=window.iaPitchMeta||{};
+ const date=meta.date||'data caricati';
+ const errors=Array.isArray(meta.priority_league_schedule_errors)?meta.priority_league_schedule_errors:[];
+ const warning=errors.length
+  ?'<p class="muted" style="margin-top:8px">Attenzione: almeno una fonte calendario ha restituito un errore. L’assenza di partite non è quindi una conferma definitiva.</p>'
+  :'';
+ return '<div class="empty" role="status"><strong>Nessuna partita trovata per '+esc(label)+'.</strong><p>Nel calendario IA Sportiva del '+esc(date)+' non risultano incontri di questa competizione. Gli altri campionati sono stati esclusi dalla ricerca.</p>'+warning+'<p class="muted">Se ti aspettavi una partita, aggiorna l’archivio: la copertura dipende dai calendari ricevuti dalle fonti collegate.</p></div>';
 }
 function leaguePriority(league){
  const name=teamKey(typeof league==='string'?league:league?.name);
@@ -716,6 +743,7 @@ async function loadPitchApiMatches(){
   window.iaLeagueCountryById=Object.fromEntries((root.leagues_catalogue||[]).map(item=>[item.id,item.country_code]));
   const matches=Array.isArray(root.matches)?root.matches:[];
   window.iaPitchMatches=matches;
+  window.iaPitchMeta=root;
   const dataDate=root.date||payload.date||'Data n.d.';
   renderPitchApiCoverage(root,matches);
 
@@ -739,43 +767,40 @@ function setMarketChecks(checked){document.querySelectorAll('.market-check').for
 function prepareFootballAnalysis(){
  const query=document.getElementById('footballEvent').value.trim();
  if(!query){toast('Scrivi una partita, una squadra o una competizione.');return}
- const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+ const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
  const matches=window.iaPitchMatches||[];
  const q=norm(query);
  const output=document.getElementById('pitchApiMatches');
  const status=document.getElementById('pitchApiStatus');
- const leagueExact=matches.filter(m=>competitionMatchesQuery(m.league,query));
- if(leagueExact.length){
-  const uniqueLeagues=new Map(leagueExact.map(m=>[m.league?.id||norm(m.league?.name),m.league]));
-  const found=leagueExact;
-  output.innerHTML=renderPitchApiFixtures(found);
-  const selectedName=[...uniqueLeagues.values()][0]?.name||query;
-  const selectedCountry=uniqueLeagues.size===1?leagueCountryCode([...uniqueLeagues.values()][0]):'';
-  status.textContent='Filtro campionato rigoroso: '+selectedName+(selectedCountry?' · '+selectedCountry:'')+' — '+found.length+' partite. Nessun altro campionato è incluso.';
+ const competitionSearch=isCompetitionSearch(query);
+ if(competitionSearch){
+  const found=matches.filter(m=>competitionMatchesQuery(m.league,query));
+  const selected=resolveCompetitionQuery(query);
+  const name=selected?.label||query;
+  if(found.length){
+   output.innerHTML=renderPitchApiFixtures(found);
+   status.textContent='Filtro campionato: '+name+' · '+found.length+' partite. Sono mostrati esclusivamente gli incontri della competizione selezionata.';
+  }else{
+   output.innerHTML=renderCompetitionEmptyState(query);
+   status.textContent='Ricerca completata · nessuna partita trovata per '+name+'.';
+  }
   output.scrollIntoView({behavior:'smooth',block:'start'});
   return;
  }
  const exact=matches.find(m=>{
   const h=norm(m.home_team?.name),a=norm(m.away_team?.name);
-  return q && ((q.includes(h)&&q.includes(a)) || (h+' '+a)===q);
+  return q&&((q.includes(h)&&q.includes(a))||(h+' '+a)===q);
  });
  if(exact){window.openMatchDetails(String(exact.id));return}
- const leagueFound=matches.filter(m=>competitionMatchesQuery(m.league,query));
- const looksLikeCompetition=/\b(serie|league|liga|bundesliga|ligue|championship|division|cup|coppa)\b/i.test(query);
- const found=leagueFound.length?leagueFound:(looksLikeCompetition?[]:matches.filter(m=>norm(m.home_team?.name).includes(q)||norm(m.away_team?.name).includes(q)));
- if(found.length){
-  output.innerHTML=renderPitchApiFixtures(found);
-  status.textContent=leagueFound.length?'Filtro competizione: '+found.length+' partite corrispondenti a “'+query+'”.':'Trovate '+found.length+' partite con una squadra corrispondente a “'+query+'”.';
-  output.scrollIntoView({behavior:'smooth',block:'start'});
-  return;
+ const teamMatches=matches.filter(m=>norm(m.home_team?.name).includes(q)||norm(m.away_team?.name).includes(q));
+ if(teamMatches.length){
+  output.innerHTML=renderPitchApiFixtures(teamMatches);
+  status.textContent='Trovate '+teamMatches.length+' partite con una squadra corrispondente a “'+query+'”.';
+ }else{
+  output.innerHTML='<div class="empty" role="status">Nessuna partita o squadra trovata per “'+esc(query)+'” nell’archivio caricato.</div>';
+  status.textContent='Nessun risultato per la ricerca.';
  }
- const panel=document.getElementById('matchDetailPanel');
- if(panel)panel.classList.remove('hidden');
- const title=document.getElementById('matchDetailTitle');
- if(title)title.textContent='Nessun risultato trovato';
- const content=document.getElementById('matchDetailContent');
- if(content)content.innerHTML='<div class="empty">“'+esc(query)+'” non compare nei dati attualmente scaricati. L’archivio contiene solo le partite restituite dall’ultimo aggiornamento PitchAPI: la ricerca per ora non interroga ancora tutte le date e tutte le competizioni.</div>';
- if(panel)panel.scrollIntoView({behavior:'smooth',block:'start'});
+ output.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function saveSlip(){let name=document.getElementById('slipName').value.trim()||'Schedina personale',selection=document.getElementById('slipSelection').value.trim(),odds=parseFloat(document.getElementById('slipOdds').value),stake=parseFloat(document.getElementById('slipStake').value)||0,notes=document.getElementById('slipNotes').value.trim();if(!selection){toast('Scrivi l’evento e la selezione.');return}if(!Number.isFinite(odds)||odds<=1){toast('Inserisci una quota valida maggiore di 1.');return}data.slips.unshift({id:Date.now(),name,selection,odds,stake,notes,date:new Date().toLocaleString('it-IT'),outcome:'Da verificare'});['slipSelection','slipOdds','slipStake','slipNotes'].forEach(id=>document.getElementById(id).value='');persist();toast('Selezione salvata sul dispositivo.')}
 const recommendedSources=[
