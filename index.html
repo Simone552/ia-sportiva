@@ -624,10 +624,21 @@ const TOP_LEAGUES=[
  {rank:4,label:'Bundesliga',keys:['bundesliga','german bundesliga']},
  {rank:5,label:'Ligue 1',keys:['ligue 1','french ligue 1']}
 ];
-function leaguePriority(name){
- const n=teamKey(name);
- const found=TOP_LEAGUES.find(item=>item.keys.some(k=>n===teamKey(k)||n.includes(teamKey(k))));
- return found?found.rank:99;
+function leaguePriority(league){
+ const name=teamKey(typeof league==='string'?league:league?.name);
+ const country=league?.country_code||window.iaLeagueCountryById?.[league?.id]||'';
+ const expected={
+  ITA:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a'],
+  ENG:['premier league','english premier league','england premier league'],
+  ESP:['laliga','laliga ea sports','la liga'],
+  GER:['bundesliga','german bundesliga'],
+  FRA:['ligue 1','french ligue 1']
+ };
+ const ranks={ITA:1,ENG:2,ESP:3,GER:4,FRA:5};
+ if(country&&expected[country]){
+  return expected[country].some(alias=>name===teamKey(alias))?ranks[country]:99;
+ }
+ return 99;
 }
 function fixtureTime(match){
  if(!match.time_utc)return 'Orario n.d.';
@@ -642,12 +653,12 @@ function renderPitchApiFixtures(matches){
   groups.get(name).push(match);
  });
  const orderedGroups=[...groups.entries()].sort((a,b)=>{
-  const ra=leaguePriority(a[0]),rb=leaguePriority(b[0]);
+  const ra=leaguePriority(a[1][0].league),rb=leaguePriority(b[1][0].league);
   return ra!==rb?ra-rb:a[0].localeCompare(b[0],'it');
  });
- const topCount=orderedGroups.filter(([name])=>leaguePriority(name)<99).length;
+ const topCount=orderedGroups.filter(([,fixtures])=>leaguePriority(fixtures[0].league)<99).length;
  return orderedGroups.map(([league,fixtures],index)=>{
-  const rank=leaguePriority(league);
+  const rank=leaguePriority(fixtures[0].league);
   const ordered=[...fixtures].sort((a,b)=>{
    const ta=a.time_utc?new Date(a.time_utc).getTime():Infinity;
    const tb=b.time_utc?new Date(b.time_utc).getTime():Infinity;
@@ -677,6 +688,7 @@ async function loadPitchApiMatches(){
   if(!response.ok)throw new Error('File dati non disponibile (HTTP '+response.status+').');
   const payload=await response.json();
   const root=payload.data||payload;
+  window.iaLeagueCountryById=Object.fromEntries((root.leagues_catalogue||[]).map(item=>[item.id,item.country_code]));
   const matches=Array.isArray(root.matches)?root.matches:[];
   window.iaPitchMatches=matches;
   const dataDate=root.date||payload.date||'Data n.d.';
