@@ -649,7 +649,12 @@ function competitionMatchesQuery(league,query){
  if(selected){
   const nameMatches=selected.aliases.some(alias=>teamKey(alias)===name);
   if(!nameMatches)return false;
-  return !selected.country||!country||country===selected.country;
+  const countryAliases={
+   ITA:['ITA','IT','ITALY'],ENG:['ENG','GB','GBR','ENGLAND'],ESP:['ESP','ES','SPAIN'],
+   GER:['GER','DE','DEU','GERMANY'],FRA:['FRA','FR','FRANCE'],NED:['NED','NL','NLD','NETHERLANDS'],
+   POR:['POR','PT','PRT','PORTUGAL'],SCO:['SCO','SCOTLAND']
+  };
+  return !selected.country||!country||((countryAliases[selected.country]||[selected.country]).includes(country));
  }
  const q=teamKey(query);
  return name===q||name.startsWith(q+' ')||(' '+name+' ').includes(' '+q+' ');
