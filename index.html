@@ -617,16 +617,12 @@ function renderPitchApiCoverage(root,matches){
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Calendari stagionali integrati</div><div class="coverage-leagues">'+(checked.length?checked.map(x=>'<span class="coverage-league">✓ '+esc(x.league)+' · '+esc(x.season)+'</span>').join(''):'<span class="muted">Nessun calendario stagionale confermato.</span>')+'</div></div>'+
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Competizioni presenti nelle partite archiviate</div><div class="coverage-leagues">'+(leagueTags||'<span class="muted">Nessun conteggio disponibile.</span>')+'</div></div>'+errorText;
 }
-const TOP_LEAGUES=[
- {rank:1,label:'Serie A',keys:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a']},
- {rank:2,label:'Premier League',keys:['premier league','english premier league','england premier league','epl']},
- {rank:3,label:'LaLiga',keys:['laliga','la liga','primera division','spanish la liga']},
- {rank:4,label:'Bundesliga',keys:['bundesliga','german bundesliga']},
- {rank:5,label:'Ligue 1',keys:['ligue 1','french ligue 1']}
-];
+function leagueCountryCode(league){
+ return league?.country_code||window.iaLeagueCountryById?.[league?.id]||'';
+}
 function leaguePriority(league){
  const name=teamKey(typeof league==='string'?league:league?.name);
- const country=league?.country_code||window.iaLeagueCountryById?.[league?.id]||'';
+ const country=leagueCountryCode(league);
  const expected={
   ITA:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a'],
   ENG:['premier league','english premier league','england premier league'],
@@ -648,17 +644,24 @@ function fixtureTime(match){
 function renderPitchApiFixtures(matches){
  const groups=new Map();
  (matches||[]).forEach(match=>{
-  const name=match.league?.name||'Competizione n.d.';
-  if(!groups.has(name))groups.set(name,[]);
-  groups.get(name).push(match);
+  const league=match.league||{};
+  const name=league.name||'Competizione n.d.';
+  const key=league.id||name;
+  if(!groups.has(key))groups.set(key,{name,league,fixtures:[]});
+  groups.get(key).fixtures.push(match);
  });
- const orderedGroups=[...groups.entries()].sort((a,b)=>{
-  const ra=leaguePriority(a[1][0].league),rb=leaguePriority(b[1][0].league);
-  return ra!==rb?ra-rb:a[0].localeCompare(b[0],'it');
+ const nameCounts=new Map();
+ [...groups.values()].forEach(group=>nameCounts.set(group.name,(nameCounts.get(group.name)||0)+1));
+ const orderedGroups=[...groups.values()].sort((a,b)=>{
+  const ra=leaguePriority(a.league),rb=leaguePriority(b.league);
+  return ra!==rb?ra-rb:a.name.localeCompare(b.name,'it');
  });
- const topCount=orderedGroups.filter(([,fixtures])=>leaguePriority(fixtures[0].league)<99).length;
- return orderedGroups.map(([league,fixtures],index)=>{
-  const rank=leaguePriority(fixtures[0].league);
+ const topCount=orderedGroups.filter(group=>leaguePriority(group.league)<99).length;
+ return orderedGroups.map((group,index)=>{
+  const {name,league,fixtures}=group;
+  const rank=leaguePriority(league);
+  const country=leagueCountryCode(league);
+  const displayName=nameCounts.get(name)>1&&country?name+' · '+country:name;
   const ordered=[...fixtures].sort((a,b)=>{
    const ta=a.time_utc?new Date(a.time_utc).getTime():Infinity;
    const tb=b.time_utc?new Date(b.time_utc).getTime():Infinity;
@@ -673,7 +676,7 @@ function renderPitchApiFixtures(matches){
    return '<button type="button" class="fixture-compact" data-match-id="'+esc(match.id)+'" onclick="openMatchDetails(this.getAttribute(\'data-match-id\'))"><span class="fixture-kickoff">'+esc(fixtureTime(match))+'</span><span class="fixture-side">'+homeBadge+'<b>'+esc(home)+'</b></span><span class="fixture-vs-mini">–</span><span class="fixture-side">'+awayBadge+'<b>'+esc(away)+'</b></span><span class="fixture-result">'+(score?esc(score):'<small>'+esc(pitchStatusLabel(match.status))+'</small>')+'</span><span class="fixture-open">›</span></button>';
   }).join('');
   const label=rank<99?'<span class="league-rank">TOP '+rank+'</span>':'';
-  return '<details class="league-card" '+(index===0?'open':'')+'><summary><span class="league-summary-main">'+label+'<strong>'+esc(league)+'</strong></span><span class="league-summary-count">'+fixtures.length+' partite</span><span class="league-chevron">⌄</span></summary><div class="league-fixtures">'+rows+'</div></details>';
+  return '<details class="league-card" '+(index===0?'open':'')+'><summary><span class="league-summary-main">'+label+'<strong>'+esc(displayName)+'</strong></span><span class="league-summary-count">'+fixtures.length+' partite</span><span class="league-chevron">⌄</span></summary><div class="league-fixtures">'+rows+'</div></details>';
  }).join('')+(topCount?'':'<p class="fixture-order-note">I campionati sono ordinati alfabeticamente: nessuno dei cinque principali è presente in questo calendario.</p>');
 }
 async function loadPitchApiMatches(){
