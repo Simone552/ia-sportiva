@@ -467,6 +467,71 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  .analysis-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
+
+/* Elenco partite per campionato: sezioni compatte e priorità ai top 5 */
+#pitchApiMatches{display:grid;gap:10px}
+.league-card{border:1px solid #31513b;border-radius:15px;background:linear-gradient(145deg,#122219,#0d1912);overflow:hidden;box-shadow:0 8px 22px #0002}
+.league-card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px;min-height:58px}
+.league-card>summary::-webkit-details-marker{display:none}
+.league-card>summary:hover{background:#b7f34a0b}
+.league-summary-main{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.league-summary-main strong{font-size:14px;letter-spacing:-.01em}
+.league-rank{flex-shrink:0;padding:4px 7px;border-radius:6px;background:#b7f34a;color:#102016;font-size:9px;font-weight:950;letter-spacing:.06em}
+.league-summary-count{color:#9eb8a3;font-size:11px;white-space:nowrap}
+.league-chevron{color:#b7f34a;font-size:19px;transition:transform .18s}
+.league-card[open] .league-chevron{transform:rotate(180deg)}
+.league-fixtures{border-top:1px solid #294333;padding:5px 10px 9px}
+.fixture-compact{width:100%;display:grid;grid-template-columns:90px minmax(0,1fr) 12px minmax(0,1fr) 76px 16px;align-items:center;gap:9px;padding:9px 7px;border:0;border-bottom:1px solid #29433388;background:transparent;color:var(--text);text-align:left;cursor:pointer;border-radius:8px}
+.fixture-compact:last-child{border-bottom:0}
+.fixture-compact:hover{background:#b7f34a0c}
+.fixture-kickoff{font-size:11px;font-weight:800;color:#b7f34a;font-variant-numeric:tabular-nums}
+.fixture-side{display:flex;align-items:center;gap:7px;min-width:0}
+.fixture-side b{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fixture-crest-mini{width:23px;height:23px;object-fit:contain;flex-shrink:0}
+.fixture-fallback{display:grid;place-items:center;border-radius:50%;background:#203c2b;font-size:13px}
+.fixture-vs-mini{color:#718b78;text-align:center;font-size:11px}
+.fixture-result{font-size:11px;text-align:right;font-weight:800;color:#cde5cf;white-space:nowrap}
+.fixture-result small{font-size:10px;color:#9eb8a3;font-weight:500}
+.fixture-open{font-size:19px;color:#8fb69a;text-align:right}
+.fixture-order-note{color:var(--muted);font-size:11px;padding:5px 2px}
+#matchDetailPanel{max-width:100%;margin-top:12px!important}
+#matchDetailPanel>.panel-head{padding:5px 2px 9px}
+#matchDetailTitle{font-size:15px}
+.match-hero{padding:13px 16px;margin:5px 0 9px;border-radius:14px}
+.match-score{gap:8px;margin:10px auto}
+.match-score strong{font-size:clamp(22px,4vw,30px)}
+.match-team-lockup{gap:7px}
+.match-team-lockup .team-crest{width:32px;height:32px}
+.match-team-lockup b{font-size:12px;max-width:150px}
+.match-league{font-size:11px}
+.match-state,.match-stadium{font-size:10px}
+.match-section-tabs{padding:7px 1px;gap:5px;margin:7px 0 3px}
+.match-section-tab{padding:7px 10px;font-size:11px;border-radius:8px}
+.match-section .analysis-block{padding:12px;margin:7px 0;border-radius:12px}
+.match-section .analysis-block h3{font-size:14px;margin-bottom:8px}
+.match-section .analysis-note{font-size:11px;margin:4px 0 8px}
+.match-section .analysis-metrics{gap:6px}
+.match-section .analysis-metrics>div{padding:8px;border-radius:9px}
+.match-section .analysis-metrics strong{font-size:16px}
+.match-section .analysis-metrics span{font-size:10px}
+.match-section .stat-row{padding:7px 9px;font-size:11px}
+.match-section .stat-group{margin:8px 0}
+.analysis-source{font-size:10px;padding:7px 2px}
+@media(max-width:620px){
+ .league-card>summary{padding:12px}
+ .fixture-compact{grid-template-columns:66px minmax(0,1fr) 8px minmax(0,1fr) 16px;gap:5px;padding:9px 3px}
+ .fixture-result{display:none}
+ .fixture-kickoff{font-size:10px}
+ .fixture-side{gap:4px}
+ .fixture-side b{font-size:10px}
+ .fixture-crest-mini{width:19px;height:19px}
+ .match-team-lockup{flex-direction:column}
+ .match-team-lockup .team-crest{width:27px;height:27px}
+ .match-team-lockup b{font-size:10px}
+ .match-score{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+ .match-section-tabs{position:sticky}
+}
+
 </style>
 </head>
 <body><main class="app">
@@ -552,6 +617,54 @@ function renderPitchApiCoverage(root,matches){
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Calendari stagionali integrati</div><div class="coverage-leagues">'+(checked.length?checked.map(x=>'<span class="coverage-league">✓ '+esc(x.league)+' · '+esc(x.season)+'</span>').join(''):'<span class="muted">Nessun calendario stagionale confermato.</span>')+'</div></div>'+
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Competizioni presenti nelle partite archiviate</div><div class="coverage-leagues">'+(leagueTags||'<span class="muted">Nessun conteggio disponibile.</span>')+'</div></div>'+errorText;
 }
+const TOP_LEAGUES=[
+ {rank:1,label:'Serie A',keys:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a']},
+ {rank:2,label:'Premier League',keys:['premier league','english premier league','england premier league','epl']},
+ {rank:3,label:'LaLiga',keys:['laliga','la liga','primera division','spanish la liga']},
+ {rank:4,label:'Bundesliga',keys:['bundesliga','german bundesliga']},
+ {rank:5,label:'Ligue 1',keys:['ligue 1','french ligue 1']}
+];
+function leaguePriority(name){
+ const n=teamKey(name);
+ const found=TOP_LEAGUES.find(item=>item.keys.some(k=>n===teamKey(k)||n.includes(teamKey(k))));
+ return found?found.rank:99;
+}
+function fixtureTime(match){
+ if(!match.time_utc)return 'Orario n.d.';
+ const d=new Date(match.time_utc);
+ return Number.isNaN(d.getTime())?'Orario n.d.':d.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'});
+}
+function renderPitchApiFixtures(matches){
+ const groups=new Map();
+ (matches||[]).forEach(match=>{
+  const name=match.league?.name||'Competizione n.d.';
+  if(!groups.has(name))groups.set(name,[]);
+  groups.get(name).push(match);
+ });
+ const orderedGroups=[...groups.entries()].sort((a,b)=>{
+  const ra=leaguePriority(a[0]),rb=leaguePriority(b[0]);
+  return ra!==rb?ra-rb:a[0].localeCompare(b[0],'it');
+ });
+ const topCount=orderedGroups.filter(([name])=>leaguePriority(name)<99).length;
+ return orderedGroups.map(([league,fixtures],index)=>{
+  const rank=leaguePriority(league);
+  const ordered=[...fixtures].sort((a,b)=>{
+   const ta=a.time_utc?new Date(a.time_utc).getTime():Infinity;
+   const tb=b.time_utc?new Date(b.time_utc).getTime():Infinity;
+   return ta-tb;
+  });
+  const rows=ordered.map(match=>{
+   const home=match.home_team?.name||'Casa n.d.',away=match.away_team?.name||'Ospite n.d.';
+   const homeBadge=match.home_team?.image_url?'<img class="fixture-crest-mini" src="'+esc(match.home_team.image_url)+'" alt="">':'<span class="fixture-crest-mini fixture-fallback">⚽</span>';
+   const awayBadge=match.away_team?.image_url?'<img class="fixture-crest-mini" src="'+esc(match.away_team.image_url)+'" alt="">':'<span class="fixture-crest-mini fixture-fallback">⚽</span>';
+   const finished=String(match.status||'').toLowerCase()==='finished';
+   const score=finished&&match.score_home!=null&&match.score_away!=null?match.score_home+' – '+match.score_away:'';
+   return '<button type="button" class="fixture-compact" data-match-id="'+esc(match.id)+'" onclick="openMatchDetails(this.getAttribute(\'data-match-id\'))"><span class="fixture-kickoff">'+esc(fixtureTime(match))+'</span><span class="fixture-side">'+homeBadge+'<b>'+esc(home)+'</b></span><span class="fixture-vs-mini">–</span><span class="fixture-side">'+awayBadge+'<b>'+esc(away)+'</b></span><span class="fixture-result">'+(score?esc(score):'<small>'+esc(pitchStatusLabel(match.status))+'</small>')+'</span><span class="fixture-open">›</span></button>';
+  }).join('');
+  const label=rank<99?'<span class="league-rank">TOP '+rank+'</span>':'';
+  return '<details class="league-card" '+(index===0?'open':'')+'><summary><span class="league-summary-main">'+label+'<strong>'+esc(league)+'</strong></span><span class="league-summary-count">'+fixtures.length+' partite</span><span class="league-chevron">⌄</span></summary><div class="league-fixtures">'+rows+'</div></details>';
+ }).join('')+(topCount?'':'<p class="fixture-order-note">I campionati sono ordinati alfabeticamente: nessuno dei cinque principali è presente in questo calendario.</p>');
+}
 async function loadPitchApiMatches(){
  const status=document.getElementById('pitchApiStatus');
  const output=document.getElementById('pitchApiMatches');
@@ -575,18 +688,7 @@ async function loadPitchApiMatches(){
    pitchApiLoaded=true;
    return;
   }
-  const ordered=[...matches].sort((a,b)=>String(a.time_utc||'').localeCompare(String(b.time_utc||'')));
-  output.innerHTML=ordered.map(match=>{
-   const home=match.home_team?.name||'Casa n.d.';
-   const away=match.away_team?.name||'Ospite n.d.';
-   const league=match.league?.name||'Competizione n.d.';
-   const time=match.time_utc?new Date(match.time_utc).toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'}):'Orario n.d.';
-   const finished=String(match.status||'').toLowerCase()==='finished';
-   const score=finished&&match.score_home!=null&&match.score_away!=null?String(match.score_home)+' – '+String(match.score_away):'—';
-   const homeBadge=match.home_team?.image_url?'<img class="fixture-crest" src="'+esc(match.home_team.image_url)+'" alt="">':'<span class="fixture-crest-fallback">⚽</span>';
-   const awayBadge=match.away_team?.image_url?'<img class="fixture-crest" src="'+esc(match.away_team.image_url)+'" alt="">':'<span class="fixture-crest-fallback">⚽</span>';
-   return '<div class="entry fixture-entry"><div class="fixture-main"><div class="fixture-team">'+homeBadge+'<strong>'+esc(home)+'</strong></div><span class="fixture-vs">vs</span><div class="fixture-team">'+awayBadge+'<strong>'+esc(away)+'</strong></div><div class="muted fixture-meta">'+esc(league)+' · '+esc(time)+' · '+esc(pitchStatusLabel(match.status))+'</div></div><div class="fixture-action"><strong>'+esc(score)+'</strong><button class="btn ghost" style="margin-top:7px" onclick="openMatchDetails(\''+esc(match.id)+'\')">Apri analisi completa</button></div></div>';
-  }).join('');
+  output.innerHTML=renderPitchApiFixtures(matches);
   status.textContent='Archivio PitchAPI caricato · '+matches.length+' partite · data '+dataDate+'.';
   pitchApiLoaded=true;
  }catch(error){
@@ -612,14 +714,7 @@ function prepareFootballAnalysis(){
  const output=document.getElementById('pitchApiMatches');
  const status=document.getElementById('pitchApiStatus');
  if(found.length){
-  output.innerHTML=found.map(match=>{
-   const home=match.home_team?.name||'Casa n.d.',away=match.away_team?.name||'Ospite n.d.';
-   const league=match.league?.name||'Competizione n.d.';
-   const time=match.time_utc?new Date(match.time_utc).toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'}):'Orario n.d.';
-   const done=String(match.status||'').toLowerCase()==='finished';
-   const score=done&&match.score_home!=null&&match.score_away!=null?match.score_home+' – '+match.score_away:'—';
-   return '<div class="entry"><div style="min-width:0"><strong>'+esc(home)+' – '+esc(away)+'</strong><div class="muted" style="font-size:12px">'+esc(league)+' · '+esc(time)+'</div><div class="muted" style="font-size:12px">'+esc(pitchStatusLabel(match.status))+'</div></div><div style="text-align:right;white-space:nowrap"><strong>'+esc(score)+'</strong><br><button class="btn ghost" style="margin-top:7px" onclick="openMatchDetails(\''+esc(match.id)+'\')">Apri scheda</button></div></div>';
-  }).join('');
+  output.innerHTML=renderPitchApiFixtures(found);
   status.textContent='Trovate '+found.length+' partite nell’archivio caricato per “'+query+'”. Se hai cercato una competizione, sono mostrati tutti gli incontri presenti in questo archivio.';
   output.scrollIntoView({behavior:'smooth',block:'start'});
   return;
