@@ -1576,7 +1576,7 @@
       "Liga 1": 6,
       "Saudi First Division": 1
     },
-    "fetched_at": "2026-11-12T07:05:20.056634+00:00",
+    "fetched_at": "2026-11-12T07:30:39.247348+00:00",
     "matches": [
       {
         "id": "m_1EVUX4",
@@ -4829,7 +4829,7 @@
                 "image_url": "https://cdn.pitchapi.dev/images/teams/ea819ceb48d4315d570aea139f1bb44f98d332fd3e88066be2e60dc9ef06089a.webp"
               },
               "home": {
-                "formation": "4-4-2",
+                "formation": "4-3-3",
                 "confirmed": false,
                 "lineup_type": "lastStarting11",
                 "coach": {
@@ -4882,58 +4882,58 @@
                     "pitch_y": 0.13
                   },
                   {
-                    "player_id": "p_3aNRO3",
-                    "name": "Patrick Soko",
-                    "shirt_number": "19",
-                    "position_id": 72,
-                    "is_captain": false,
-                    "pitch_x": 0.61,
-                    "pitch_y": 0.88
-                  },
-                  {
                     "player_id": "p_1UhX4W",
                     "name": "Yassine Kechta",
                     "shirt_number": "8",
-                    "position_id": 74,
+                    "position_id": 73,
                     "is_captain": false,
                     "pitch_x": 0.61,
-                    "pitch_y": 0.63
+                    "pitch_y": 0.79
                   },
                   {
                     "player_id": "p_0euQfm",
                     "name": "Zico Buurmeester",
                     "shirt_number": "10",
-                    "position_id": 76,
+                    "position_id": 75,
                     "is_captain": false,
                     "pitch_x": 0.61,
-                    "pitch_y": 0.38
+                    "pitch_y": 0.5
                   },
                   {
                     "player_id": "p_1j8zIF",
                     "name": "Dani Rodríguez",
                     "shirt_number": "14",
-                    "position_id": 78,
+                    "position_id": 77,
                     "is_captain": false,
                     "pitch_x": 0.61,
-                    "pitch_y": 0.13
+                    "pitch_y": 0.21
+                  },
+                  {
+                    "player_id": "p_3aNRO3",
+                    "name": "Patrick Soko",
+                    "shirt_number": "19",
+                    "position_id": 103,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.79
                   },
                   {
                     "player_id": "p_4JUll7",
                     "name": "Álex Millán",
                     "shirt_number": "9",
-                    "position_id": 104,
+                    "position_id": 105,
                     "is_captain": false,
                     "pitch_x": 0.87,
-                    "pitch_y": 0.7
+                    "pitch_y": 0.5
                   },
                   {
                     "player_id": "p_0luZKU",
                     "name": "Unax del Cura",
                     "shirt_number": "16",
-                    "position_id": 106,
+                    "position_id": 107,
                     "is_captain": false,
                     "pitch_x": 0.87,
-                    "pitch_y": 0.3
+                    "pitch_y": 0.21
                   }
                 ],
                 "subs": [
