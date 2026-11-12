@@ -357,6 +357,116 @@ label{color:#a9c4af}
 .pitch-player{position:absolute;cursor:pointer}.pitch-face-small{position:absolute;top:-5px;right:3px;width:19px;height:19px;border:1.5px solid #f5ffe8;border-radius:50%;object-fit:cover;box-shadow:0 2px 5px #000b;background:#243a2c}.match-team-lockup{min-width:0}.match-score{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.match-team-lockup b{max-width:190px;overflow-wrap:anywhere;text-align:center}@media(max-width:520px){.pitch-face-small{width:15px;height:15px;top:-3px;right:0}.match-team-lockup .team-crest{width:38px;height:38px}.match-team-lockup b{font-size:11px}}
 .fixture-entry{align-items:center;gap:14px}.fixture-main{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0;flex:1}.fixture-team{display:flex;align-items:center;gap:8px;min-width:0}.fixture-team strong{font-size:14px}.fixture-crest{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 2px 4px #0008)}.fixture-crest-fallback{width:30px;height:30px;display:grid;place-items:center;background:#203c2b;border-radius:50%}.fixture-vs{font-size:10px;color:#91ad9a;font-weight:800}.fixture-meta{width:100%;font-size:11px}.fixture-action{text-align:right;white-space:nowrap;display:grid;justify-items:end}@media(max-width:600px){.fixture-entry{align-items:flex-start}.fixture-main{gap:8px}.fixture-team{width:100%}.fixture-vs{display:none}.fixture-action .btn{font-size:10px;padding:7px}}
 .match-hero{position:relative;overflow:hidden}.match-hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 12%,#c5f58a09 12.1% 12.3%),linear-gradient(90deg,transparent 49.8%,#d9ffb31c 50%,transparent 50.2%);animation:pitchDrift 28s linear infinite}.match-hero>*{position:relative}.match-stadium{margin-top:10px;color:#c3d9c4;font-size:11px;letter-spacing:.04em}
+
+/* IA SPORTIVA — restyling dashboard 1.0 */
+:root{
+ color-scheme:dark;
+ --bg:#07110d;--panel:#101d16;--panel2:#17271d;--text:#edf7ef;--muted:#9aafa0;
+ --line:#294333;--accent:#a8ef65;--accent2:#54c77b;--good:#70db91;--warn:#f2c36d;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+ background:
+  radial-gradient(ellipse at 12% -8%,#28583b55 0,transparent 36rem),
+  radial-gradient(ellipse at 100% 28%,#173d2b44 0,transparent 32rem),
+  linear-gradient(180deg,#08130d 0%,#09140f 48%,#07110d 100%);
+ color:var(--text);min-height:100vh
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.12;
+ background-image:linear-gradient(#7cb58a18 1px,transparent 1px),linear-gradient(90deg,#7cb58a18 1px,transparent 1px);
+ background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 82%)
+}
+.app{max-width:1320px;padding:24px 28px 42px}
+.top{padding:5px 2px 18px;margin-bottom:20px;border-bottom:1px solid #29433388}
+.brand{gap:14px}
+.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(145deg,#c1ff80,#51bb78);color:#0a1b10;box-shadow:0 8px 24px #65d98530;font-size:17px;letter-spacing:-1px}
+.eyebrow{color:#9db8a3;letter-spacing:.16em;font-weight:750;font-size:10px}
+.brand h1{font-size:23px;letter-spacing:-.045em}
+.tag{border-color:#365641;background:#102017;color:#b9d3bf;padding:8px 12px}
+.hero{
+ min-height:255px;padding:34px 36px;border:1px solid #47734f;border-radius:23px;
+ background:
+  linear-gradient(100deg,#0d2518f5 0%,#102d1df0 50%,#10251be0 100%),
+  repeating-linear-gradient(90deg,#ffffff08 0 1px,transparent 1px 9%);
+ box-shadow:0 22px 60px #0004;isolation:isolate
+}
+.hero:before{content:"";position:absolute;inset:14px;border:1px solid #c2f5b21c;border-radius:16px;pointer-events:none}
+.hero:after{
+ content:"";position:absolute;right:6%;top:50%;transform:translateY(-50%);
+ width:260px;height:170px;border:2px solid #c7f5b01c;border-radius:48%;
+ box-shadow:inset 0 0 0 42px #c7f5b008,0 0 0 1px #c7f5b00a;
+ font-size:0
+}
+.hero h2{max-width:720px;font-size:clamp(28px,4.4vw,43px);letter-spacing:-.045em;line-height:1.06;margin:12px 0}
+.hero p{max-width:660px;color:#c1d7c5;font-size:15px;line-height:1.65}
+.hero .eyebrow{color:#b8ee91}
+.btn{background:linear-gradient(135deg,#b5f477,#80d65e);color:#102013;border:1px solid #c7ff91;box-shadow:0 5px 16px #8cda5930;transition:transform .18s,filter .18s,box-shadow .18s}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px);box-shadow:0 8px 22px #8cda593b}
+.btn.secondary{background:#1c3827;color:#e3f5e6;border:1px solid #55795b;box-shadow:none}
+.btn.ghost{background:#18291e;color:#cfe4d1;border:1px solid #35523d;box-shadow:none}
+.tabs{gap:8px;margin:18px 0 8px;padding:5px 0 9px}
+.tab{background:#0e1b13;border:1px solid #294333;color:#abc1ae;border-radius:11px;padding:10px 15px;font-size:13px;font-weight:700;transition:.18s}
+.tab:hover{border-color:#77b86d;color:#eaffdf}
+.tab.active{background:#b0ed72;color:#102014;border-color:#b0ed72;box-shadow:0 5px 16px #9be35a25}
+.grid{gap:16px;margin-top:17px}
+.panel{background:linear-gradient(160deg,#122219 0%,#0e1a13 100%);border:1px solid #2b4734;border-radius:18px;padding:19px;box-shadow:0 12px 32px #0002}
+.panel-head{margin-bottom:15px}
+.panel h3{letter-spacing:-.02em}
+.panel-head .pill,.pill{background:#1a3021;color:#b9d5bd;border:1px solid #31533a;border-radius:7px;font-weight:700}
+.sport{background:linear-gradient(145deg,#172a1d,#101d16);border-color:#2e4a36;border-radius:15px;transition:transform .18s,border-color .18s}
+.sport:hover,.sport.active{border-color:#9cde6b;background:linear-gradient(145deg,#203d27,#14251a);transform:translateY(-2px)}
+.sport .emoji{filter:saturate(.9)}
+.metric{background:linear-gradient(145deg,#1b3022,#142319);border:1px solid #2b4934}
+.metric strong{color:#c0f28d;letter-spacing:-.04em}
+.entry{background:#122118;border-color:#2b4633;border-radius:12px;transition:border-color .18s}
+.entry:hover{border-color:#547b55}
+.field{background:#09150e;border-color:#31503a;color:#edf7ef;border-radius:11px}
+.field:focus{border-color:#a8ef65;box-shadow:0 0 0 3px #a8ef651c}
+label{color:#b2c7b5;font-weight:650;letter-spacing:.01em}
+.notice{background:#1c3020;border:1px solid #45613b;color:#d9edcf;border-radius:12px}
+.empty{background:#0c1911;border-color:#35513b;border-radius:13px;color:#9fb6a3}
+.source{border-color:#294333}
+.source-icon{background:#1c3022;color:#b5ed82}
+.status{color:#8ce0a0}
+#pitchApiMatches .entry{background:linear-gradient(100deg,#14251a,#101d16);border:1px solid #2e4b36;padding:14px 16px}
+#pitchApiMatches .entry:hover{border-color:#91d66c;box-shadow:0 8px 24px #0003}
+#matchDetailPanel{background:transparent}
+.analysis-block{background:linear-gradient(155deg,#122219,#0d1912);border-color:#2c4935;box-shadow:0 10px 25px #0002}
+.match-hero{background:radial-gradient(ellipse at 50% 0%,#275d37 0%,#153522 42%,#0c2115 100%);border:1px solid #49754a;box-shadow:0 14px 36px #0003}
+.analysis-metrics>div{background:#1a2d20;border:1px solid #2d4a35}
+.stat-table{border-color:#2c4935}
+.stat-head{background:#1a3021}
+.stat-row{border-color:#294333}
+.analysis-details{border-color:#31503a;background:#101d15}
+.match-section-tabs{gap:7px}
+.match-section-tab{background:#132319;border:1px solid #31503a;color:#b9d0bc;border-radius:9px;padding:9px 12px}
+.match-section-tab.active{background:#a8ef65;color:#102013;border-color:#a8ef65}
+.news-masthead{background:linear-gradient(110deg,#102b1b,#163923);border:1px solid #365b3c;border-radius:19px;padding:24px}
+.news-masthead h2{letter-spacing:-.04em}
+.news-card,.news-item{background:#122118;border-color:#2b4734}
+.foot{border-top:1px solid #294333;margin-top:28px}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #b3f178;outline-offset:3px}
+@media(max-width:760px){
+ .app{padding:14px 12px 32px}
+ .top{align-items:center}
+ .hero{min-height:0;padding:24px 20px}
+ .hero:after{right:-95px;opacity:.7}
+ .hero h2{font-size:29px;max-width:92%}
+ .hero p{font-size:13px;max-width:95%}
+ .tabs{margin-top:14px}
+ .tab{padding:9px 12px}
+ .panel{padding:15px}
+}
+@media(max-width:480px){
+ .brand h1{font-size:20px}
+ .tag{font-size:10px;padding:7px 8px}
+ .hero{border-radius:17px}
+ .hero h2{font-size:26px}
+ .hero-actions .btn{flex:1}
+ .analysis-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 </style>
 </head>
 <body><main class="app">
