@@ -1,6 +1,6 @@
 {
   "data": {
-    "date": "2026-11-11",
+    "date": "2026-11-12",
     "period_days": 7,
     "calendar_errors": [],
     "leagues_catalogue": [
@@ -1352,6 +1352,35 @@
         ]
       },
       {
+        "league": "Saudi First Division",
+        "country_code": "KSA",
+        "season": "2026/2027",
+        "matches_in_season": null,
+        "played_results": 97,
+        "sample_played": [
+          {
+            "date": "2026-08-21",
+            "time_utc": "2026-08-21T15:50:00Z",
+            "home_id": "t_48iq70",
+            "home_name": "Al Jeel",
+            "away_id": "t_1oC4UP",
+            "away_name": "Al-Zulfi",
+            "score_home": 0,
+            "score_away": 2
+          },
+          {
+            "date": "2026-08-21",
+            "time_utc": "2026-08-21T16:15:00Z",
+            "home_id": "t_0vCP0a",
+            "home_name": "Al Bukayriyah",
+            "away_id": "t_2JfNRc",
+            "away_name": "Al Anwar",
+            "score_home": 0,
+            "score_away": 0
+          }
+        ]
+      },
+      {
         "league": "Serie A",
         "country_code": "BRA",
         "season": "2026",
@@ -1414,7 +1443,7 @@
         "country_code": "BRA",
         "season": "2026",
         "matches_in_season": null,
-        "played_results": 370,
+        "played_results": 371,
         "sample_played": [
           {
             "date": "2026-03-21",
@@ -1528,11 +1557,11 @@
     ],
     "priority_league_schedule_errors": [],
     "recent_form_coverage": {
-      "matches_with_home_results": 84,
-      "matches_with_away_results": 84
+      "matches_with_home_results": 89,
+      "matches_with_away_results": 89
     },
     "league_counts_in_calendar": {
-      "Serie B": 10,
+      "Serie B": 9,
       "Primera Division": 1,
       "Primera A": 10,
       "LaLiga2": 11,
@@ -1540,645 +1569,15 @@
       "League Two": 12,
       "League One": 11,
       "Eerste Divisie": 8,
-      "Serie A": 2,
+      "Serie A": 6,
       "Liga MX": 1,
       "USL Championship": 2,
       "USL League One": 1,
-      "Liga 1": 5
+      "Liga 1": 6,
+      "Saudi First Division": 1
     },
-    "fetched_at": "2026-11-11T19:08:32.447891+00:00",
+    "fetched_at": "2026-11-12T01:24:10.430097+00:00",
     "matches": [
-      {
-        "id": "m_4XjY7T",
-        "league": {
-          "id": "l_3qUkB8",
-          "name": "Serie B",
-          "image_url": "https://cdn.pitchapi.dev/images/leagues/2283252267859e291fd350c135171e0a836ff7f944c839dae7dcfdc5c458068c.webp"
-        },
-        "home_team": {
-          "id": "t_2RhN0s",
-          "name": "Londrina",
-          "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
-        },
-        "away_team": {
-          "id": "t_1cAOm2",
-          "name": "Náutico",
-          "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
-        },
-        "time_utc": "2026-11-11T22:00:00Z",
-        "status": "not_started",
-        "score_home": null,
-        "score_away": null,
-        "date": "2026-11-11",
-        "recent_form": {
-          "scope": "Ultime 5 in campionato",
-          "home": [
-            {
-              "date": "2026-10-13",
-              "opponent": "Athletic Club MG",
-              "home": false,
-              "score_for": 2,
-              "score_against": 2,
-              "result": "D"
-            },
-            {
-              "date": "2026-10-20",
-              "opponent": "Cuiabá",
-              "home": true,
-              "score_for": 1,
-              "score_against": 0,
-              "result": "W"
-            },
-            {
-              "date": "2026-10-24",
-              "opponent": "CRB",
-              "home": false,
-              "score_for": 1,
-              "score_against": 2,
-              "result": "L"
-            },
-            {
-              "date": "2026-11-01",
-              "opponent": "América-MG",
-              "home": true,
-              "score_for": 1,
-              "score_against": 3,
-              "result": "L"
-            },
-            {
-              "date": "2026-11-05",
-              "opponent": "Botafogo SP",
-              "home": false,
-              "score_for": 0,
-              "score_against": 4,
-              "result": "L"
-            }
-          ],
-          "away": [
-            {
-              "date": "2026-10-11",
-              "opponent": "Vila Nova",
-              "home": true,
-              "score_for": 0,
-              "score_against": 2,
-              "result": "L"
-            },
-            {
-              "date": "2026-10-19",
-              "opponent": "Goiás",
-              "home": false,
-              "score_for": 0,
-              "score_against": 0,
-              "result": "D"
-            },
-            {
-              "date": "2026-10-26",
-              "opponent": "Juventude",
-              "home": false,
-              "score_for": 0,
-              "score_against": 4,
-              "result": "L"
-            },
-            {
-              "date": "2026-10-31",
-              "opponent": "Avaí",
-              "home": true,
-              "score_for": 1,
-              "score_against": 0,
-              "result": "W"
-            },
-            {
-              "date": "2026-11-08",
-              "opponent": "CRB",
-              "home": true,
-              "score_for": 0,
-              "score_against": 3,
-              "result": "L"
-            }
-          ]
-        },
-        "details": {
-          "summary": {
-            "available": true,
-            "data": {
-              "id": "m_4XjY7T",
-              "league": {
-                "id": "l_3qUkB8",
-                "name": "Serie B",
-                "image_url": "https://cdn.pitchapi.dev/images/leagues/2283252267859e291fd350c135171e0a836ff7f944c839dae7dcfdc5c458068c.webp"
-              },
-              "season": "2026",
-              "home_team": {
-                "id": "t_2RhN0s",
-                "name": "Londrina",
-                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
-              },
-              "away_team": {
-                "id": "t_1cAOm2",
-                "name": "Náutico",
-                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
-              },
-              "date": "2026-11-11",
-              "time_utc": "2026-11-11T22:00:00Z",
-              "status": "not_started",
-              "score_home": null,
-              "score_away": null,
-              "round_name": null,
-              "has_playoff": false,
-              "referee": null,
-              "stadium": null
-            }
-          },
-          "stats": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "shots": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "players": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "lineups": {
-            "available": true,
-            "data": {
-              "match_id": "m_4XjY7T",
-              "home_team": {
-                "id": "t_2RhN0s",
-                "name": "Londrina",
-                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
-              },
-              "away_team": {
-                "id": "t_1cAOm2",
-                "name": "Náutico",
-                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
-              },
-              "home": {
-                "formation": "3-4-3",
-                "confirmed": false,
-                "lineup_type": "lastStarting11",
-                "coach": {
-                  "name": "Hugo Emanuel Barros Chacon"
-                },
-                "starters": [
-                  {
-                    "player_id": "p_4KZUym",
-                    "name": "Maurício Kozlinski",
-                    "shirt_number": "30",
-                    "position_id": 11,
-                    "is_captain": false,
-                    "pitch_x": 0.1,
-                    "pitch_y": 0.5
-                  },
-                  {
-                    "player_id": "p_06hGqz",
-                    "name": "André Dhominique Queiroz Santiago da Silva",
-                    "shirt_number": "13",
-                    "position_id": 72,
-                    "is_captain": false,
-                    "pitch_x": 0.61,
-                    "pitch_y": 0.88
-                  },
-                  {
-                    "player_id": "p_2qMr2C",
-                    "name": "Artur Sérgio Batista de Souza",
-                    "shirt_number": "22",
-                    "position_id": 78,
-                    "is_captain": false,
-                    "pitch_x": 0.61,
-                    "pitch_y": 0.13
-                  },
-                  {
-                    "player_id": "p_0GLytd",
-                    "name": "Matheus Henrique dos Santos",
-                    "shirt_number": "3",
-                    "position_id": 37,
-                    "is_captain": false,
-                    "pitch_x": 0.36,
-                    "pitch_y": 0.21
-                  },
-                  {
-                    "player_id": "p_3O1TGw",
-                    "name": "Wallace Reis da Silva",
-                    "shirt_number": "4",
-                    "position_id": 35,
-                    "is_captain": true,
-                    "pitch_x": 0.36,
-                    "pitch_y": 0.5
-                  },
-                  {
-                    "player_id": "p_4MmAdc",
-                    "name": "Caio César Rodrigues Souza",
-                    "shirt_number": "44",
-                    "position_id": 33,
-                    "is_captain": false,
-                    "pitch_x": 0.36,
-                    "pitch_y": 0.79
-                  },
-                  {
-                    "player_id": "p_2AQTPd",
-                    "name": "Geovane Santana Meurer",
-                    "shirt_number": "38",
-                    "position_id": 74,
-                    "is_captain": false,
-                    "pitch_x": 0.61,
-                    "pitch_y": 0.63
-                  },
-                  {
-                    "player_id": "p_0sVC8i",
-                    "name": "Lucas Marques de Oliveira",
-                    "shirt_number": "8",
-                    "position_id": 76,
-                    "is_captain": false,
-                    "pitch_x": 0.61,
-                    "pitch_y": 0.38
-                  },
-                  {
-                    "player_id": "p_4TKDxc",
-                    "name": "Igor Ruan Sousa dos Santos",
-                    "shirt_number": "99",
-                    "position_id": 105,
-                    "is_captain": false,
-                    "pitch_x": 0.87,
-                    "pitch_y": 0.5
-                  },
-                  {
-                    "player_id": "p_0d1NL5",
-                    "name": "João Vitor Coni de Andrade",
-                    "shirt_number": "17",
-                    "position_id": 103,
-                    "is_captain": false,
-                    "pitch_x": 0.87,
-                    "pitch_y": 0.79
-                  },
-                  {
-                    "player_id": "p_0oe7Qe",
-                    "name": "Herbert Mateus Almeida de Oliveira",
-                    "shirt_number": "28",
-                    "position_id": 107,
-                    "is_captain": false,
-                    "pitch_x": 0.87,
-                    "pitch_y": 0.21
-                  }
-                ],
-                "subs": [
-                  {
-                    "player_id": "p_0wUiNo",
-                    "name": "Eduardo Alves Zanella",
-                    "shirt_number": "12",
-                    "position_id": 0,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_0njYCp",
-                    "name": "Severino do Ramo Clementino da Silva",
-                    "shirt_number": "2",
-                    "position_id": 1,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_05W9DT",
-                    "name": "Richarlyson Covre de Mello",
-                    "shirt_number": "75",
-                    "position_id": 1,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_0VbGcE",
-                    "name": "Tárik Michel Kedes Boschetti",
-                    "shirt_number": "32",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_1NmdDc",
-                    "name": "Rafael Monteiro Reis",
-                    "shirt_number": "77",
-                    "position_id": 1,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_12KuNC",
-                    "name": "Cainã Santos da Silva",
-                    "shirt_number": "15",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_1l07gD",
-                    "name": "Pablo Dyego da Silva Rosa",
-                    "shirt_number": "11",
-                    "position_id": 3,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_2plgMX",
-                    "name": "Willian da Silva Santos",
-                    "shirt_number": "53",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_4VgYQF",
-                    "name": "Kauã Jonathan dos Santos Ferreira",
-                    "shirt_number": "27",
-                    "position_id": 3,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  }
-                ]
-              },
-              "away": {
-                "formation": "4-2-3-1",
-                "confirmed": false,
-                "lineup_type": "lastStarting11",
-                "coach": {
-                  "name": "Bruno Marques Fernandes Pivetti"
-                },
-                "starters": [
-                  {
-                    "player_id": "p_07fqVp",
-                    "name": "Gastón Guruceaga Fagúndez",
-                    "shirt_number": "55",
-                    "position_id": 11,
-                    "is_captain": false,
-                    "pitch_x": 0.1,
-                    "pitch_y": 0.5
-                  },
-                  {
-                    "player_id": "p_0Ca9tY",
-                    "name": "Reginaldo Lopes de Jesus",
-                    "shirt_number": "93",
-                    "position_id": 32,
-                    "is_captain": false,
-                    "pitch_x": 0.29,
-                    "pitch_y": 0.88
-                  },
-                  {
-                    "player_id": "p_3Uto5K",
-                    "name": "Luiz Paulo França do Nascimento",
-                    "shirt_number": "60",
-                    "position_id": 38,
-                    "is_captain": false,
-                    "pitch_x": 0.29,
-                    "pitch_y": 0.13
-                  },
-                  {
-                    "player_id": "p_2Ip0XW",
-                    "name": "Samuel Felix Rodrigues",
-                    "shirt_number": "41",
-                    "position_id": 66,
-                    "is_captain": false,
-                    "pitch_x": 0.49,
-                    "pitch_y": 0.3
-                  },
-                  {
-                    "player_id": "p_4NrEMp",
-                    "name": "Wanderson Camelo Viana",
-                    "shirt_number": "34",
-                    "position_id": 34,
-                    "is_captain": false,
-                    "pitch_x": 0.29,
-                    "pitch_y": 0.63
-                  },
-                  {
-                    "player_id": "p_0L2CJm",
-                    "name": "Alberto Magno Santos de Melo Filho",
-                    "shirt_number": "3",
-                    "position_id": 36,
-                    "is_captain": true,
-                    "pitch_x": 0.29,
-                    "pitch_y": 0.38
-                  },
-                  {
-                    "player_id": "p_1AOBTR",
-                    "name": "Derek Freitas Ribeiro",
-                    "shirt_number": "72",
-                    "position_id": 83,
-                    "is_captain": false,
-                    "pitch_x": 0.68,
-                    "pitch_y": 0.84
-                  },
-                  {
-                    "player_id": "p_4BiL7G",
-                    "name": "Luiz Felipe Oliveira de Paula",
-                    "shirt_number": "27",
-                    "position_id": 64,
-                    "is_captain": false,
-                    "pitch_x": 0.49,
-                    "pitch_y": 0.7
-                  },
-                  {
-                    "player_id": "p_0vT9jo",
-                    "name": "Kauã Almeida da Costa",
-                    "shirt_number": "19",
-                    "position_id": 115,
-                    "is_captain": false,
-                    "pitch_x": 0.87,
-                    "pitch_y": 0.5
-                  },
-                  {
-                    "player_id": "p_0NZW0D",
-                    "name": "Luiz Cláudio Bezerra Alves",
-                    "shirt_number": "16",
-                    "position_id": 85,
-                    "is_captain": false,
-                    "pitch_x": 0.68,
-                    "pitch_y": 0.5
-                  },
-                  {
-                    "player_id": "p_2sILsg",
-                    "name": "Victor Andrade Santos",
-                    "shirt_number": "11",
-                    "position_id": 87,
-                    "is_captain": false,
-                    "pitch_x": 0.68,
-                    "pitch_y": 0.16
-                  }
-                ],
-                "subs": [
-                  {
-                    "player_id": "p_0G8ptX",
-                    "name": "Nikollas Alves Portella",
-                    "shirt_number": "33",
-                    "position_id": 0,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_1U8og2",
-                    "name": "Hector Fernandes de Andrade Silva",
-                    "shirt_number": "75",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_1J8c37",
-                    "name": "Halan Gomes da Silva Tenório",
-                    "shirt_number": "18",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_3STpr1",
-                    "name": "Leonardo Joventino Honório",
-                    "shirt_number": "32",
-                    "position_id": 0,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_0Y0M0M",
-                    "name": "Isaque Vitor Kaminski Borba Ferreira",
-                    "shirt_number": "99",
-                    "position_id": 3,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_22iNwM",
-                    "name": "Wendell Miranda Azevedo",
-                    "shirt_number": "17",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_002tnp",
-                    "name": "Everson Luis Santana dos Santos",
-                    "shirt_number": "28",
-                    "position_id": 3,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_1EBbT8",
-                    "name": "Ryan Carlos Santos de Sousa",
-                    "shirt_number": "6",
-                    "position_id": 1,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_2RQc7V",
-                    "name": "Gabriel Severino de Sousa",
-                    "shirt_number": "13",
-                    "position_id": 1,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_0yNh7c",
-                    "name": "Matheus Antonio Uchôa da Silva",
-                    "shirt_number": "37",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_2hLved",
-                    "name": "Guilherme da Silva Ramos",
-                    "shirt_number": "48",
-                    "position_id": 1,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  },
-                  {
-                    "player_id": "p_1EjGlG",
-                    "name": "Caio de Oliveira Mendonça Soares",
-                    "shirt_number": "88",
-                    "position_id": 2,
-                    "is_captain": false,
-                    "pitch_x": 0,
-                    "pitch_y": 0
-                  }
-                ]
-              }
-            }
-          },
-          "h2h": {
-            "available": true,
-            "data": {
-              "match_id": "m_4XjY7T",
-              "home_team": {
-                "id": "t_2RhN0s",
-                "name": "Londrina",
-                "image_url": "https://cdn.pitchapi.dev/images/teams/fc86ed351a07d0e43461f2766a7f53769d368d106dc3a85fc06d94c0b7f62325.webp"
-              },
-              "away_team": {
-                "id": "t_1cAOm2",
-                "name": "Náutico",
-                "image_url": "https://cdn.pitchapi.dev/images/teams/088243c580b6c3eb8ceeb0f68f31709e7a69d3881669d4645fb936846b747912.webp"
-              },
-              "home_wins": 0,
-              "draws": 0,
-              "away_wins": 0,
-              "total_matches": 0,
-              "recent_matches": []
-            }
-          },
-          "events": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "advanced": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "advanced_players": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "advanced_network": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "momentum": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "players_halves": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          },
-          "heatmaps": {
-            "available": false,
-            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
-          }
-        }
-      },
       {
         "id": "m_1EVUX4",
         "league": {
@@ -5430,16 +4829,442 @@
                 "image_url": "https://cdn.pitchapi.dev/images/teams/ea819ceb48d4315d570aea139f1bb44f98d332fd3e88066be2e60dc9ef06089a.webp"
               },
               "home": {
-                "formation": "",
+                "formation": "4-4-2",
                 "confirmed": false,
-                "starters": null,
-                "subs": null
+                "lineup_type": "lastStarting11",
+                "coach": {
+                  "name": "Luis Carrión"
+                },
+                "starters": [
+                  {
+                    "player_id": "p_00YcB9",
+                    "name": "Raúl Fernández",
+                    "shirt_number": "1",
+                    "position_id": 11,
+                    "is_captain": false,
+                    "pitch_x": 0.1,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_0ERCjT",
+                    "name": "Jorge Martinez",
+                    "shirt_number": "39",
+                    "position_id": 32,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_1lQUAn",
+                    "name": "Rubén Pulido",
+                    "shirt_number": "4",
+                    "position_id": 34,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_0Ugs3J",
+                    "name": "Javi Montero",
+                    "shirt_number": "3",
+                    "position_id": 36,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_38h0bJ",
+                    "name": "Naim García",
+                    "shirt_number": "11",
+                    "position_id": 38,
+                    "is_captain": true,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_3aNRO3",
+                    "name": "Patrick Soko",
+                    "shirt_number": "19",
+                    "position_id": 72,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_1UhX4W",
+                    "name": "Yassine Kechta",
+                    "shirt_number": "8",
+                    "position_id": 74,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_0euQfm",
+                    "name": "Zico Buurmeester",
+                    "shirt_number": "10",
+                    "position_id": 76,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_1j8zIF",
+                    "name": "Dani Rodríguez",
+                    "shirt_number": "14",
+                    "position_id": 78,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_4JUll7",
+                    "name": "Álex Millán",
+                    "shirt_number": "9",
+                    "position_id": 104,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.7
+                  },
+                  {
+                    "player_id": "p_0luZKU",
+                    "name": "Unax del Cura",
+                    "shirt_number": "16",
+                    "position_id": 106,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.3
+                  }
+                ],
+                "subs": [
+                  {
+                    "player_id": "p_4Ufbda",
+                    "name": "Luca Zidane",
+                    "shirt_number": "13",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1sXOtF",
+                    "name": "Nico Lozano",
+                    "shirt_number": "31",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2KKFXq",
+                    "name": "Diego Pérez",
+                    "shirt_number": "40",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0UHqNj",
+                    "name": "Marvel",
+                    "shirt_number": "2",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_4f4sds",
+                    "name": "Álvaro Tejero",
+                    "shirt_number": "23",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0bzzkX",
+                    "name": "Enric Franquesa",
+                    "shirt_number": "15",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3vI5o4",
+                    "name": "Ignasi Miquel",
+                    "shirt_number": "5",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2iMNfQ",
+                    "name": "Miguel Atienza",
+                    "shirt_number": "20",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_4cO8v6",
+                    "name": "Jorge Herrero",
+                    "shirt_number": "33",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0ptdM1",
+                    "name": "Álex Sancris",
+                    "shirt_number": "22",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_4Nq4d7",
+                    "name": "Álvaro Morata",
+                    "shirt_number": "21",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1hK8GB",
+                    "name": "Suleiman El Haddadi",
+                    "shirt_number": "32",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  }
+                ]
               },
               "away": {
-                "formation": "",
+                "formation": "4-4-2",
                 "confirmed": false,
-                "starters": null,
-                "subs": null
+                "lineup_type": "lastStarting11",
+                "coach": {
+                  "name": "Sergio Francisco"
+                },
+                "starters": [
+                  {
+                    "player_id": "p_2AfaEF",
+                    "name": "Ander Cantero",
+                    "shirt_number": "13",
+                    "position_id": 11,
+                    "is_captain": false,
+                    "pitch_x": 0.1,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_3mtbku",
+                    "name": "Álex Lizancos",
+                    "shirt_number": "2",
+                    "position_id": 32,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_2rHOsu",
+                    "name": "Oier Luengo",
+                    "shirt_number": "15",
+                    "position_id": 34,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_3ERtA2",
+                    "name": "Saúl del Cerro",
+                    "shirt_number": "18",
+                    "position_id": 36,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_0RTwte",
+                    "name": "Brais Martínez",
+                    "shirt_number": "22",
+                    "position_id": 38,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_2BGQRU",
+                    "name": "Alberto Dadie",
+                    "shirt_number": "23",
+                    "position_id": 72,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_35jLlA",
+                    "name": "Unai Vencedor",
+                    "shirt_number": "12",
+                    "position_id": 74,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_22KZRj",
+                    "name": "Pablo Galdames",
+                    "shirt_number": "4",
+                    "position_id": 76,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_3QYs6p",
+                    "name": "Víctor Mollejo",
+                    "shirt_number": "11",
+                    "position_id": 78,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_44hg2F",
+                    "name": "Álex Forés",
+                    "shirt_number": "9",
+                    "position_id": 104,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.7
+                  },
+                  {
+                    "player_id": "p_2j5BQW",
+                    "name": "Curro Sánchez",
+                    "shirt_number": "16",
+                    "position_id": 106,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.3
+                  }
+                ],
+                "subs": [
+                  {
+                    "player_id": "p_2NmKV5",
+                    "name": "Bruno Iribarne",
+                    "shirt_number": "1",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_051VlP",
+                    "name": "Marc Monedero",
+                    "shirt_number": "30",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3VwBKW",
+                    "name": "Ignasi Vilarrasa",
+                    "shirt_number": "3",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_434BMc",
+                    "name": "Iván Martínez",
+                    "shirt_number": "36",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3wSjK2",
+                    "name": "Sergio González",
+                    "shirt_number": "6",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0j0qUz",
+                    "name": "Fermín García",
+                    "shirt_number": "21",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_4XkRF5",
+                    "name": "José Gragera",
+                    "shirt_number": "20",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3InREa",
+                    "name": "Marcelo Expósito",
+                    "shirt_number": "5",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3CPvzE",
+                    "name": "Mario Cantero",
+                    "shirt_number": "17",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1GPh2O",
+                    "name": "Irian Ribas",
+                    "shirt_number": "31",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_46DzoY",
+                    "name": "Javi Llabrés",
+                    "shirt_number": "19",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1nHdAK",
+                    "name": "Kévin Appin",
+                    "shirt_number": "10",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  }
+                ]
               }
             }
           },
@@ -23320,6 +23145,1821 @@
                 "id": "t_3Xc6B2",
                 "name": "ADT",
                 "image_url": "https://cdn.pitchapi.dev/images/teams/16c456cb07e5e98152e14de2913dd412b1e1c19f0fdc74d4d74c0468520f7165.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_4QHczv",
+        "league": {
+          "id": "l_3CB6qX",
+          "name": "Saudi First Division",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/6dd6a1b82976ed2c4532c968d82d5ea12ac50b607156e9c46c807187bdea72da.webp"
+        },
+        "home_team": {
+          "id": "t_17r1N0",
+          "name": "Al-Adalah",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/b93937c8221ebb6bea88f23c230429a912b591234d004d243666e54533cc6c9f.webp"
+        },
+        "away_team": {
+          "id": "t_3Fgh9T",
+          "name": "Al-Orobah FC",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/c87e6c5d43e8a6259a9b4e57fc2d42548090a61d2e128a4364fd20fba351d0c4.webp"
+        },
+        "time_utc": "2026-11-18T14:30:00Z",
+        "status": "not_started",
+        "score_home": 0,
+        "score_away": 0,
+        "date": "2026-11-18",
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-09-20",
+              "opponent": "Damac FC",
+              "home": false,
+              "score_for": 2,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-12",
+              "opponent": "Al Anwar",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-20",
+              "opponent": "Al Akhdoud",
+              "home": false,
+              "score_for": 3,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-27",
+              "opponent": "Al Jeel",
+              "home": true,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-11-01",
+              "opponent": "Jeddah",
+              "home": false,
+              "score_for": 2,
+              "score_against": 2,
+              "result": "D"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-09-15",
+              "opponent": "Al Jeel",
+              "home": true,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-09-20",
+              "opponent": "Al Jabalain",
+              "home": false,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-20",
+              "opponent": "Al Bukayriyah",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-26",
+              "opponent": "Al-Ula FC",
+              "home": false,
+              "score_for": 1,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-11-02",
+              "opponent": "Al Anwar",
+              "home": true,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_4QHczv",
+              "league": {
+                "id": "l_3CB6qX",
+                "name": "Saudi First Division",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/6dd6a1b82976ed2c4532c968d82d5ea12ac50b607156e9c46c807187bdea72da.webp"
+              },
+              "season": "2026/2027",
+              "home_team": {
+                "id": "t_17r1N0",
+                "name": "Al-Adalah",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b93937c8221ebb6bea88f23c230429a912b591234d004d243666e54533cc6c9f.webp"
+              },
+              "away_team": {
+                "id": "t_3Fgh9T",
+                "name": "Al-Orobah FC",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c87e6c5d43e8a6259a9b4e57fc2d42548090a61d2e128a4364fd20fba351d0c4.webp"
+              },
+              "date": "2026-11-18",
+              "time_utc": "2026-11-18T14:30:00Z",
+              "status": "not_started",
+              "score_home": 0,
+              "score_away": 0,
+              "round_name": "11",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": "Hajer Club Stadium"
+            }
+          },
+          "stats": {
+            "available": true,
+            "data": {
+              "match_id": "m_4QHczv",
+              "home_team": {
+                "id": "t_17r1N0",
+                "name": "Al-Adalah",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b93937c8221ebb6bea88f23c230429a912b591234d004d243666e54533cc6c9f.webp"
+              },
+              "away_team": {
+                "id": "t_3Fgh9T",
+                "name": "Al-Orobah FC",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c87e6c5d43e8a6259a9b4e57fc2d42548090a61d2e128a4364fd20fba351d0c4.webp"
+              },
+              "periods": []
+            }
+          },
+          "shots": {
+            "available": true,
+            "data": {
+              "match_id": "m_4QHczv",
+              "periods": null
+            }
+          },
+          "players": {
+            "available": true,
+            "data": []
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_4QHczv",
+              "home_team": {
+                "id": "t_17r1N0",
+                "name": "Al-Adalah",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b93937c8221ebb6bea88f23c230429a912b591234d004d243666e54533cc6c9f.webp"
+              },
+              "away_team": {
+                "id": "t_3Fgh9T",
+                "name": "Al-Orobah FC",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c87e6c5d43e8a6259a9b4e57fc2d42548090a61d2e128a4364fd20fba351d0c4.webp"
+              },
+              "home": {
+                "formation": "3-5-2",
+                "confirmed": false,
+                "lineup_type": "lastStarting11",
+                "coach": {
+                  "name": "Rodolfo Correia"
+                },
+                "starters": [
+                  {
+                    "player_id": "p_18hRzc",
+                    "name": "Mohammed Al Dawsari",
+                    "shirt_number": "17",
+                    "position_id": 11,
+                    "is_captain": false,
+                    "pitch_x": 0.1,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_4DQwyU",
+                    "name": "Khalid Al Muzayil",
+                    "shirt_number": "89",
+                    "position_id": 33,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.79
+                  },
+                  {
+                    "player_id": "p_20IRUl",
+                    "name": "André Teixeira",
+                    "shirt_number": "4",
+                    "position_id": 35,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_1Gomu1",
+                    "name": "Ahmed Muwallad",
+                    "shirt_number": "70",
+                    "position_id": 37,
+                    "is_captain": false,
+                    "pitch_x": 0.36,
+                    "pitch_y": 0.21
+                  },
+                  {
+                    "player_id": "p_1wJL41",
+                    "name": "Abdullah Al Rashidi",
+                    "shirt_number": "19",
+                    "position_id": 71,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.89
+                  },
+                  {
+                    "player_id": "p_3aBEeS",
+                    "name": "Hussain Al Nattar",
+                    "shirt_number": "96",
+                    "position_id": 73,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.7
+                  },
+                  {
+                    "player_id": "p_0h4ds4",
+                    "name": "Khalid Hamithi",
+                    "shirt_number": "16",
+                    "position_id": 75,
+                    "is_captain": true,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_09cuQo",
+                    "name": "David Tijanić",
+                    "shirt_number": "43",
+                    "position_id": 77,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.31
+                  },
+                  {
+                    "player_id": "p_1otJJO",
+                    "name": "Salman Al Omaish",
+                    "shirt_number": "27",
+                    "position_id": 79,
+                    "is_captain": false,
+                    "pitch_x": 0.61,
+                    "pitch_y": 0.11
+                  },
+                  {
+                    "player_id": "p_3g5SiT",
+                    "name": "Ali Al Abbad",
+                    "shirt_number": "6",
+                    "position_id": 104,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.7
+                  },
+                  {
+                    "player_id": "p_4SIXpV",
+                    "name": "Emmanuel Avornyo",
+                    "shirt_number": "80",
+                    "position_id": 106,
+                    "is_captain": false,
+                    "pitch_x": 0.87,
+                    "pitch_y": 0.3
+                  }
+                ],
+                "subs": [
+                  {
+                    "player_id": "p_4arJ3A",
+                    "name": "Mohammed Al Beladi",
+                    "shirt_number": "13",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_212amq",
+                    "name": "Mohammed Al Saeed",
+                    "shirt_number": "18",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_0zJdyg",
+                    "name": "Mohammed Al Hejji",
+                    "shirt_number": "26",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2KWWta",
+                    "name": "Sultan Faqihi",
+                    "shirt_number": "14",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1ebeo4",
+                    "name": "Hassan Al Mohammed Saleh",
+                    "shirt_number": "15",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1adPkt",
+                    "name": "Amar Al Basha",
+                    "shirt_number": "23",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2jpdwN",
+                    "name": "Ali Al Zaqan",
+                    "shirt_number": "95",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3g5SiT",
+                    "name": "Abdullah Al Khalifa",
+                    "shirt_number": "24",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  }
+                ]
+              },
+              "away": {
+                "formation": "4-1-4-1",
+                "confirmed": false,
+                "lineup_type": "lastStarting11",
+                "coach": {
+                  "name": "Željko Petrović"
+                },
+                "starters": [
+                  {
+                    "player_id": "p_1JSiQ8",
+                    "name": "Hatem Al Juhani",
+                    "shirt_number": "26",
+                    "position_id": 11,
+                    "is_captain": false,
+                    "pitch_x": 0.1,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_2pJQDg",
+                    "name": "Ammar Al Harfi",
+                    "shirt_number": "13",
+                    "position_id": 32,
+                    "is_captain": false,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_1oHNB4",
+                    "name": "Hamed Al Maghati",
+                    "shirt_number": "11",
+                    "position_id": 34,
+                    "is_captain": true,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_4QVtRL",
+                    "name": "Mohammed Krishan",
+                    "shirt_number": "5",
+                    "position_id": 36,
+                    "is_captain": false,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_3ExMc4",
+                    "name": "Ali Al Sultan",
+                    "shirt_number": "66",
+                    "position_id": 38,
+                    "is_captain": false,
+                    "pitch_x": 0.29,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_4TIFN5",
+                    "name": "Abdulaziz Al Harabi",
+                    "shirt_number": "6",
+                    "position_id": 65,
+                    "is_captain": false,
+                    "pitch_x": 0.49,
+                    "pitch_y": 0.5
+                  },
+                  {
+                    "player_id": "p_2sX9Lo",
+                    "name": "Hisham Al Dubais",
+                    "shirt_number": "7",
+                    "position_id": 82,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.88
+                  },
+                  {
+                    "player_id": "p_2kwNfH",
+                    "name": "Fahad Al Rashidi",
+                    "shirt_number": "80",
+                    "position_id": 84,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.63
+                  },
+                  {
+                    "player_id": "p_22IMn1",
+                    "name": "Khaled Eid",
+                    "shirt_number": "8",
+                    "position_id": 86,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.38
+                  },
+                  {
+                    "player_id": "p_3ZIMT0",
+                    "name": "Abdellah Zoubir",
+                    "shirt_number": "10",
+                    "position_id": 88,
+                    "is_captain": false,
+                    "pitch_x": 0.68,
+                    "pitch_y": 0.13
+                  },
+                  {
+                    "player_id": "p_1g7IIu",
+                    "name": "Famara Diédhiou",
+                    "shirt_number": "9",
+                    "position_id": 115,
+                    "is_captain": false,
+                    "pitch_x": 0.89,
+                    "pitch_y": 0.5
+                  }
+                ],
+                "subs": [
+                  {
+                    "player_id": "p_1VHQLH",
+                    "name": "Rafi Al Ruwaili",
+                    "shirt_number": "1",
+                    "position_id": 0,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3Rxmvv",
+                    "name": "Loay Al Shahrani",
+                    "shirt_number": "24",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1THCqV",
+                    "name": "Faris Al Zubaidi",
+                    "shirt_number": "16",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3uA3h9",
+                    "name": "Rabie Hawsawi",
+                    "shirt_number": "27",
+                    "position_id": 1,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_2MnRVV",
+                    "name": "Faraj Al Rashed",
+                    "shirt_number": "18",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_1tRv6R",
+                    "name": "Omar Al Sharari",
+                    "shirt_number": "19",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3g5SiT",
+                    "name": "Mohammed Abdulaziz\tAl Mohaini",
+                    "shirt_number": "14",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3g5SiT",
+                    "name": "Qassem Al Hussain",
+                    "shirt_number": "28",
+                    "position_id": 2,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  },
+                  {
+                    "player_id": "p_3g5SiT",
+                    "name": "Abdullah Othman Abaa Al Khail",
+                    "shirt_number": "20",
+                    "position_id": 3,
+                    "is_captain": false,
+                    "pitch_x": 0,
+                    "pitch_y": 0
+                  }
+                ]
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_4QHczv",
+              "home_team": {
+                "id": "t_17r1N0",
+                "name": "Al-Adalah",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b93937c8221ebb6bea88f23c230429a912b591234d004d243666e54533cc6c9f.webp"
+              },
+              "away_team": {
+                "id": "t_3Fgh9T",
+                "name": "Al-Orobah FC",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c87e6c5d43e8a6259a9b4e57fc2d42548090a61d2e128a4364fd20fba351d0c4.webp"
+              },
+              "home_wins": 0,
+              "draws": 1,
+              "away_wins": 1,
+              "total_matches": 2,
+              "recent_matches": [
+                {
+                  "time_utc": "2026-02-14T13:05:00.000Z",
+                  "home": {
+                    "id": "t_3Fgh9T",
+                    "name": "Al-Orobah FC",
+                    "image_url": null
+                  },
+                  "away": {
+                    "id": "t_17r1N0",
+                    "name": "Al-Adalah",
+                    "image_url": null
+                  },
+                  "score_home": 2,
+                  "score_away": 2,
+                  "finished": true
+                },
+                {
+                  "time_utc": "2025-10-20T14:50:00.000Z",
+                  "home": {
+                    "id": "t_17r1N0",
+                    "name": "Al-Adalah",
+                    "image_url": null
+                  },
+                  "away": {
+                    "id": "t_3Fgh9T",
+                    "name": "Al-Orobah FC",
+                    "image_url": null
+                  },
+                  "score_home": 1,
+                  "score_away": 4,
+                  "finished": true
+                }
+              ]
+            }
+          },
+          "events": {
+            "available": true,
+            "data": {
+              "match_id": "m_4QHczv",
+              "events": []
+            }
+          },
+          "advanced": {
+            "available": false,
+            "http_status": 404,
+            "reason": "Dato non pubblicato o non disponibile per questa partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "http_status": 404,
+            "reason": "Dato non pubblicato o non disponibile per questa partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "http_status": 404,
+            "reason": "Dato non pubblicato o non disponibile per questa partita."
+          },
+          "momentum": {
+            "available": true,
+            "data": {
+              "match_id": "m_4QHczv",
+              "points": []
+            }
+          },
+          "players_halves": {
+            "available": false,
+            "http_status": 404,
+            "reason": "Dato non pubblicato o non disponibile per questa partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "http_status": 404,
+            "reason": "Dato non pubblicato o non disponibile per questa partita."
+          }
+        }
+      },
+      {
+        "id": "m_2eAsEf",
+        "league": {
+          "id": "l_3uNwVX",
+          "name": "Liga 1",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/8a4b76b1bf452af6515e344a6b8d667b5f850eafe8879798a97a4ac37a5bb4cc.webp"
+        },
+        "home_team": {
+          "id": "t_13UHVn",
+          "name": "Alianza Atlético",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/3478838d097a68a258c3c8bc010827311876b9721b82cc0a53ce59871d3ac2e8.webp"
+        },
+        "away_team": {
+          "id": "t_4UYS4d",
+          "name": "Melgar",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/bb2386c345ac4c277cc3fe071a1485075568c11b4df106199cb16608ce654189.webp"
+        },
+        "time_utc": "2026-11-18T20:00:00Z",
+        "status": "not_started",
+        "score_home": null,
+        "score_away": null,
+        "date": "2026-11-18",
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-18",
+              "opponent": "Universitario",
+              "home": true,
+              "score_for": 1,
+              "score_against": 4,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "Sport Huancayo",
+              "home": false,
+              "score_for": 1,
+              "score_against": 4,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-28",
+              "opponent": "Deportivo Garcilaso",
+              "home": true,
+              "score_for": 3,
+              "score_against": 2,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-31",
+              "opponent": "Juan Pablo II College",
+              "home": true,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "FC Cajamarca",
+              "home": false,
+              "score_for": 0,
+              "score_against": 2,
+              "result": "L"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-17",
+              "opponent": "Deportivo Garcilaso",
+              "home": true,
+              "score_for": 4,
+              "score_against": 2,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-23",
+              "opponent": "UTC Cajamarca",
+              "home": false,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-30",
+              "opponent": "Comerciantes Unidos",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-02",
+              "opponent": "Sport Huancayo",
+              "home": false,
+              "score_for": 0,
+              "score_against": 2,
+              "result": "L"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Juan Pablo II College",
+              "home": true,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_2eAsEf",
+              "league": {
+                "id": "l_3uNwVX",
+                "name": "Liga 1",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/8a4b76b1bf452af6515e344a6b8d667b5f850eafe8879798a97a4ac37a5bb4cc.webp"
+              },
+              "season": "2026",
+              "home_team": {
+                "id": "t_13UHVn",
+                "name": "Alianza Atlético",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/3478838d097a68a258c3c8bc010827311876b9721b82cc0a53ce59871d3ac2e8.webp"
+              },
+              "away_team": {
+                "id": "t_4UYS4d",
+                "name": "Melgar",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/bb2386c345ac4c277cc3fe071a1485075568c11b4df106199cb16608ce654189.webp"
+              },
+              "date": "2026-11-18",
+              "time_utc": "2026-11-18T20:00:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": null,
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_2eAsEf",
+              "home_team": {
+                "id": "t_13UHVn",
+                "name": "Alianza Atlético",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/3478838d097a68a258c3c8bc010827311876b9721b82cc0a53ce59871d3ac2e8.webp"
+              },
+              "away_team": {
+                "id": "t_4UYS4d",
+                "name": "Melgar",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/bb2386c345ac4c277cc3fe071a1485075568c11b4df106199cb16608ce654189.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_2eAsEf",
+              "home_team": {
+                "id": "t_13UHVn",
+                "name": "Alianza Atlético",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/3478838d097a68a258c3c8bc010827311876b9721b82cc0a53ce59871d3ac2e8.webp"
+              },
+              "away_team": {
+                "id": "t_4UYS4d",
+                "name": "Melgar",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/bb2386c345ac4c277cc3fe071a1485075568c11b4df106199cb16608ce654189.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_4Ny7vk",
+        "league": {
+          "id": "l_1D8Xrl",
+          "name": "Serie A",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+        },
+        "home_team": {
+          "id": "t_1xkjGG",
+          "name": "Coritiba",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/1019e0bee642c42e7315e71d42e5ac339b9ee292674df818c5b9bf603ee21c83.webp"
+        },
+        "away_team": {
+          "id": "t_2S65sJ",
+          "name": "Santos",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/357832fbbc816b28fbdcefb500f5fe35de728c0d7fcb8017ac2fcc0b50fb6d8c.webp"
+        },
+        "time_utc": "2026-11-18T22:30:00Z",
+        "status": "not_started",
+        "score_home": null,
+        "score_away": null,
+        "date": "2026-11-18",
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-12",
+              "opponent": "Botafogo",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "Atlético-MG",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-26",
+              "opponent": "Grêmio",
+              "home": true,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-31",
+              "opponent": "Vitória",
+              "home": true,
+              "score_for": 2,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-04",
+              "opponent": "Internacional",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-11",
+              "opponent": "Atlético-MG",
+              "home": false,
+              "score_for": 1,
+              "score_against": 2,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-18",
+              "opponent": "Fluminense",
+              "home": false,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-25",
+              "opponent": "Bahia",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-28",
+              "opponent": "Palmeiras",
+              "home": true,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-02",
+              "opponent": "RB Bragantino",
+              "home": false,
+              "score_for": 1,
+              "score_against": 2,
+              "result": "L"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_4Ny7vk",
+              "league": {
+                "id": "l_1D8Xrl",
+                "name": "Serie A",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+              },
+              "season": "2026",
+              "home_team": {
+                "id": "t_1xkjGG",
+                "name": "Coritiba",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/1019e0bee642c42e7315e71d42e5ac339b9ee292674df818c5b9bf603ee21c83.webp"
+              },
+              "away_team": {
+                "id": "t_2S65sJ",
+                "name": "Santos",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/357832fbbc816b28fbdcefb500f5fe35de728c0d7fcb8017ac2fcc0b50fb6d8c.webp"
+              },
+              "date": "2026-11-18",
+              "time_utc": "2026-11-18T22:30:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "35",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_4Ny7vk",
+              "home_team": {
+                "id": "t_1xkjGG",
+                "name": "Coritiba",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/1019e0bee642c42e7315e71d42e5ac339b9ee292674df818c5b9bf603ee21c83.webp"
+              },
+              "away_team": {
+                "id": "t_2S65sJ",
+                "name": "Santos",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/357832fbbc816b28fbdcefb500f5fe35de728c0d7fcb8017ac2fcc0b50fb6d8c.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_4Ny7vk",
+              "home_team": {
+                "id": "t_1xkjGG",
+                "name": "Coritiba",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/1019e0bee642c42e7315e71d42e5ac339b9ee292674df818c5b9bf603ee21c83.webp"
+              },
+              "away_team": {
+                "id": "t_2S65sJ",
+                "name": "Santos",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/357832fbbc816b28fbdcefb500f5fe35de728c0d7fcb8017ac2fcc0b50fb6d8c.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_1yoMGk",
+        "league": {
+          "id": "l_1D8Xrl",
+          "name": "Serie A",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+        },
+        "home_team": {
+          "id": "t_0h77bm",
+          "name": "Remo",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/862993082329df4f00f997d7e0b6994705faac70435f6be05067d43b22bf77a8.webp"
+        },
+        "away_team": {
+          "id": "t_27VAuc",
+          "name": "Chapecoense",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/b14b1d665c13809779e058a06be8a37eb0862430a2a8b8c825ad89e262abf080.webp"
+        },
+        "time_utc": "2026-11-18T23:00:00Z",
+        "status": "not_started",
+        "score_home": null,
+        "score_away": null,
+        "date": "2026-11-18",
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-10",
+              "opponent": "Vasco da Gama",
+              "home": false,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-18",
+              "opponent": "RB Bragantino",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-23",
+              "opponent": "Cruzeiro",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-29",
+              "opponent": "Botafogo",
+              "home": true,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-05",
+              "opponent": "Palmeiras",
+              "home": false,
+              "score_for": 1,
+              "score_against": 6,
+              "result": "L"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-12",
+              "opponent": "Athletico Paranaense",
+              "home": true,
+              "score_for": 1,
+              "score_against": 4,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "Botafogo",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "Fluminense",
+              "home": true,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-28",
+              "opponent": "RB Bragantino",
+              "home": false,
+              "score_for": 0,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-11-03",
+              "opponent": "Mirassol",
+              "home": true,
+              "score_for": 1,
+              "score_against": 2,
+              "result": "L"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_1yoMGk",
+              "league": {
+                "id": "l_1D8Xrl",
+                "name": "Serie A",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+              },
+              "season": "2026",
+              "home_team": {
+                "id": "t_0h77bm",
+                "name": "Remo",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/862993082329df4f00f997d7e0b6994705faac70435f6be05067d43b22bf77a8.webp"
+              },
+              "away_team": {
+                "id": "t_27VAuc",
+                "name": "Chapecoense",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b14b1d665c13809779e058a06be8a37eb0862430a2a8b8c825ad89e262abf080.webp"
+              },
+              "date": "2026-11-18",
+              "time_utc": "2026-11-18T23:00:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "35",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_1yoMGk",
+              "home_team": {
+                "id": "t_0h77bm",
+                "name": "Remo",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/862993082329df4f00f997d7e0b6994705faac70435f6be05067d43b22bf77a8.webp"
+              },
+              "away_team": {
+                "id": "t_27VAuc",
+                "name": "Chapecoense",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b14b1d665c13809779e058a06be8a37eb0862430a2a8b8c825ad89e262abf080.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_1yoMGk",
+              "home_team": {
+                "id": "t_0h77bm",
+                "name": "Remo",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/862993082329df4f00f997d7e0b6994705faac70435f6be05067d43b22bf77a8.webp"
+              },
+              "away_team": {
+                "id": "t_27VAuc",
+                "name": "Chapecoense",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b14b1d665c13809779e058a06be8a37eb0862430a2a8b8c825ad89e262abf080.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_0AYEfd",
+        "league": {
+          "id": "l_1D8Xrl",
+          "name": "Serie A",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+        },
+        "home_team": {
+          "id": "t_1E0X8D",
+          "name": "Flamengo",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/dbae99b6a7fec0743ff9bb1502f45a9c12c2b21c6faa994f024ba22c46dc5797.webp"
+        },
+        "away_team": {
+          "id": "t_2PEbuH",
+          "name": "Athletico Paranaense",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/2b5a8e512551eab2ae50401e82cd6e7e923899a5e7e27dc41008d0a2eb9e512e.webp"
+        },
+        "time_utc": "2026-11-18T23:30:00Z",
+        "status": "not_started",
+        "score_home": null,
+        "score_away": null,
+        "date": "2026-11-18",
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-11",
+              "opponent": "Fluminense",
+              "home": true,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-18",
+              "opponent": "Bahia",
+              "home": false,
+              "score_for": 3,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-26",
+              "opponent": "Atlético-MG",
+              "home": true,
+              "score_for": 3,
+              "score_against": 2,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-29",
+              "opponent": "Vasco da Gama",
+              "home": false,
+              "score_for": 4,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-04",
+              "opponent": "Grêmio",
+              "home": true,
+              "score_for": 3,
+              "score_against": 1,
+              "result": "W"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-12",
+              "opponent": "Chapecoense",
+              "home": false,
+              "score_for": 4,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "Palmeiras",
+              "home": true,
+              "score_for": 0,
+              "score_against": 2,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "Vitória",
+              "home": false,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-30",
+              "opponent": "Grêmio",
+              "home": false,
+              "score_for": 0,
+              "score_against": 2,
+              "result": "L"
+            },
+            {
+              "date": "2026-11-04",
+              "opponent": "Vasco da Gama",
+              "home": true,
+              "score_for": 1,
+              "score_against": 3,
+              "result": "L"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_0AYEfd",
+              "league": {
+                "id": "l_1D8Xrl",
+                "name": "Serie A",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+              },
+              "season": "2026",
+              "home_team": {
+                "id": "t_1E0X8D",
+                "name": "Flamengo",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/dbae99b6a7fec0743ff9bb1502f45a9c12c2b21c6faa994f024ba22c46dc5797.webp"
+              },
+              "away_team": {
+                "id": "t_2PEbuH",
+                "name": "Athletico Paranaense",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/2b5a8e512551eab2ae50401e82cd6e7e923899a5e7e27dc41008d0a2eb9e512e.webp"
+              },
+              "date": "2026-11-18",
+              "time_utc": "2026-11-18T23:30:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "35",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_0AYEfd",
+              "home_team": {
+                "id": "t_1E0X8D",
+                "name": "Flamengo",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/dbae99b6a7fec0743ff9bb1502f45a9c12c2b21c6faa994f024ba22c46dc5797.webp"
+              },
+              "away_team": {
+                "id": "t_2PEbuH",
+                "name": "Athletico Paranaense",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/2b5a8e512551eab2ae50401e82cd6e7e923899a5e7e27dc41008d0a2eb9e512e.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_0AYEfd",
+              "home_team": {
+                "id": "t_1E0X8D",
+                "name": "Flamengo",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/dbae99b6a7fec0743ff9bb1502f45a9c12c2b21c6faa994f024ba22c46dc5797.webp"
+              },
+              "away_team": {
+                "id": "t_2PEbuH",
+                "name": "Athletico Paranaense",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/2b5a8e512551eab2ae50401e82cd6e7e923899a5e7e27dc41008d0a2eb9e512e.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_33Sg8S",
+        "league": {
+          "id": "l_1D8Xrl",
+          "name": "Serie A",
+          "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+        },
+        "home_team": {
+          "id": "t_3npCjp",
+          "name": "Cruzeiro",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/631d773f8c33e46ce95047cade86427c9dae86f10e863139acd2f90b9946d06d.webp"
+        },
+        "away_team": {
+          "id": "t_1RYE8n",
+          "name": "Palmeiras",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/f7146c35a9610bbfc3fe72eb91b08da8b7a9d8a1d8b68cb823c0171251a93315.webp"
+        },
+        "time_utc": "2026-11-18T23:30:00Z",
+        "status": "not_started",
+        "score_home": null,
+        "score_away": null,
+        "date": "2026-11-18",
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-13",
+              "opponent": "RB Bragantino",
+              "home": false,
+              "score_for": 2,
+              "score_against": 4,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-18",
+              "opponent": "Grêmio",
+              "home": false,
+              "score_for": 4,
+              "score_against": 2,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-23",
+              "opponent": "Remo",
+              "home": true,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-29",
+              "opponent": "Atlético-MG",
+              "home": false,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-06",
+              "opponent": "Bahia",
+              "home": true,
+              "score_for": 3,
+              "score_against": 2,
+              "result": "W"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-11",
+              "opponent": "Corinthians",
+              "home": true,
+              "score_for": 4,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "Athletico Paranaense",
+              "home": false,
+              "score_for": 2,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "RB Bragantino",
+              "home": true,
+              "score_for": 2,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-28",
+              "opponent": "Santos",
+              "home": false,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-05",
+              "opponent": "Remo",
+              "home": true,
+              "score_for": 6,
+              "score_against": 1,
+              "result": "W"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_33Sg8S",
+              "league": {
+                "id": "l_1D8Xrl",
+                "name": "Serie A",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/630cd646d0abd39143e0eeed3d142dcd58a49c7574517a2d71dce8d3dfe99553.webp"
+              },
+              "season": "2026",
+              "home_team": {
+                "id": "t_3npCjp",
+                "name": "Cruzeiro",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/631d773f8c33e46ce95047cade86427c9dae86f10e863139acd2f90b9946d06d.webp"
+              },
+              "away_team": {
+                "id": "t_1RYE8n",
+                "name": "Palmeiras",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/f7146c35a9610bbfc3fe72eb91b08da8b7a9d8a1d8b68cb823c0171251a93315.webp"
+              },
+              "date": "2026-11-18",
+              "time_utc": "2026-11-18T23:30:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "35",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_33Sg8S",
+              "home_team": {
+                "id": "t_3npCjp",
+                "name": "Cruzeiro",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/631d773f8c33e46ce95047cade86427c9dae86f10e863139acd2f90b9946d06d.webp"
+              },
+              "away_team": {
+                "id": "t_1RYE8n",
+                "name": "Palmeiras",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/f7146c35a9610bbfc3fe72eb91b08da8b7a9d8a1d8b68cb823c0171251a93315.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_33Sg8S",
+              "home_team": {
+                "id": "t_3npCjp",
+                "name": "Cruzeiro",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/631d773f8c33e46ce95047cade86427c9dae86f10e863139acd2f90b9946d06d.webp"
+              },
+              "away_team": {
+                "id": "t_1RYE8n",
+                "name": "Palmeiras",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/f7146c35a9610bbfc3fe72eb91b08da8b7a9d8a1d8b68cb823c0171251a93315.webp"
               },
               "home_wins": 0,
               "draws": 0,
