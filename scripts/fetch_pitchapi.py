@@ -126,7 +126,11 @@ for offset in range(7):
     print(f"Calendario {day}: {len(day_matches)} partite")
     for match in day_matches:
         match_id = match.get("id")
-        league_id = str((match.get("league") or {}).get("id") or "")
+        league_obj = match.get("league") or match.get("competition") or {}
+        league_id = str(
+            (league_obj.get("id") if isinstance(league_obj, dict) else None)
+            or match.get("league_id") or match.get("competition_id") or ""
+        )
         if match_id and league_id in selected_league_ids:
             match.setdefault("date", day)
             matches_by_id[match_id] = match
@@ -136,6 +140,35 @@ for offset in range(7):
 
 window_start = today_dt
 window_end = today_dt + timedelta(days=6)
+
+def parse_match_date(value):
+    """Converte date/time PitchAPI in una data UTC, anche come timestamp."""
+    if value is None or value == "":
+        return None
+    if isinstance(value, dict):
+        value = value.get("date") or value.get("datetime") or value.get("timestamp")
+        if value is None:
+            return None
+    if isinstance(value, (int, float)):
+        try:
+            seconds = value / 1000 if value > 10_000_000_000 else value
+            return datetime.fromtimestamp(seconds, timezone.utc).date()
+        except (OverflowError, OSError, ValueError):
+            return None
+    raw = str(value).strip()
+    if not raw:
+        return None
+    try:
+        parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if parsed.tzinfo is not None:
+            parsed = parsed.astimezone(timezone.utc)
+        return parsed.date()
+    except ValueError:
+        try:
+            return datetime.strptime(raw[:10], "%Y-%m-%d").date()
+        except ValueError:
+            return None
+
 league_schedule_errors = []
 league_schedules_checked = []
 # Recupera lo storico di ogni competizione presente nelle partite in calendario,
@@ -212,16 +245,11 @@ for league in leagues:
     for match in all_league_matches:
         # PitchAPI può restituire la data come YYYY-MM-DD oppure come
         # timestamp ISO completo. Usa anche time_utc come fallback.
-        match_date = match.get("date") or match.get("time_utc") or match.get("kickoff")
-        if not match_date:
+        match_date = (match.get("date") or match.get("time_utc") or match.get("kickoff")
+                      or match.get("start_time") or match.get("timestamp"))
+        parsed_date = parse_match_date(match_date)
+        if parsed_date is None:
             continue
-        try:
-            parsed_date = datetime.fromisoformat(str(match_date).replace("Z", "+00:00")).date()
-        except ValueError:
-            try:
-                parsed_date = datetime.strptime(str(match_date)[:10], "%Y-%m-%d").date()
-            except ValueError:
-                continue
         if window_start <= parsed_date <= window_end:
             match_id = match.get("id")
             if match_id:
