@@ -95,7 +95,7 @@ SUPPORTED_COMPETITIONS = [
     ({'eredivisie', 'dutch eredivisie'}, {'NED', 'NL', 'NLD', 'NETHERLANDS'}),
     ({'primeira liga', 'liga portugal', 'portuguese primeira liga'}, {'POR', 'PT', 'PRT', 'PORTUGAL'}),
     ({'championship', 'english championship', 'efl championship'}, {'ENG', 'GB', 'GBR', 'EN', 'ENGLAND', 'UNITED KINGDOM', 'UK'}),
-    ({'scottish premiership', 'scottish premier league'}, {'SCO', 'SCOTLAND', 'GB', 'GBR'}),
+    ({'scottish premiership', 'scottish premier league', 'premiership'}, {'SCO', 'SCOTLAND', 'GB', 'GBR'}),
 ]
 selected_league_ids = set()
 for league in leagues:
