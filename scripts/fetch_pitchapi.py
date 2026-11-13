@@ -107,6 +107,43 @@ for league in leagues:
                 selected_league_ids.add(str(league['id']))
             break
 print(f'Competizioni IA Sportiva riconosciute nel catalogo: {len(selected_league_ids)}')
+# Indici canonici: alcuni endpoint PitchAPI restituiscono ID lega diversi
+# oppure soltanto nome/paese nella scheda della partita.
+def norm_key(value):
+    return normalize_competition(value or "")
+
+catalogue_by_name_country = {}
+catalogue_by_name = {}
+for item in leagues:
+    item_id = str(item.get("id") or "")
+    if not item_id:
+        continue
+    key = (norm_key(item.get("name")), str(item.get("country_code") or "").strip().upper())
+    catalogue_by_name_country[key] = item_id
+    catalogue_by_name.setdefault(key[0], []).append(item_id)
+
+def resolve_match_league(match):
+    raw = match.get("league") or match.get("competition") or {}
+    raw = raw if isinstance(raw, dict) else {"name": raw}
+    raw_id = (raw.get("id") or match.get("league_id") or
+              match.get("competition_id") or match.get("tournament_id"))
+    if raw_id is not None and str(raw_id) in selected_league_ids:
+        return str(raw_id), raw
+    name = raw.get("name") or raw.get("league_name") or match.get("league_name") or match.get("competition_name")
+    country = (raw.get("country_code") or raw.get("country") or
+               match.get("country_code") or match.get("country") or "")
+    if isinstance(country, dict):
+        country = country.get("code") or country.get("name") or ""
+    name_key = norm_key(name)
+    country_key = str(country).strip().upper()
+    candidate = catalogue_by_name_country.get((name_key, country_key))
+    if candidate in selected_league_ids:
+        return candidate, raw
+    candidates = [value for value in catalogue_by_name.get(name_key, []) if value in selected_league_ids]
+    if len(candidates) == 1:
+        return candidates[0], raw
+    return None, raw
+
 
 today_dt = datetime.now(timezone.utc).date()
 today = today_dt.strftime("%Y-%m-%d")
@@ -126,13 +163,10 @@ for offset in range(7):
     print(f"Calendario {day}: {len(day_matches)} partite")
     for match in day_matches:
         match_id = match.get("id")
-        league_obj = match.get("league") or match.get("competition") or {}
-        league_id = str(
-            (league_obj.get("id") if isinstance(league_obj, dict) else None)
-            or match.get("league_id") or match.get("competition_id") or ""
-        )
-        if match_id and league_id in selected_league_ids:
+        league_id, league_obj = resolve_match_league(match)
+        if match_id and league_id:
             match.setdefault("date", day)
+            match["league"] = {**league_obj, "id": league_id}
             matches_by_id[match_id] = match
 
 # Integra anche i calendari stagionali delle competizioni prioritarie.
