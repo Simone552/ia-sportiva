@@ -210,13 +210,18 @@ for league in leagues:
     })
     league_matches_by_id[league_id] = played_matches
     for match in all_league_matches:
-        match_date = match.get("date")
+        # PitchAPI può restituire la data come YYYY-MM-DD oppure come
+        # timestamp ISO completo. Usa anche time_utc come fallback.
+        match_date = match.get("date") or match.get("time_utc") or match.get("kickoff")
         if not match_date:
             continue
         try:
-            parsed_date = datetime.strptime(match_date, "%Y-%m-%d").date()
+            parsed_date = datetime.fromisoformat(str(match_date).replace("Z", "+00:00")).date()
         except ValueError:
-            continue
+            try:
+                parsed_date = datetime.strptime(str(match_date)[:10], "%Y-%m-%d").date()
+            except ValueError:
+                continue
         if window_start <= parsed_date <= window_end:
             match_id = match.get("id")
             if match_id:
