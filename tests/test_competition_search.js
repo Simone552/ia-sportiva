@@ -33,7 +33,8 @@ const cases = [
   ["Bundesliga (DE)", {name:"Bundesliga",country_code:"DE"}, "Bundesliga", true, 4],
   ["Ligue 1 (FR)", {name:"Ligue 1",country_code:"FR"}, "Ligue 1", true, 5],
   ["Ligue 1 con paese errato", {name:"Ligue 1",country_code:"BR"}, "Ligue 1", false, 99],
-  ["Champions League internazionale", {name:"Champions League",country_code:"INT-2"}, "Champions League", true, 99]
+  ["Champions League internazionale", {name:"Champions League",country_code:"INT-2"}, "Champions League", true, 99],
+  ["Scottish Premiership nel catalogo PitchAPI", {name:"Premiership",country_code:"SCO"}, "Scottish Premiership", true, 99]
 ];
 for (const [label, league, query, expectedMatch, expectedRank] of cases) {
   assert.equal(api.competitionMatchesQuery(league, query), expectedMatch, label + ": filtro");
