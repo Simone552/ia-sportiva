@@ -1294,6 +1294,35 @@
         ]
       },
       {
+        "league": "Premiership",
+        "country_code": "SCO",
+        "season": "2026/2027",
+        "matches_in_season": 197,
+        "played_results": 74,
+        "sample_played": [
+          {
+            "date": "2026-07-31",
+            "time_utc": "2026-07-31T19:00:00Z",
+            "home_id": "t_1MaGFI",
+            "home_name": "Dundee United",
+            "away_id": "t_0TPUj3",
+            "away_name": "Rangers",
+            "score_home": 1,
+            "score_away": 1
+          },
+          {
+            "date": "2026-08-01",
+            "time_utc": "2026-08-01T14:00:00Z",
+            "home_id": "t_33JOEX",
+            "home_name": "Falkirk",
+            "away_id": "t_0DQtXp",
+            "away_name": "St. Mirren",
+            "score_home": 0,
+            "score_away": 2
+          }
+        ]
+      },
+      {
         "league": "Serie A",
         "country_code": "ITA",
         "season": "2026/2027",
@@ -1358,7 +1387,7 @@
       "matches_with_away_results": 0
     },
     "league_counts_in_calendar": {},
-    "fetched_at": "2026-11-13T18:24:53.997510+00:00",
+    "fetched_at": "2026-11-13T18:26:13.788689+00:00",
     "matches": []
   }
 }
