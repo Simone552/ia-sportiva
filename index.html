@@ -724,7 +724,7 @@ function renderPitchApiFixtures(matches){
   const {name,league,fixtures}=group;
   const rank=leaguePriority(league);
   const country=leagueCountryCode(league);
-  const displayName=nameCounts.get(name)>1&&country?name+' · '+country:name;
+  const displayName=country?name+' · '+country:name;
   const ordered=[...fixtures].sort((a,b)=>{
    const ta=a.time_utc?new Date(a.time_utc).getTime():Infinity;
    const tb=b.time_utc?new Date(b.time_utc).getTime():Infinity;
