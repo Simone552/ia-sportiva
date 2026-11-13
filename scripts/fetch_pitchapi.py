@@ -73,6 +73,41 @@ if leagues_error:
 else:
     print(f"Catalogo PitchAPI: {len(leagues)} leghe/competizioni")
 
+# Competizioni supportate da IA Sportiva: nome + Paese, mai il solo nome.
+def normalize_competition(value):
+    import re
+    import unicodedata
+    value = unicodedata.normalize('NFKD', str(value or '').casefold())
+    value = ''.join(char for char in value if not unicodedata.combining(char))
+    return re.sub(r'[^a-z0-9]+', ' ', value).strip()
+
+SUPPORTED_COMPETITIONS = [
+    ({'serie a', 'serie a enilive', 'serie a tim', 'italian serie a'}, {'ITA', 'IT', 'ITALY'}),
+    ({'serie b', 'serie bkt', 'italian serie b'}, {'ITA', 'IT', 'ITALY'}),
+    ({'serie c', 'serie c now', 'serie c girone a', 'serie c girone b', 'serie c girone c'}, {'ITA', 'IT', 'ITALY'}),
+    ({'premier league', 'english premier league', 'england premier league'}, {'ENG', 'GB', 'GBR', 'EN', 'ENGLAND', 'UNITED KINGDOM', 'UK'}),
+    ({'la liga', 'laliga', 'laliga ea sports', 'spanish la liga'}, {'ESP', 'ES', 'SPAIN'}),
+    ({'bundesliga', 'german bundesliga', 'germany bundesliga'}, {'GER', 'DE', 'DEU', 'GERMANY'}),
+    ({'ligue 1', 'french ligue 1', 'france ligue 1'}, {'FRA', 'FR', 'FRANCE'}),
+    ({'champions league', 'uefa champions league', 'ucl'}, None),
+    ({'europa league', 'uefa europa league', 'uel'}, None),
+    ({'conference league', 'uefa conference league', 'uecl'}, None),
+    ({'eredivisie', 'dutch eredivisie'}, {'NED', 'NL', 'NLD', 'NETHERLANDS'}),
+    ({'primeira liga', 'liga portugal', 'portuguese primeira liga'}, {'POR', 'PT', 'PRT', 'PORTUGAL'}),
+    ({'championship', 'english championship', 'efl championship'}, {'ENG', 'GB', 'GBR', 'EN', 'ENGLAND', 'UNITED KINGDOM', 'UK'}),
+    ({'scottish premiership', 'scottish premier league'}, {'SCO', 'SCOTLAND', 'GB', 'GBR'}),
+]
+selected_league_ids = set()
+for league in leagues:
+    league_name = normalize_competition(league.get('name'))
+    country_code = str(league.get('country_code') or '').strip().upper()
+    for aliases, countries in SUPPORTED_COMPETITIONS:
+        if league_name in {normalize_competition(alias) for alias in aliases} and (countries is None or country_code in countries):
+            if league.get('id') is not None:
+                selected_league_ids.add(str(league['id']))
+            break
+print(f'Competizioni IA Sportiva riconosciute nel catalogo: {len(selected_league_ids)}')
+
 today_dt = datetime.now(timezone.utc).date()
 today = today_dt.strftime("%Y-%m-%d")
 matches_by_id = {}
@@ -91,19 +126,14 @@ for offset in range(7):
     print(f"Calendario {day}: {len(day_matches)} partite")
     for match in day_matches:
         match_id = match.get("id")
-        if match_id:
+        league_id = str((match.get("league") or {}).get("id") or "")
+        if match_id and league_id in selected_league_ids:
             match.setdefault("date", day)
             matches_by_id[match_id] = match
 
 # Integra anche i calendari stagionali delle competizioni prioritarie.
 # L'endpoint per data resta la base; questo recupero colma eventuali partite mancanti.
-priority_competitions = {
-    ("Serie A", "ITA"),
-    ("Serie B", "ITA"),
-    ("Champions League", "INT-2"),
-    ("Europa League", "INT-2"),
-    ("Conference League", "INT-2"),
-}
+
 window_start = today_dt
 window_end = today_dt + timedelta(days=6)
 league_schedule_errors = []
@@ -119,16 +149,15 @@ calendar_league_ids = {
 priority_league_ids = {
     league.get("id")
     for league in leagues
-    if (league.get("name"), league.get("country_code")) in priority_competitions
-    and league.get("id")
+    if str(league.get("id")) in selected_league_ids and league.get("id")
 }
-league_ids_needed = calendar_league_ids | priority_league_ids
+league_ids_needed = priority_league_ids
 
 for league in leagues:
     league_id = league.get("id")
-    if not league_id or league_id not in league_ids_needed:
+    if not league_id or str(league_id) not in {str(value) for value in league_ids_needed}:
         continue
-    is_priority = (league.get("name"), league.get("country_code")) in priority_competitions
+    is_priority = str(league_id) in selected_league_ids
     seasons = league.get("seasons") or []
     if not seasons:
         continue
@@ -198,7 +227,10 @@ for league in leagues:
                 })
                 matches_by_id[match_id] = match
 
-matches = list(matches_by_id.values())
+matches = [
+    match for match in matches_by_id.values()
+    if str((match.get("league") or {}).get("id") or "") in selected_league_ids
+]
 
 # Normalizza sempre la competizione con il catalogo ufficiale PitchAPI.
 # Il solo nome non basta: Serie A esiste in più Paesi e non va confusa.
