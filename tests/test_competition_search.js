@@ -57,7 +57,7 @@ const fixtures = leagues.map((league,index)=>({
   time_utc:"2026-11-14T18:00:00Z",status:"not_started"
 }));
 const rendered = api.renderPitchApiFixtures(fixtures);
-const labels = ["Serie A · ITA","Premier League","LaLiga","Bundesliga","Ligue 1","Eredivisie","LaLiga2","Serie A · BRA"];
+const labels = ["Serie A · ITA","Premier League · GB","LaLiga · ES","Bundesliga · DE","Ligue 1 · FR","Eredivisie · NL","LaLiga2 · ES","Serie A · BRA"];
 const positions = labels.map(label=>rendered.indexOf("<strong>"+label+"</strong>"));
 assert.ok(positions.every(position=>position>=0), "Tutte le competizioni di test devono essere mostrate");
 assert.deepEqual([...positions].sort((a,b)=>a-b), positions, "I top 5 devono precedere gli altri; i restanti alfabetici");
