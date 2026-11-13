@@ -608,12 +608,13 @@ function renderPitchApiCoverage(root,matches){
  const errors=Array.isArray(root.priority_league_schedule_errors)?root.priority_league_schedule_errors:[];
  const catalogue=Array.isArray(root.leagues_catalogue)?root.leagues_catalogue:[];
  const counts=root.league_counts_in_calendar&&typeof root.league_counts_in_calendar==='object'?root.league_counts_in_calendar:{};
+ const topCatalogueRanks=new Set(catalogue.map(league=>leaguePriority(league)).filter(rank=>rank>=1&&rank<=5));
  const leagueNames=Object.keys(counts).sort((a,b)=>a.localeCompare(b,'it'));
  const leagueTags=leagueNames.map(name=>'<span class="coverage-league">'+esc(name)+' · '+Number(counts[name]||0)+'</span>').join('');
  const updated=root.fetched_at?new Date(root.fetched_at).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'}):'Orario non disponibile';
- const errorText=errors.length?'<div class="coverage-warning">Attenzione: '+errors.length+' calendari prioritari non sono stati letti correttamente. '+errors.map(e=>esc(typeof e==='string'?e:(e.league||e.error||JSON.stringify(e)))).join(' · ')+'</div>':'<span class="status">✓ Nessun errore nei calendari prioritari</span>';
+ const errorText=errors.length?'<div class="coverage-warning">Attenzione: '+errors.length+' calendari stagionali prioritari configurati non sono stati letti correttamente. '+errors.map(e=>esc(typeof e==='string'?e:(e.league||e.error||JSON.stringify(e)))).join(' · ')+'</div>':'<span class="status">✓ Nessun errore nei calendari stagionali prioritari configurati</span>';
  box.innerHTML='<div class="coverage-top"><strong>Copertura archivio e competizioni</strong><span class="pill">Aggiornato: '+esc(updated)+'</span></div>'+
- '<div class="coverage-kpis"><div class="coverage-kpi"><strong>'+matches.length+'</strong><span>Partite archiviate</span></div><div class="coverage-kpi"><strong>'+checked.length+'/5</strong><span>Calendari prioritari letti</span></div><div class="coverage-kpi"><strong>'+catalogue.length+'</strong><span>Competizioni nel catalogo</span></div></div>'+
+ '<div class="coverage-kpis"><div class="coverage-kpi"><strong>'+matches.length+'</strong><span>Partite archiviate</span></div><div class="coverage-kpi"><strong>'+topCatalogueRanks.size+'/5</strong><span>Campionati top 5 nel catalogo</span></div><div class="coverage-kpi"><strong>'+catalogue.length+'</strong><span>Competizioni nel catalogo</span></div></div>'+
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Calendari stagionali integrati</div><div class="coverage-leagues">'+(checked.length?checked.map(x=>'<span class="coverage-league">✓ '+esc(x.league)+' · '+esc(x.season)+'</span>').join(''):'<span class="muted">Nessun calendario stagionale confermato.</span>')+'</div></div>'+
  '<div><div class="muted" style="font-size:11px;margin-bottom:7px">Competizioni presenti nelle partite archiviate</div><div class="coverage-leagues">'+(leagueTags||'<span class="muted">Nessun conteggio disponibile.</span>')+'</div></div>'+errorText;
 }
@@ -636,6 +637,20 @@ const IA_COMPETITIONS=[
  {key:'championship',label:'Championship',country:'ENG',aliases:['championship','english championship','efl championship']},
  {key:'scottish-premiership',label:'Scottish Premiership',country:'SCO',aliases:['scottish premiership','scottish premier league']}
 ];
+const IA_COUNTRY_ALIASES={
+ ITA:['ITA','IT','ITALY'],
+ ENG:['ENG','GB','GBR','EN','ENGLAND','UNITED KINGDOM','UK'],
+ ESP:['ESP','ES','SPAIN'],
+ GER:['GER','DE','DEU','GERMANY'],
+ FRA:['FRA','FR','FRANCE'],
+ NED:['NED','NL','NLD','NETHERLANDS'],
+ POR:['POR','PT','PRT','PORTUGAL'],
+ SCO:['SCO','SCOTLAND','GB','GBR']
+};
+function countryMatchesCompetition(country,expectedCountry){
+ const code=String(country||'').trim().toUpperCase();
+ return Boolean(code&&(IA_COUNTRY_ALIASES[expectedCountry]||[expectedCountry]).includes(code));
+}
 function resolveCompetitionQuery(query){
  const q=teamKey(query);
  if(!q)return null;
@@ -649,12 +664,7 @@ function competitionMatchesQuery(league,query){
  if(selected){
   const nameMatches=selected.aliases.some(alias=>teamKey(alias)===name);
   if(!nameMatches)return false;
-  const countryAliases={
-   ITA:['ITA','IT','ITALY'],ENG:['ENG','GB','GBR','ENGLAND'],ESP:['ESP','ES','SPAIN'],
-   GER:['GER','DE','DEU','GERMANY'],FRA:['FRA','FR','FRANCE'],NED:['NED','NL','NLD','NETHERLANDS'],
-   POR:['POR','PT','PRT','PORTUGAL'],SCO:['SCO','SCOTLAND']
-  };
-  return !selected.country||!country||((countryAliases[selected.country]||[selected.country]).includes(country));
+  return !selected.country||countryMatchesCompetition(country,selected.country);
  }
  const q=teamKey(query);
  return name===q||name.startsWith(q+' ')||(' '+name+' ').includes(' '+q+' ');
@@ -676,7 +686,7 @@ function renderCompetitionEmptyState(query){
 }
 function leaguePriority(league){
  const name=teamKey(typeof league==='string'?league:league?.name);
- const country=leagueCountryCode(league);
+ const ranks={ITA:1,ENG:2,ESP:3,GER:4,FRA:5};
  const expected={
   ITA:['serie a','serie a enilive','serie a tim','italian serie a','italy serie a'],
   ENG:['premier league','english premier league','england premier league'],
@@ -684,9 +694,8 @@ function leaguePriority(league){
   GER:['bundesliga','german bundesliga'],
   FRA:['ligue 1','french ligue 1']
  };
- const ranks={ITA:1,ENG:2,ESP:3,GER:4,FRA:5};
- if(country&&expected[country]){
-  return expected[country].some(alias=>name===teamKey(alias))?ranks[country]:99;
+ for(const country of Object.keys(expected)){
+  if(expected[country].some(alias=>name===teamKey(alias))&&countryMatchesCompetition(leagueCountryCode(league),country))return ranks[country];
  }
  return 99;
 }

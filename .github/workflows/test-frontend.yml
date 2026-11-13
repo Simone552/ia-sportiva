@@ -1,0 +1,22 @@
+name: Verifica ricerca e campionati IA Sportiva
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "tests/test_competition_search.js"
+      - ".github/workflows/test-frontend.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+      - name: Verifica ricerca, priorità e schede partita
+        run: node tests/test_competition_search.js
