@@ -705,26 +705,8 @@ function fixtureTime(match){
  return Number.isNaN(d.getTime())?'Orario n.d.':d.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'});
 }
 function renderPitchApiFixtures(matches){
- const groups=new Map();
- (matches||[]).forEach(match=>{
-  const league=match.league||{};
-  const name=league.name||'Competizione n.d.';
-  const key=league.id||name;
-  if(!groups.has(key))groups.set(key,{name,league,fixtures:[]});
-  groups.get(key).fixtures.push(match);
- });
- const nameCounts=new Map();
- [...groups.values()].forEach(group=>nameCounts.set(group.name,(nameCounts.get(group.name)||0)+1));
- const orderedGroups=[...groups.values()].sort((a,b)=>{
-  const ra=leaguePriority(a.league),rb=leaguePriority(b.league);
-  return ra!==rb?ra-rb:a.name.localeCompare(b.name,'it');
- });
- const topCount=orderedGroups.filter(group=>leaguePriority(group.league)<99).length;
- return orderedGroups.map((group,index)=>{
-  const {name,league,fixtures}=group;
-  const rank=leaguePriority(league);
-  const country=leagueCountryCode(league);
-  const displayName=country?name+' · '+country:name;
+ const competitions=IA_COMPETITIONS.map(competition=>{
+  const fixtures=(matches||[]).filter(match=>competitionMatchesQuery(match.league||{},competition.label));
   const ordered=[...fixtures].sort((a,b)=>{
    const ta=a.time_utc?new Date(a.time_utc).getTime():Infinity;
    const tb=b.time_utc?new Date(b.time_utc).getTime():Infinity;
@@ -738,9 +720,11 @@ function renderPitchApiFixtures(matches){
    const score=finished&&match.score_home!=null&&match.score_away!=null?match.score_home+' – '+match.score_away:'';
    return '<button type="button" class="fixture-compact" data-match-id="'+esc(match.id)+'" onclick="openMatchDetails(this.getAttribute(\'data-match-id\'))"><span class="fixture-kickoff">'+esc(fixtureTime(match))+'</span><span class="fixture-side">'+homeBadge+'<b>'+esc(home)+'</b></span><span class="fixture-vs-mini">–</span><span class="fixture-side">'+awayBadge+'<b>'+esc(away)+'</b></span><span class="fixture-result">'+(score?esc(score):'<small>'+esc(pitchStatusLabel(match.status))+'</small>')+'</span><span class="fixture-open">›</span></button>';
   }).join('');
-  const label=rank<99?'<span class="league-rank">TOP '+rank+'</span>':'';
-  return '<details class="league-card" '+(index===0?'open':'')+'><summary><span class="league-summary-main">'+label+'<strong>'+esc(displayName)+'</strong></span><span class="league-summary-count">'+fixtures.length+' partite</span><span class="league-chevron">⌄</span></summary><div class="league-fixtures">'+rows+'</div></details>';
- }).join('')+(topCount?'':'<p class="fixture-order-note">I campionati sono ordinati alfabeticamente: nessuno dei cinque principali è presente in questo calendario.</p>');
+  const country=competition.country?' · '+competition.country:'';
+  const content=rows||'<div class="empty" role="status">Nessuna partita prevista</div>';
+  return '<details class="league-card"><summary><span class="league-summary-main"><strong>'+esc(competition.label+country)+'</strong></span><span class="league-summary-count">'+fixtures.length+' partite</span><span class="league-chevron">⌄</span></summary><div class="league-fixtures">'+content+'</div></details>';
+ }).join('');
+ return competitions||'<div class="empty">Nessuna competizione configurata.</div>';
 }
 async function loadPitchApiMatches(){
  const status=document.getElementById('pitchApiStatus');
@@ -762,8 +746,8 @@ async function loadPitchApiMatches(){
   renderPitchApiCoverage(root,matches);
 
   if(!matches.length){
-   output.innerHTML='<div class="empty">Il file è stato letto, ma non contiene partite per la data indicata.</div>';
-   status.textContent='Archivio PitchAPI letto · '+dataDate+' · nessuna partita restituita.';
+   output.innerHTML=renderPitchApiFixtures([]);
+   status.textContent='Archivio PitchAPI letto · '+dataDate+' · nessuna partita prevista nei campionati selezionati.';
    pitchApiLoaded=true;
    return;
   }
