@@ -220,11 +220,14 @@ for league in leagues:
         if window_start <= parsed_date <= window_end:
             match_id = match.get("id")
             if match_id:
-                match.setdefault("league", {
+                # Il calendario stagionale è richiesto per un ID lega noto:
+                # sovrascrive eventuali metadati incompleti restituiti dal provider.
+                match["league"] = {
+                    **(match.get("league") or {}),
                     "id": league_id,
                     "name": league.get("name"),
                     "country_code": league.get("country_code"),
-                })
+                }
                 matches_by_id[match_id] = match
 
 matches = [
