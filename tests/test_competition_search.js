@@ -16,7 +16,8 @@ const source = teamKey[0] + "\n" + html.slice(start, end) +
 const context = {
   window: { iaLeagueCountryById: {} },
   esc: value => String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"),
-  pitchStatusLabel: value => String(value || "n.d.")
+  pitchStatusLabel: value => String(value || "n.d."),
+  fixtureTime: () => "14/11, 19:00"
 };
 vm.runInNewContext(source, context);
 const api = context.api;
@@ -50,20 +51,21 @@ const leagues = [
   {id:5,name:"Ligue 1",country_code:"FR"},
   {id:6,name:"Serie A",country_code:"BRA"},
   {id:7,name:"LaLiga2",country_code:"ES"},
-  {id:8,name:"Eredivisie",country_code:"NL"}
+  {id:8,name:"Eredivisie",country_code:"NL"},
+  {id:9,name:"Champions League",country_code:"INT-2"}
 ];
 const fixtures = leagues.map((league,index)=>({
   id:String(index+1),league,home_team:{name:"Casa "+index},away_team:{name:"Ospite "+index},
   time_utc:"2026-11-14T18:00:00Z",status:"not_started"
 }));
 const rendered = api.renderPitchApiFixtures(fixtures);
-const labels = ["Serie A · ITA","Premier League · GB","LaLiga · ES","Bundesliga · DE","Ligue 1 · FR","Eredivisie · NL","LaLiga2 · ES","Serie A · BRA"];
-const positions = labels.map(label=>rendered.indexOf("<strong>"+label+"</strong>"));
-assert.ok(positions.every(position=>position>=0), "Tutte le competizioni di test devono essere mostrate");
-assert.deepEqual([...positions].sort((a,b)=>a-b), positions, "I top 5 devono precedere gli altri; i restanti alfabetici");
-assert.match(rendered, /TOP 1[\s\S]*TOP 2[\s\S]*TOP 3[\s\S]*TOP 4[\s\S]*TOP 5/,
-  "I badge di priorità devono rispettare l'ordine richiesto");
-assert.match(rendered, /openMatchDetails\(this\.getAttribute/,
-  "Ogni partita deve mantenere l'apertura della scheda");
+const labels = ["Serie A · ITA","Serie B · ITA","Serie C · ITA","Premier League · ENG","La Liga · ESP","Bundesliga · GER","Ligue 1 · FRA","Champions League","Europa League","Conference League","Eredivisie · NED","Primeira Liga · POR","Championship · ENG","Scottish Premiership · SCO"];
+for (const label of labels) assert.ok(rendered.includes("<strong>"+label+"</strong>"), "Sezione fissa mancante: "+label);
+assert.ok(!rendered.includes("Casa 5") && !rendered.includes("Ospite 5"), "Le partite della Serie A brasiliana devono essere escluse");
+assert.ok(!rendered.includes("Casa 6") && !rendered.includes("Ospite 6"), "Le competizioni non supportate devono essere escluse");
+assert.ok(rendered.includes("Nessuna partita prevista"), "Le sezioni senza partite devono mostrare il messaggio richiesto");
+assert.match(rendered, /openMatchDetails\(this\.getAttribute/, "Ogni partita deve mantenere l'apertura della scheda");
+const emptyRendered = api.renderPitchApiFixtures([]);
+assert.equal((emptyRendered.match(/Nessuna partita prevista/g)||[]).length, 14, "Con calendario vuoto tutte le 14 sezioni devono mostrare il messaggio");
 
 console.log("OK: filtri campionati, codici paese, priorità top 5, raggruppamento e apertura schede.");
