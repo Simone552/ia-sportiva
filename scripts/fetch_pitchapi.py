@@ -200,6 +200,25 @@ for league in leagues:
 
 matches = list(matches_by_id.values())
 
+# Normalizza sempre la competizione con il catalogo ufficiale PitchAPI.
+# Il solo nome non basta: Serie A esiste in più Paesi e non va confusa.
+leagues_by_id = {
+    str(league.get("id")): league
+    for league in leagues
+    if league.get("id") is not None
+}
+for match in matches:
+    current_league = match.get("league") or {}
+    league_id = current_league.get("id")
+    canonical_league = leagues_by_id.get(str(league_id)) if league_id is not None else None
+    if canonical_league:
+        match["league"] = {
+            **current_league,
+            "id": canonical_league.get("id"),
+            "name": canonical_league.get("name") or current_league.get("name"),
+            "country_code": canonical_league.get("country_code") or current_league.get("country_code"),
+        }
+
 def recent_team_form(team_id, team_name, before_date, league_id):
     """Ultime cinque gare di campionato precedenti alla partita, senza includere il match da analizzare."""
     played = []
