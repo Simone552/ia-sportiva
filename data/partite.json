@@ -1,6 +1,6 @@
 {
   "data": {
-    "date": "2026-11-13",
+    "date": "2026-11-14",
     "period_days": 7,
     "calendar_errors": [],
     "leagues_catalogue": [
@@ -1383,11 +1383,945 @@
     ],
     "priority_league_schedule_errors": [],
     "recent_form_coverage": {
-      "matches_with_home_results": 0,
-      "matches_with_away_results": 0
+      "matches_with_home_results": 4,
+      "matches_with_away_results": 4
     },
-    "league_counts_in_calendar": {},
-    "fetched_at": "2026-11-13T19:02:37.436460+00:00",
-    "matches": []
+    "league_counts_in_calendar": {
+      "Serie B": 1,
+      "Bundesliga": 1,
+      "Ligue 1": 1,
+      "LaLiga": 1
+    },
+    "fetched_at": "2026-11-14T01:12:17.505594+00:00",
+    "matches": [
+      {
+        "id": "m_3biNtz",
+        "date": "2026-11-20",
+        "time_utc": "2026-11-20T19:30:00Z",
+        "status": "not_started",
+        "home_team": {
+          "id": "t_0YcbNh",
+          "name": "Hellas Verona",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/8209b337006be0a4b0ef0bbc8b8e3c69a161dd08e49d4dbdcf0fa1065cc34afe.webp"
+        },
+        "away_team": {
+          "id": "t_2YMaKw",
+          "name": "Cesena",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/c73d45ec134d9d27a7249f0351a1657792689e76c73cffac6b49df1912e11b50.webp"
+        },
+        "score_home": null,
+        "score_away": null,
+        "league": {
+          "id": "l_0jy5yE",
+          "name": "Serie B",
+          "country_code": "ITA"
+        },
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-16",
+              "opponent": "Catanzaro",
+              "home": true,
+              "score_for": 2,
+              "score_against": 2,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-25",
+              "opponent": "Pisa",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-28",
+              "opponent": "Juve Stabia",
+              "home": false,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-01",
+              "opponent": "Carrarese",
+              "home": true,
+              "score_for": 3,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Mantova",
+              "home": false,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-18",
+              "opponent": "Avellino",
+              "home": true,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "Modena",
+              "home": false,
+              "score_for": 0,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-27",
+              "opponent": "Empoli",
+              "home": true,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-31",
+              "opponent": "Südtirol",
+              "home": false,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Catanzaro",
+              "home": true,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_3biNtz",
+              "league": {
+                "id": "l_0jy5yE",
+                "name": "Serie B",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/312d6ce269e15510e0514d364584e752962c2c3737b53a92bb738d03ec07ce84.webp"
+              },
+              "season": "2026/2027",
+              "home_team": {
+                "id": "t_0YcbNh",
+                "name": "Hellas Verona",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/8209b337006be0a4b0ef0bbc8b8e3c69a161dd08e49d4dbdcf0fa1065cc34afe.webp"
+              },
+              "away_team": {
+                "id": "t_2YMaKw",
+                "name": "Cesena",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c73d45ec134d9d27a7249f0351a1657792689e76c73cffac6b49df1912e11b50.webp"
+              },
+              "date": "2026-11-20",
+              "time_utc": "2026-11-20T19:30:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "12",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_3biNtz",
+              "home_team": {
+                "id": "t_0YcbNh",
+                "name": "Hellas Verona",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/8209b337006be0a4b0ef0bbc8b8e3c69a161dd08e49d4dbdcf0fa1065cc34afe.webp"
+              },
+              "away_team": {
+                "id": "t_2YMaKw",
+                "name": "Cesena",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c73d45ec134d9d27a7249f0351a1657792689e76c73cffac6b49df1912e11b50.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_3biNtz",
+              "home_team": {
+                "id": "t_0YcbNh",
+                "name": "Hellas Verona",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/8209b337006be0a4b0ef0bbc8b8e3c69a161dd08e49d4dbdcf0fa1065cc34afe.webp"
+              },
+              "away_team": {
+                "id": "t_2YMaKw",
+                "name": "Cesena",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c73d45ec134d9d27a7249f0351a1657792689e76c73cffac6b49df1912e11b50.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_4McNx8",
+        "date": "2026-11-20",
+        "time_utc": "2026-11-20T19:30:00Z",
+        "status": "not_started",
+        "home_team": {
+          "id": "t_1cpjqO",
+          "name": "Bayern München",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/1e2afd379a7d354c930f790c1f9ab0c2b50654cf4d47f20ffb269b8cfe309bca.webp"
+        },
+        "away_team": {
+          "id": "t_0x6Gji",
+          "name": "1. FC Köln",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/b586b79d51436583827db4053e71f243046c61dd2523b5a50d7cc05a921900ec.webp"
+        },
+        "score_home": null,
+        "score_away": null,
+        "league": {
+          "id": "l_1Isor4",
+          "name": "Bundesliga",
+          "country_code": "GER"
+        },
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-10",
+              "opponent": "Augsburg",
+              "home": false,
+              "score_for": 2,
+              "score_against": 2,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "RB Leipzig",
+              "home": true,
+              "score_for": 6,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-25",
+              "opponent": "Freiburg",
+              "home": false,
+              "score_for": 3,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-31",
+              "opponent": "Borussia Dortmund",
+              "home": true,
+              "score_for": 2,
+              "score_against": 2,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Mainz 05",
+              "home": false,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-11",
+              "opponent": "Borussia Mönchengladbach",
+              "home": true,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-10-16",
+              "opponent": "Eintracht Frankfurt",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "Schalke 04",
+              "home": true,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-01",
+              "opponent": "Union Berlin",
+              "home": false,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-11-08",
+              "opponent": "Bayer Leverkusen",
+              "home": true,
+              "score_for": 1,
+              "score_against": 2,
+              "result": "L"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_4McNx8",
+              "league": {
+                "id": "l_1Isor4",
+                "name": "Bundesliga",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/f798d3b662336f2336cbd121d4e83958ae3205fb9922b6716e2e9bd5eb7c6050.webp"
+              },
+              "season": "2026/2027",
+              "home_team": {
+                "id": "t_1cpjqO",
+                "name": "Bayern München",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/1e2afd379a7d354c930f790c1f9ab0c2b50654cf4d47f20ffb269b8cfe309bca.webp"
+              },
+              "away_team": {
+                "id": "t_0x6Gji",
+                "name": "1. FC Köln",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b586b79d51436583827db4053e71f243046c61dd2523b5a50d7cc05a921900ec.webp"
+              },
+              "date": "2026-11-20",
+              "time_utc": "2026-11-20T19:30:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "10",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_4McNx8",
+              "home_team": {
+                "id": "t_1cpjqO",
+                "name": "Bayern München",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/1e2afd379a7d354c930f790c1f9ab0c2b50654cf4d47f20ffb269b8cfe309bca.webp"
+              },
+              "away_team": {
+                "id": "t_0x6Gji",
+                "name": "1. FC Köln",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b586b79d51436583827db4053e71f243046c61dd2523b5a50d7cc05a921900ec.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_4McNx8",
+              "home_team": {
+                "id": "t_1cpjqO",
+                "name": "Bayern München",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/1e2afd379a7d354c930f790c1f9ab0c2b50654cf4d47f20ffb269b8cfe309bca.webp"
+              },
+              "away_team": {
+                "id": "t_0x6Gji",
+                "name": "1. FC Köln",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/b586b79d51436583827db4053e71f243046c61dd2523b5a50d7cc05a921900ec.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_3rtQqb",
+        "date": "2026-11-20",
+        "time_utc": "2026-11-20T19:45:00Z",
+        "status": "not_started",
+        "home_team": {
+          "id": "t_0zVhE4",
+          "name": "Troyes",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/a805183b27f376ca106faf014559528f32f291be0a93b621357697efc173aeeb.webp"
+        },
+        "away_team": {
+          "id": "t_4BCeSu",
+          "name": "Le Havre",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/c9c565fda39bde124db002c75a5b6a34a1a464a961dccf8ae7d256c8eac59ed6.webp"
+        },
+        "score_home": null,
+        "score_away": null,
+        "league": {
+          "id": "l_3FJFUl",
+          "name": "Ligue 1",
+          "country_code": "FRA"
+        },
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-11",
+              "opponent": "Marseille",
+              "home": true,
+              "score_for": 0,
+              "score_against": 2,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "Lens",
+              "home": true,
+              "score_for": 1,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-25",
+              "opponent": "Toulouse",
+              "home": false,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-31",
+              "opponent": "Le Mans",
+              "home": true,
+              "score_for": 2,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Paris Saint-Germain",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-10",
+              "opponent": "Lille",
+              "home": false,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-18",
+              "opponent": "Auxerre",
+              "home": true,
+              "score_for": 1,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-25",
+              "opponent": "Marseille",
+              "home": false,
+              "score_for": 3,
+              "score_against": 4,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-30",
+              "opponent": "Paris Saint-Germain",
+              "home": true,
+              "score_for": 1,
+              "score_against": 5,
+              "result": "L"
+            },
+            {
+              "date": "2026-11-08",
+              "opponent": "Lorient",
+              "home": true,
+              "score_for": 0,
+              "score_against": 2,
+              "result": "L"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_3rtQqb",
+              "league": {
+                "id": "l_3FJFUl",
+                "name": "Ligue 1",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/60132b94cec9376428f59561ef11650b8a69b097d492642f9b737dc76f45cf94.webp"
+              },
+              "season": "2026/2027",
+              "home_team": {
+                "id": "t_0zVhE4",
+                "name": "Troyes",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/a805183b27f376ca106faf014559528f32f291be0a93b621357697efc173aeeb.webp"
+              },
+              "away_team": {
+                "id": "t_4BCeSu",
+                "name": "Le Havre",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c9c565fda39bde124db002c75a5b6a34a1a464a961dccf8ae7d256c8eac59ed6.webp"
+              },
+              "date": "2026-11-20",
+              "time_utc": "2026-11-20T19:45:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "11",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_3rtQqb",
+              "home_team": {
+                "id": "t_0zVhE4",
+                "name": "Troyes",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/a805183b27f376ca106faf014559528f32f291be0a93b621357697efc173aeeb.webp"
+              },
+              "away_team": {
+                "id": "t_4BCeSu",
+                "name": "Le Havre",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c9c565fda39bde124db002c75a5b6a34a1a464a961dccf8ae7d256c8eac59ed6.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_3rtQqb",
+              "home_team": {
+                "id": "t_0zVhE4",
+                "name": "Troyes",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/a805183b27f376ca106faf014559528f32f291be0a93b621357697efc173aeeb.webp"
+              },
+              "away_team": {
+                "id": "t_4BCeSu",
+                "name": "Le Havre",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/c9c565fda39bde124db002c75a5b6a34a1a464a961dccf8ae7d256c8eac59ed6.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      },
+      {
+        "id": "m_0iaTdE",
+        "date": "2026-11-20",
+        "time_utc": "2026-11-20T20:00:00Z",
+        "status": "not_started",
+        "home_team": {
+          "id": "t_3kZPrE",
+          "name": "Athletic Club",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/3df8987ea318edccd9c2d8887b27324fa47c275eea7604e9e9c8539f5a69cda3.webp"
+        },
+        "away_team": {
+          "id": "t_3WlXqr",
+          "name": "Espanyol",
+          "image_url": "https://cdn.pitchapi.dev/images/teams/f8174b3077c6d721131a0171d6e57bfbe7d65bd7583f1d0a63befc59ce9b6da0.webp"
+        },
+        "score_home": null,
+        "score_away": null,
+        "league": {
+          "id": "l_0ErfuF",
+          "name": "LaLiga",
+          "country_code": "ESP"
+        },
+        "recent_form": {
+          "scope": "Ultime 5 in campionato",
+          "home": [
+            {
+              "date": "2026-10-17",
+              "opponent": "Valencia",
+              "home": false,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-21",
+              "opponent": "Levante",
+              "home": false,
+              "score_for": 1,
+              "score_against": 3,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-25",
+              "opponent": "Getafe",
+              "home": true,
+              "score_for": 4,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-01",
+              "opponent": "Real Sociedad",
+              "home": true,
+              "score_for": 2,
+              "score_against": 1,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Osasuna",
+              "home": false,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            }
+          ],
+          "away": [
+            {
+              "date": "2026-10-09",
+              "opponent": "Málaga",
+              "home": false,
+              "score_for": 1,
+              "score_against": 1,
+              "result": "D"
+            },
+            {
+              "date": "2026-10-17",
+              "opponent": "Atlético Madrid",
+              "home": true,
+              "score_for": 0,
+              "score_against": 1,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-24",
+              "opponent": "Racing Santander",
+              "home": false,
+              "score_for": 1,
+              "score_against": 2,
+              "result": "L"
+            },
+            {
+              "date": "2026-10-30",
+              "opponent": "Villarreal",
+              "home": false,
+              "score_for": 1,
+              "score_against": 0,
+              "result": "W"
+            },
+            {
+              "date": "2026-11-07",
+              "opponent": "Deportivo A Coruña",
+              "home": true,
+              "score_for": 0,
+              "score_against": 0,
+              "result": "D"
+            }
+          ]
+        },
+        "details": {
+          "summary": {
+            "available": true,
+            "data": {
+              "id": "m_0iaTdE",
+              "league": {
+                "id": "l_0ErfuF",
+                "name": "LaLiga",
+                "image_url": "https://cdn.pitchapi.dev/images/leagues/4a840c09a3b5d1b2150eeba66e2c31d83d23503c0df04b3ddd04341f9c7b2b48.webp"
+              },
+              "season": "2026/2027",
+              "home_team": {
+                "id": "t_3kZPrE",
+                "name": "Athletic Club",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/3df8987ea318edccd9c2d8887b27324fa47c275eea7604e9e9c8539f5a69cda3.webp"
+              },
+              "away_team": {
+                "id": "t_3WlXqr",
+                "name": "Espanyol",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/f8174b3077c6d721131a0171d6e57bfbe7d65bd7583f1d0a63befc59ce9b6da0.webp"
+              },
+              "date": "2026-11-20",
+              "time_utc": "2026-11-20T20:00:00Z",
+              "status": "not_started",
+              "score_home": null,
+              "score_away": null,
+              "round_name": "13",
+              "has_playoff": false,
+              "referee": null,
+              "stadium": null
+            }
+          },
+          "stats": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "shots": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "lineups": {
+            "available": true,
+            "data": {
+              "match_id": "m_0iaTdE",
+              "home_team": {
+                "id": "t_3kZPrE",
+                "name": "Athletic Club",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/3df8987ea318edccd9c2d8887b27324fa47c275eea7604e9e9c8539f5a69cda3.webp"
+              },
+              "away_team": {
+                "id": "t_3WlXqr",
+                "name": "Espanyol",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/f8174b3077c6d721131a0171d6e57bfbe7d65bd7583f1d0a63befc59ce9b6da0.webp"
+              },
+              "home": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              },
+              "away": {
+                "formation": "",
+                "confirmed": false,
+                "starters": null,
+                "subs": null
+              }
+            }
+          },
+          "h2h": {
+            "available": true,
+            "data": {
+              "match_id": "m_0iaTdE",
+              "home_team": {
+                "id": "t_3kZPrE",
+                "name": "Athletic Club",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/3df8987ea318edccd9c2d8887b27324fa47c275eea7604e9e9c8539f5a69cda3.webp"
+              },
+              "away_team": {
+                "id": "t_3WlXqr",
+                "name": "Espanyol",
+                "image_url": "https://cdn.pitchapi.dev/images/teams/f8174b3077c6d721131a0171d6e57bfbe7d65bd7583f1d0a63befc59ce9b6da0.webp"
+              },
+              "home_wins": 0,
+              "draws": 0,
+              "away_wins": 0,
+              "total_matches": 0,
+              "recent_matches": []
+            }
+          },
+          "events": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_players": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "advanced_network": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "momentum": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "players_halves": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          },
+          "heatmaps": {
+            "available": false,
+            "reason": "Dato in attesa: verrà richiesto dopo l'inizio della partita."
+          }
+        }
+      }
+    ]
   }
 }
