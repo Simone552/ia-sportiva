@@ -615,17 +615,6 @@
         "is_free": true
       },
       {
-        "id": "l_46aZMC",
-        "name": "Premier League",
-        "country_code": "EGY",
-        "image_url": "https://cdn.pitchapi.dev/images/leagues/fff70d481a93db13ce38870618c6b0b297cebb69e46728fd403f87cdc53f3834.webp",
-        "seasons": [
-          "2025/2026",
-          "2026/2027"
-        ],
-        "is_free": true
-      },
-      {
         "id": "l_4WFCIZ",
         "name": "Premier League",
         "country_code": "ENG",
@@ -641,6 +630,28 @@
         "is_free": true
       },
       {
+        "id": "l_2Mh0jT",
+        "name": "Premier League",
+        "country_code": "RUS",
+        "image_url": "https://cdn.pitchapi.dev/images/leagues/474ad85827e7f67e6a25e4a54c422314a39d3e60c578a49911f1af9a5882bc0d.webp",
+        "seasons": [
+          "2025/2026",
+          "2026/2027"
+        ],
+        "is_free": true
+      },
+      {
+        "id": "l_46aZMC",
+        "name": "Premier League",
+        "country_code": "EGY",
+        "image_url": "https://cdn.pitchapi.dev/images/leagues/fff70d481a93db13ce38870618c6b0b297cebb69e46728fd403f87cdc53f3834.webp",
+        "seasons": [
+          "2025/2026",
+          "2026/2027"
+        ],
+        "is_free": true
+      },
+      {
         "id": "l_3UiOcj",
         "name": "Premier League",
         "country_code": "CAN",
@@ -649,17 +660,6 @@
           "2024",
           "2025",
           "2026"
-        ],
-        "is_free": true
-      },
-      {
-        "id": "l_2Mh0jT",
-        "name": "Premier League",
-        "country_code": "RUS",
-        "image_url": "https://cdn.pitchapi.dev/images/leagues/474ad85827e7f67e6a25e4a54c422314a39d3e60c578a49911f1af9a5882bc0d.webp",
-        "seasons": [
-          "2025/2026",
-          "2026/2027"
         ],
         "is_free": true
       },
@@ -776,18 +776,6 @@
         "is_free": true
       },
       {
-        "id": "l_1dmt9H",
-        "name": "Serie A",
-        "country_code": "ECU",
-        "image_url": "https://cdn.pitchapi.dev/images/leagues/4e39dfc4b8193285e82361f9e15475f31e7256e5e090844427586d51396b3d1a.webp",
-        "seasons": [
-          "2024",
-          "2025",
-          "2026"
-        ],
-        "is_free": true
-      },
-      {
         "id": "l_1D8Xrl",
         "name": "Serie A",
         "country_code": "BRA",
@@ -816,10 +804,10 @@
         "is_free": true
       },
       {
-        "id": "l_3qUkB8",
-        "name": "Serie B",
-        "country_code": "BRA",
-        "image_url": "https://cdn.pitchapi.dev/images/leagues/2283252267859e291fd350c135171e0a836ff7f944c839dae7dcfdc5c458068c.webp",
+        "id": "l_1dmt9H",
+        "name": "Serie A",
+        "country_code": "ECU",
+        "image_url": "https://cdn.pitchapi.dev/images/leagues/4e39dfc4b8193285e82361f9e15475f31e7256e5e090844427586d51396b3d1a.webp",
         "seasons": [
           "2024",
           "2025",
@@ -835,6 +823,18 @@
         "seasons": [
           "2025/2026",
           "2026/2027"
+        ],
+        "is_free": true
+      },
+      {
+        "id": "l_3qUkB8",
+        "name": "Serie B",
+        "country_code": "BRA",
+        "image_url": "https://cdn.pitchapi.dev/images/leagues/2283252267859e291fd350c135171e0a836ff7f944c839dae7dcfdc5c458068c.webp",
+        "seasons": [
+          "2024",
+          "2025",
+          "2026"
         ],
         "is_free": true
       },
@@ -1397,7 +1397,7 @@
       "Premiership": 6,
       "Eredivisie": 9
     },
-    "fetched_at": "2026-11-16T01:34:08.756320+00:00",
+    "fetched_at": "2026-11-16T08:57:02.405393+00:00",
     "matches": [
       {
         "id": "m_3biNtz",
